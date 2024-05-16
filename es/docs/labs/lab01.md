@@ -77,10 +77,11 @@ En un archivo llamado **calc.cl**, hagan un programa que reciba una string y des
 
 Su calculadora debería de aceptar operaciones simples como `3 + 4`, `125 - 70`, etc. Noten que el formato siempre es el mismo de acuerdo a la siguiente expresión regular: `( )*[0-9]+( )+[+-*/]( )+[0-9]+( )*`.
 
-!!!info "Recomendación
+!!!info "Recomendación"
 	Creen un método para buscar espacios.
 
-Las operaciones que van a ser ingresadas por el usuario siempre son binarias, y no algo como esto: `3 + 2 - 5 / 3 * 2` así que no se compliquen la vida.
+!!!warning "Solo operaciones simples"
+	Las operaciones que van a ser ingresadas por el usuario siempre son binarias, y no algo como esto: `3 + 2 - 5 / 3 * 2` así que no se compliquen la vida.
 
 Su programa debe de funcionar de la siguiente manera:
 

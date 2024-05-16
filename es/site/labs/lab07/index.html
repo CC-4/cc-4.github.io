@@ -1,0 +1,1080 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Ciencias de la Computacion 4 - Compiladores">
+      
+      
+        <link rel="canonical" href="https://cc-4.github.io/labs/lab07/">
+      
+      
+        <meta name="author" content="CC-4">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>7: Semantic 2 - Compiladores</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#lab-7-40analisis-semantico-ii41" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-4.github.io/" title="Compiladores" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Compiladores
+              </span>
+              <span class="md-header-nav__topic">
+                7: Semantic 2
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-4/cc-4.github.io/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-4/cc-4.github.io
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-4.github.io/" title="Compiladores" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Compiladores
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-4/cc-4.github.io/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-4/cc-4.github.io
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01/" title="1: COOL" class="md-nav__link">
+      1: COOL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02/" title="2: jLex" class="md-nav__link">
+      2: jLex
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab03/" title="3: RDP" class="md-nav__link">
+      3: RDP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab04/" title="4: cup" class="md-nav__link">
+      4: cup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab05/" title="5: SymbolTable" class="md-nav__link">
+      5: SymbolTable
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab06/" title="6: Semantic 1" class="md-nav__link">
+      6: Semantic 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        7: Semantic 2
+      </label>
+    
+    <a href="./" title="7: Semantic 2" class="md-nav__link md-nav__link--active">
+      7: Semantic 2
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reglas-de-inferencia" title="Reglas de Inferencia" class="md-nav__link">
+    Reglas de Inferencia
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-tienen-que-hacer" title="¿Qué tienen que hacer?" class="md-nav__link">
+    ¿Qué tienen que hacer?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacion" title="Implementación" class="md-nav__link">
+    Implementación
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assign" title="Assign" class="md-nav__link">
+    Assign
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call" title="Call" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#declaration" title="Declaration" class="md-nav__link">
+    Declaration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equal" title="Equal" class="md-nav__link">
+    Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lessequal-lessthan" title="LessEqual, LessThan" class="md-nav__link">
+    LessEqual, LessThan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id" title="Id" class="md-nav__link">
+    Id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if" title="If" class="md-nav__link">
+    If
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#while" title="While" class="md-nav__link">
+    While
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autograder" title="Autograder" class="md-nav__link">
+    Autograder
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab08/" title="8: RISC-V" class="md-nav__link">
+      8: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab09/" title="9: Codegen 1" class="md-nav__link">
+      9: Codegen 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab10/" title="10: Codegen 2" class="md-nav__link">
+      10: Codegen 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab11/" title="11: Optimizaciones" class="md-nav__link">
+      11: Optimizaciones
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj00/" title="0: Instalacion" class="md-nav__link">
+      0: Instalacion
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: Lexer" class="md-nav__link">
+      1: Lexer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Parser" class="md-nav__link">
+      2: Parser
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj03/" title="3: Semantic" class="md-nav__link">
+      3: Semantic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj04/" title="4: Codegen" class="md-nav__link">
+      4: Codegen
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reglas-de-inferencia" title="Reglas de Inferencia" class="md-nav__link">
+    Reglas de Inferencia
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-tienen-que-hacer" title="¿Qué tienen que hacer?" class="md-nav__link">
+    ¿Qué tienen que hacer?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacion" title="Implementación" class="md-nav__link">
+    Implementación
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assign" title="Assign" class="md-nav__link">
+    Assign
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call" title="Call" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#declaration" title="Declaration" class="md-nav__link">
+    Declaration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equal" title="Equal" class="md-nav__link">
+    Equal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lessequal-lessthan" title="LessEqual, LessThan" class="md-nav__link">
+    LessEqual, LessThan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id" title="Id" class="md-nav__link">
+    Id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if" title="If" class="md-nav__link">
+    If
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#while" title="While" class="md-nav__link">
+    While
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autograder" title="Autograder" class="md-nav__link">
+    Autograder
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-4/cc-4.github.io/edit/master/page/es/docs/labs/lab07.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="lab-7-40analisis-semantico-ii41">Lab 7 (Análisis Semántico II)<a class="headerlink" href="#lab-7-40analisis-semantico-ii41" title="Permanent link">&para;</a></h1>
+<p>En este laboratorio van a continuar con el análisis semántico del lenguaje Viper y así ganar aún más intuición en esta fase del compilador y que plasmar estas ideas en su proyecto sea bastante sencillo. </p>
+<p>Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:</p>
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/bs9-cgvz
+</pre></div>
+
+<div class="admonition warning">
+<p class="admonition-title">Lean bien</p>
+<p>Este lab es más complejo que los anteriores, por favor lean todas las instrucciones del lab, antes de empezar.</p>
+</div>
+<h2 id="reglas-de-inferencia">Reglas de Inferencia<a class="headerlink" href="#reglas-de-inferencia" title="Permanent link">&para;</a></h2>
+<p>Vamos a continuar utilizando el archivo que tiene todas las reglas de inferencia del lenguaje, pueden descargar este archivo aquí:</p>
+<p><a href="../../cc4/viper_language_type_rules.pdf">Reglas de inferencia de Viper</a></p>
+<h3 id="que-tienen-que-hacer">¿Qué tienen que hacer?<a class="headerlink" href="#que-tienen-que-hacer" title="Permanent link">&para;</a></h3>
+<p>Como se pudieron dar cuenta en el laboratorio pasado en <strong>src/viper/tree</strong> están definidos los nodos que representan el AST de Viper. En este laboratorio ustedes tienen que completar los 10 nodos restantes, estos nodos son los siguientes:</p>
+<ol>
+<li><strong>Assign</strong></li>
+<li><strong>Call</strong></li>
+<li><strong>Declaration</strong></li>
+<li><strong>Equal</strong></li>
+<li><strong>Id</strong></li>
+<li><strong>If</strong></li>
+<li><strong>LessEqual</strong></li>
+<li><strong>LessThan</strong></li>
+<li><strong>Not</strong></li>
+<li><strong>While</strong></li>
+</ol>
+<div class="admonition danger">
+<p class="admonition-title">Lab anterior</p>
+<p>Ustedes tienen que copiar lo que implementaron en el laboratorio pasado, de lo contrario el autograder no les dará todos los puntos, simplemente tienen que copiar y reemplazar los archivos. </p>
+</div>
+<p>Para algunos de estos nodos como <strong>LessEqual</strong>, <strong>LessThan</strong>, <strong>Not</strong> su código debería de ser bastante similar a lo que hicieron con las operaciones artiméticas, incluso para <strong>Equal</strong>, solo que aquí tenemos la restricción que ambos operandos tienen que ser del mismo tipo ya sea <strong>int</strong>, <strong>bool</strong> o <strong>str</strong>. Para los demás nodos si van a tener que hacer un par de cosas más.</p>
+<p>Para que tengan una referencia de que tanto tendrían que agregar a los diferentes archivos, aquí están las estadísticas de nuestra implementación:</p>
+<div class="codehilite"><pre><span></span> src/viper/tree/Assign.java      <span class="p">|</span> <span class="m">12</span> +++++++++++-
+ src/viper/tree/Call.java        <span class="p">|</span> <span class="m">22</span> +++++++++++++++++++++-
+ src/viper/tree/Declaration.java <span class="p">|</span> <span class="m">10</span> +++++++++-
+ src/viper/tree/Equal.java       <span class="p">|</span>  <span class="m">7</span> ++++++-
+ src/viper/tree/Id.java          <span class="p">|</span>  <span class="m">8</span> +++++++-
+ src/viper/tree/If.java          <span class="p">|</span> <span class="m">11</span> ++++++++++-
+ src/viper/tree/LessEqual.java   <span class="p">|</span>  <span class="m">7</span> ++++++-
+ src/viper/tree/LessThan.java    <span class="p">|</span>  <span class="m">7</span> ++++++-
+ src/viper/tree/Not.java         <span class="p">|</span>  <span class="m">6</span> +++++-
+ src/viper/tree/While.java       <span class="p">|</span>  <span class="m">8</span> +++++++-
+ <span class="m">10</span> files changed, <span class="m">88</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">10</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</pre></div>
+
+<h3 id="implementacion">Implementación<a class="headerlink" href="#implementacion" title="Permanent link">&para;</a></h3>
+<p>Para cada nodo del AST hay una serie de pasos que se tienen que realizar para garantizar que el análisis semántico capture todos los errores posibles, recuerden que esta es nuestra última barrera antes de <strong>codegen</strong> para atrapar errores.</p>
+<h4 id="assign">Assign<a class="headerlink" href="#assign" title="Permanent link">&para;</a></h4>
+<p>Para el assign primero deben llamar recursivamente a semant de <code>e</code>. Luego verificar que la variable a la se se le está asignando un valor exista en algún scope, si esta variable no existe deberían devolver el siguiente error e indicar que el tipo de la expresión es <strong>void</strong>.</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">cannotFindSymbol</span><span class="o">(</span><span class="n">line</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
+</pre></div>
+
+<div class="admonition info">
+<p class="admonition-title">void</p>
+<p>En general cuando no se pueda recuperar del error y no se le pueda asignar un tipo a una expresión, el tipo de la expresión será <strong>void</strong>. En el proyecto haremos algo similar con <strong>Object</strong>.</p>
+</div>
+<p>Si la variable a la que se le está asignando un valor existe, pero tiene un tipo diferente que el de la expresión, deberían de devolver el siguiente error:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">incompatibleTypes</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">line</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">col</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getType</span><span class="o">(),</span> <span class="n">t</span><span class="o">);</span>
+<span class="c1">// t debería de ser el tipo que devolvio su entorno O</span>
+</pre></div>
+
+<p>Como en este error si se pueden recuperar porque si saben cual es el tipo de la variable, tienen que poner que el tipo del nodo es el tipo de la variable. Si ambos tipos coinciden de igual forma tienen que indicar que el tipo del nodo es el tipo de la variable.</p>
+<h4 id="call">Call<a class="headerlink" href="#call" title="Permanent link">&para;</a></h4>
+<p>El análisis semántico de <strong>Call</strong> es lo más complicado que realizarán en este laboratorio,  primero deberían llamar recursivamente a <code>semant</code> de cada <strong>actual</strong> que tenga el nodo, y atrapar sus errores. Luego  si la función que se está mandando a llamar no existe deberían de devolver el siguiente error e indicar que el tipo es <strong>void</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">cannotFindSymbol</span><span class="o">(</span><span class="n">line</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
+</pre></div>
+
+<div class="admonition info">
+<p class="admonition-title">O</p>
+<p>Van a encontrar útil el entorno <strong>O</strong> en esta parte del laboratorio.</p>
+</div>
+<p>Si la función si existe, ustedes deberían verificar que la cantidad de argumentos (actuals) sea igual a la cantidad de parámetros formales, si no es así devolver el siguiente error:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">functionCalledWithWrongNumberOfArgs</span><span class="o">(</span><span class="n">line</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
+</pre></div>
+
+<p>Si ocurre este error todavía es posible recuperarse del error porque sabemos el tipo de retorno de la función, entonces tienen que indicar que el tipo del nodo es el tipo de retorno de la expresión. Por último (si el tamaño de actuals es igual al de los formals) deberían de verificar que cada actual sea del mismo tipo, si no es así indicar el siguiente error:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">incompatibleTypes</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">line</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">col</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getType</span><span class="o">(),</span> <span class="n">f</span><span class="o">.</span><span class="na">type</span><span class="o">);</span>
+</pre></div>
+
+<div class="admonition info">
+<p class="admonition-title">Tipo de retorno</p>
+<p>Siempre que sepan que la función existe, el tipo del nodo debería de ser igual al tipo de retorno de la función.</p>
+</div>
+<h4 id="declaration">Declaration<a class="headerlink" href="#declaration" title="Permanent link">&para;</a></h4>
+<p>Como este nodo no es una expresión, no es necesario anotarlo con un tipo, de todos modos es necesario hacerle su respectivo análisis semántico. Primero deberían de comenzar llamando recursivamente a <code>semant</code> de <strong>init</strong>. Luego verificar que la variable no haya sido declarada ya en el <strong>scope</strong> actual, si ya existe indicar el siguiente error:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">variableIsAlreadyDefined</span><span class="o">(</span><span class="n">line</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
+</pre></div>
+
+<div class="admonition info">
+<p class="admonition-title">Shadowing</p>
+<p>El error anterior solo debería ocurrir si la variable es declarada más de una vez en el scope actual, algo como esto:</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span> <span class="n">void</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>y no en el siguiente caso:</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span> <span class="n">void</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">true</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>ya que el lenguaje <strong>Viper</strong>,  lastimosamente,  permite <strong>shadowing</strong> como en el lenguage <strong>COOL</strong> y otros lenguajes populares como <strong>java</strong> o <strong>C</strong>. ¿Qué método de <strong>O</strong> les conviene más utilizar?.</p>
+</div>
+<p>Si no es el caso que la variable está declarada más de una vez en el <strong>scope</strong> actual, deberían de agregarla a este. Recuerden que lo que nos interesa guardar de las variables en <strong>O</strong> es el tipo y nada más. Por último verificar que el tipo de <strong>init</strong> sea el mismo tipo que el tipo declarado, de lo contrario indicar el siguiente error:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">incompatibleTypes</span><span class="o">(</span><span class="n">init</span><span class="o">.</span><span class="na">line</span><span class="o">,</span> <span class="n">init</span><span class="o">.</span><span class="na">col</span><span class="o">,</span> <span class="n">init</span><span class="o">.</span><span class="na">getType</span><span class="o">(),</span> <span class="n">type</span><span class="o">);</span>
+</pre></div>
+
+<h4 id="equal">Equal<a class="headerlink" href="#equal" title="Permanent link">&para;</a></h4>
+<p>Para este nodo tienen que hacer algo similar a lo que hicieron en las expresiones aritméticas, llamar recursivamente a <code>semant</code> de cada operando, en este caso <strong>ambos</strong> operandos tienen que ser del mismo tipo para poderse comparar, si no indicar el siguiente error:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">incomparableTypes</span><span class="o">(</span><span class="n">line</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">e1</span><span class="o">.</span><span class="na">getType</span><span class="o">(),</span> <span class="n">e2</span><span class="o">.</span><span class="na">getType</span><span class="o">());</span>
+</pre></div>
+
+<p>Si este error sucede es fácil recuperarse porque sabemos que el tipo que devuelve una comparación siempre es <strong>bool</strong>, deberían de anotar este nodo con el tipo <strong>bool</strong>.</p>
+<h4 id="lessequal-lessthan">LessEqual, LessThan<a class="headerlink" href="#lessequal-lessthan" title="Permanent link">&para;</a></h4>
+<p>Lo mismo que <strong>Equal</strong>, lo único que cambia aquí es que ambos operandos del nodo tienen que ser de tipo <strong>int</strong>, si alguno no lo es indicar el siguiente error:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">badOperandTypesForBinaryOp</span><span class="o">(</span><span class="n">line</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">operator</span><span class="o">);</span>
+<span class="c1">// cambien operator con el operador del nodo, i.e, &lt;= o &lt;</span>
+</pre></div>
+
+<p>No se olviden anotar el nodo con el tipo <strong>bool.</strong> </p>
+<h4 id="id">Id<a class="headerlink" href="#id" title="Permanent link">&para;</a></h4>
+<p>Este es nodo es bastante fácil, unicamente tienen que buscar en el entorno <strong>O</strong> si la variable existe en algún <strong>scope</strong> si no existe indicar el siguiente error y anotar el nodo con <strong>void</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">cannotFindSymbol</span><span class="o">(</span><span class="n">line</span><span class="o">,</span> <span class="n">col</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
+</pre></div>
+
+<p>Si la variable existe, anotar el nodo con el tipo que nos indica <strong>O</strong>.</p>
+<h4 id="if">If<a class="headerlink" href="#if" title="Permanent link">&para;</a></h4>
+<p>Para el if ustedes deberían de mandar a llamar recursivamente a <code>semant</code> de <strong>pred</strong> verificar si este es de tipo <strong>bool</strong> y si no lo es indicar el siguiente error:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">incompatibleTypes</span><span class="o">(</span><span class="n">pred</span><span class="o">.</span><span class="na">line</span><span class="o">,</span> <span class="n">pred</span><span class="o">.</span><span class="na">col</span><span class="o">,</span> <span class="n">pred</span><span class="o">.</span><span class="na">getType</span><span class="o">(),</span> <span class="n">Type</span><span class="o">.</span><span class="na">BOOL</span><span class="o">);</span>
+</pre></div>
+
+<p>Luego mandar a llamar recursivamente a <code>semant</code> de <strong>thenp</strong> y luego <strong>elsep</strong>, recuerden que en Viper cada par de llaves <code>{}</code> abre un <strong>scope</strong> nuevo. Nuevamente este nodo no es una expresión entonces no es necesario anotarlo.</p>
+<div class="admonition info">
+<p class="admonition-title">Scope nuevo</p>
+<p>Cuando nos referimos a que se abre un scope nuevo, su código debería de verse algo así:</p>
+<div class="codehilite"><pre><span></span><span class="n">O</span><span class="o">.</span><span class="na">enterScope</span><span class="o">();</span>
+<span class="c1">// analisis semantico de algo</span>
+<span class="n">O</span><span class="o">.</span><span class="na">exitScope</span><span class="o">()</span>
+</pre></div>
+
+</div>
+<h4 id="while">While<a class="headerlink" href="#while" title="Permanent link">&para;</a></h4>
+<p>El while es muy similar al <strong>if</strong>, tienen que llamar recursivamente de <strong>cond</strong>, verificar que sea de tipo <strong>bool</strong>, si no lo es indicar el siguiente error:</p>
+<div class="codehilite"><pre><span></span><span class="n">SemantErrors</span><span class="o">.</span><span class="na">incompatibleTypes</span><span class="o">(</span><span class="n">cond</span><span class="o">.</span><span class="na">line</span><span class="o">,</span> <span class="n">cond</span><span class="o">.</span><span class="na">col</span><span class="o">,</span> <span class="n">cond</span><span class="o">.</span><span class="na">getType</span><span class="o">(),</span> <span class="n">Type</span><span class="o">.</span><span class="na">BOOL</span><span class="o">);</span>
+</pre></div>
+
+<p>Luego mandar a llamar recursivamente a <strong>body</strong>, nuevamente abriendo un <strong>scope</strong> nuevo. Nuevamente este nodo no es una expresión entonces no es necesario anotarlo.</p>
+<h3 id="autograder">Autograder<a class="headerlink" href="#autograder" title="Permanent link">&para;</a></h3>
+<p>Para probar su implementación pueden utitlizar lo siguiente:</p>
+<div class="codehilite"><pre><span></span>sudo ./gradlew build
+./check
+</pre></div>
+
+<p>Si todo lo tienen bien, les debería de salir lo siguiente:</p>
+<div class="codehilite"><pre><span></span>      Autograder
+
+
++1    <span class="o">(</span>badassign2<span class="o">)</span>     
++1      <span class="o">(</span>compare<span class="o">)</span>      
++1 <span class="o">(</span>unexpectedreturn<span class="o">)</span>  
++1    <span class="o">(</span>diffrettype<span class="o">)</span>    
++1       <span class="o">(</span>call<span class="o">)</span>        
++1       <span class="o">(</span>arith<span class="o">)</span>       
++1   <span class="o">(</span>mainwithargs<span class="o">)</span>    
++1     <span class="o">(</span>baddecl2<span class="o">)</span>      
++1       <span class="o">(</span>badid<span class="o">)</span>       
++1       <span class="o">(</span>fact<span class="o">)</span>        
++1       <span class="o">(</span>basic<span class="o">)</span>       
++1     <span class="o">(</span>badarith<span class="o">)</span>      
++1        <span class="o">(</span><span class="k">if</span><span class="o">)</span>         
++1     <span class="o">(</span>mainnoint<span class="o">)</span>     
++1     <span class="o">(</span>badcall2<span class="o">)</span>      
++1     <span class="o">(</span>badcall3<span class="o">)</span>      
++1        <span class="o">(</span>id<span class="o">)</span>         
++1     <span class="o">(</span>badassign<span class="o">)</span>     
++1       <span class="o">(</span>good<span class="o">)</span>        
++1       <span class="o">(</span><span class="k">while</span><span class="o">)</span>       
++1      <span class="o">(</span>assign<span class="o">)</span>       
++1     <span class="o">(</span>shadowing<span class="o">)</span>     
++1       <span class="o">(</span>badif<span class="o">)</span>       
++1     <span class="o">(</span>badcall1<span class="o">)</span>      
++1    <span class="o">(</span>badformals<span class="o">)</span>     
++1     <span class="o">(</span>badequal<span class="o">)</span>      
++1       <span class="o">(</span>decl<span class="o">)</span>        
++1      <span class="o">(</span>string<span class="o">)</span>       
++1     <span class="o">(</span>badwhile<span class="o">)</span>      
++1      <span class="o">(</span>nomain<span class="o">)</span>       
++1       <span class="o">(</span>bool<span class="o">)</span>        
++1       <span class="o">(</span>equal<span class="o">)</span>       
++1    <span class="o">(</span>missingret<span class="o">)</span>     
++1     <span class="o">(</span>baddecl1<span class="o">)</span>      
++1    <span class="o">(</span>badcompare<span class="o">)</span>     
+
+
+<span class="o">=</span>&gt; You got a score of <span class="m">35</span> out of <span class="m">35</span>.
+</pre></div>
+
+<p>Si ustedes desean probar en un archivo en específico pueden hacer lo siguiente:</p>
+<div class="codehilite"><pre><span></span>sudo ./gradlew build
+./run &lt;archivo&gt;
+</pre></div>
+
+<p>En la carpeta <strong>examples/</strong> hay algunos ejemplos para que puedan probar. </p>
+<p><strong>¡LISTO!</strong> Han terminado el análisis semántico de <strong>Viper</strong>, es hora de lograr terminar el análisis semántico de <strong>COOL</strong>, esperamos que esta serie de laboratorios les hayan ayudado bastante.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lab06/" title="6: Semantic 1" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                6: Semantic 1
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../lab08/" title="8: RISC-V" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                8: RISC-V
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-4
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-4/" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

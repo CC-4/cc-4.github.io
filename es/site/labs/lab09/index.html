@@ -1,0 +1,1030 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Ciencias de la Computacion 4 - Compiladores">
+      
+      
+        <link rel="canonical" href="https://cc-4.github.io/labs/lab09/">
+      
+      
+        <meta name="author" content="CC-4">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>9: Codegen 1 - Compiladores</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#lab-9-40codegen-i41" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-4.github.io/" title="Compiladores" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Compiladores
+              </span>
+              <span class="md-header-nav__topic">
+                9: Codegen 1
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-4/cc-4.github.io/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-4/cc-4.github.io
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-4.github.io/" title="Compiladores" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Compiladores
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-4/cc-4.github.io/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-4/cc-4.github.io
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01/" title="1: COOL" class="md-nav__link">
+      1: COOL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02/" title="2: jLex" class="md-nav__link">
+      2: jLex
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab03/" title="3: RDP" class="md-nav__link">
+      3: RDP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab04/" title="4: cup" class="md-nav__link">
+      4: cup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab05/" title="5: SymbolTable" class="md-nav__link">
+      5: SymbolTable
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab06/" title="6: Semantic 1" class="md-nav__link">
+      6: Semantic 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab07/" title="7: Semantic 2" class="md-nav__link">
+      7: Semantic 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab08/" title="8: RISC-V" class="md-nav__link">
+      8: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        9: Codegen 1
+      </label>
+    
+    <a href="./" title="9: Codegen 1" class="md-nav__link md-nav__link--active">
+      9: Codegen 1
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#activation-record" title="Activation Record" class="md-nav__link">
+    Activation Record
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soporte" title="Soporte" class="md-nav__link">
+    Soporte
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generando-codigo" title="Generando Código" class="md-nav__link">
+    Generando Código
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function" title="Function" class="md-nav__link">
+    Function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call" title="Call" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constantes" title="Constantes" class="md-nav__link">
+    Constantes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodos-aritmeticos" title="Nodos Aritméticos" class="md-nav__link">
+    Nodos Aritméticos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return" title="Return" class="md-nav__link">
+    Return
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autograder" title="Autograder" class="md-nav__link">
+    Autograder
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab10/" title="10: Codegen 2" class="md-nav__link">
+      10: Codegen 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab11/" title="11: Optimizaciones" class="md-nav__link">
+      11: Optimizaciones
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj00/" title="0: Instalacion" class="md-nav__link">
+      0: Instalacion
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: Lexer" class="md-nav__link">
+      1: Lexer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Parser" class="md-nav__link">
+      2: Parser
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj03/" title="3: Semantic" class="md-nav__link">
+      3: Semantic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj04/" title="4: Codegen" class="md-nav__link">
+      4: Codegen
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#activation-record" title="Activation Record" class="md-nav__link">
+    Activation Record
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soporte" title="Soporte" class="md-nav__link">
+    Soporte
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generando-codigo" title="Generando Código" class="md-nav__link">
+    Generando Código
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function" title="Function" class="md-nav__link">
+    Function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call" title="Call" class="md-nav__link">
+    Call
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constantes" title="Constantes" class="md-nav__link">
+    Constantes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodos-aritmeticos" title="Nodos Aritméticos" class="md-nav__link">
+    Nodos Aritméticos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return" title="Return" class="md-nav__link">
+    Return
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autograder" title="Autograder" class="md-nav__link">
+    Autograder
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-4/cc-4.github.io/edit/master/page/es/docs/labs/lab09.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="lab-9-40codegen-i41">Lab 9 (CodeGen I)<a class="headerlink" href="#lab-9-40codegen-i41" title="Permanent link">&para;</a></h1>
+<p>En este laboratorio van a generar código en lenguaje ensamblador RISC-V para algunos nodos del lenguaje <strong>Viper</strong> que utilizarón en el laboratorio 6 y 7. Debido a que este lenguaje no es orientado a objetos es más fácil generar código. </p>
+<p>Los archivos necesarios para este laboratorio los pueden encontrar en el siguiente enlace:</p>
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/XnJyp8xe
+</pre></div>
+
+<p>Los archivos base tienen la misma estructura que vieron anteriormente en los laboratorios 6 y 7. Para este laboratorio el análisis semántico ya está hecho, así que no se tienen que preocupar de esta tarea, solamente se tienen que enfocar en generar código implementando un <strong>Accumulator Machine</strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Lean bien</p>
+<p>Este lab es más complejo que los anteriores, por favor lean todas las instrucciones del lab, antes de empezar.</p>
+</div>
+<h2 id="activation-record">Activation Record<a class="headerlink" href="#activation-record" title="Permanent link">&para;</a></h2>
+<p>El activation record para las funciones de Viper es muy similar al que tienen que utilizar para los métodos de COOL.</p>
+<p><img alt="Activation Record de Viper" src="/img/ar-viper.png" /></p>
+<p>Si tuvieramos la siguiente función de Viper</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span> <span class="n">void</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">var</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">var</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>El activation record sería el siguiente:</p>
+<p><img alt="Activation Record de la Funci&#xF3;n foo" src="/img/ar-foo.png" /></p>
+<h2 id="soporte">Soporte<a class="headerlink" href="#soporte" title="Permanent link">&para;</a></h2>
+<p>Tanto en el proyecto, como en este laboratorio, van a encontrar una clase de ayuda llamada <strong>CgenSupport.java</strong> que contiene algunas definiciones que sirven para generar código, revisen esta clase para hacerse una idea de lo que pueden hacer con ella. </p>
+<p>Aplicar ingeniería inversa es factible, siempre y cuando tengamos claro que está sucediendo. Utilizando el siguiente comando podemos compilar un archivo y ver lo que el generador de código ya hecho genera, para que podamos imitar ese comportamiento.</p>
+<div class="codehilite"><pre><span></span>./vipercl &lt;archivo&gt;
+</pre></div>
+
+<p>Para compilar un archivo, utilizando su propio generador de código pueden hacer lo siguiente.</p>
+<div class="codehilite"><pre><span></span>./compile &lt;archivo&gt;
+</pre></div>
+
+<p>Pueden correr un programa compilado utilizando lo siguiente.</p>
+<div class="codehilite"><pre><span></span>./run &lt;archivo&gt;
+</pre></div>
+
+<h2 id="generando-codigo">Generando Código<a class="headerlink" href="#generando-codigo" title="Permanent link">&para;</a></h2>
+<p>Ustedes tienen que generar código para los siguientes nodos de Viper:</p>
+<ul>
+<li><strong>Function</strong></li>
+<li><strong>Call</strong></li>
+<li><strong>BoolConst</strong></li>
+<li><strong>IntConst</strong></li>
+<li><strong>StrConst</strong></li>
+<li><strong>Add</strong></li>
+<li><strong>Sub</strong></li>
+<li><strong>Div</strong></li>
+<li><strong>Mod</strong></li>
+<li><strong>Mul</strong></li>
+<li><strong>Return</strong></li>
+</ul>
+<p>Cada nodo de Viper tiene un método <code>code</code> con la siguiente firma:</p>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">code</span><span class="o">(</span><span class="n">Counter</span> <span class="n">locals</span><span class="o">,</span> <span class="n">SymbolTable</span> <span class="n">O</span><span class="o">,</span> <span class="n">PrintStream</span> <span class="n">p</span><span class="o">)</span>
+</pre></div>
+
+<p>Los parámetros tienen el siguiente significado:</p>
+<ul>
+<li><strong>locals</strong>: un contador que nos ayuda a saber cual es el siguiente espacio disponible en el área de variables locales dentro del activation record en relación al frame pointer (no se utilizará en este laboratorio).</li>
+<li><strong>O</strong>: Es nuestra tabla de símbolos, esta nos sirve para guardar en que posición del activation record se encuentran los símbolos (variables locales y parámetros) en relación al frame pointer.</li>
+<li><strong>p</strong>: Nos sirve para imprimir el código generado a un archivo.</li>
+</ul>
+<p>Ustedes tienen que implementar el método <code>code</code> para los nodos antes mencionados con ayuda de la clase <strong>CgenSupport.java</strong>.</p>
+<h3 id="function">Function<a class="headerlink" href="#function" title="Permanent link">&para;</a></h3>
+<p><strong>Function</strong> en cuestión de implementación es lo más complicado del laboratorio y lo primero que tienen que hacer. Usaremos este nodo como tutorial. Consideremos el mismo ejemplo anterior: </p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span> <span class="n">void</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">var</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">var</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>El generador de código para una función de Viper tiene que hacer los siguientes puntos:</p>
+<ol>
+<li>Definir una etiqueta que represente a la función.</li>
+<li>Reservar espacio en el stack para las variables locales, el registro fp y el registro ra.</li>
+<li>Crear un nuevo scope.</li>
+<li>Guardar en <strong>O</strong> la dirección de los formals en relación al registro fp.</li>
+<li>Mandar a llamar a <code>code</code> de los statements dentro de la función.</li>
+<li>Mandar a llamar a <code>code</code> de la expresión de return.</li>
+<li>Destruir el scope creado.</li>
+<li>Restaurar el stack, contemplando también el espacio que se reservo para los formals de parte del caller.</li>
+</ol>
+<p>Para definir la etiqueta que represente a la función vamos a utilizar lo siguiente:</p>
+<div class="codehilite"><pre><span></span><span class="n">CgenSupport</span><span class="o">.</span><span class="na">emitLabelDef</span><span class="o">(</span><span class="n">CgenSupport</span><span class="o">.</span><span class="na">DEF</span> <span class="o">+</span> <span class="n">name</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
+</pre></div>
+
+<p>Esto imprimirá en el archivo donde estará el código generado lo siguiente:</p>
+<div class="codehilite"><pre><span></span>def_foo:
+</pre></div>
+
+<p>Luego tenemos que saber cuanto espacio necesitamos reservar para las variables locales y los dos registros <code>fp</code> y <code>ra</code>. El método <code>locals()</code> que está implementado en el nodo <strong>Statements</strong> nos ayuda a determinar la cantidad de espacio que se necesita reservar para las variables locales que van a aparecer dentro del cuerpo de la función y además sabemos que necesitamos 2 palabras adicionales para los registros <code>fp</code> y <code>ra</code>. Sabiendo eso podemos reservar espacio y crear el prólogo de la función utilizando lo siguiente:</p>
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">statements</span><span class="o">.</span><span class="na">locals</span><span class="o">()</span> <span class="o">+</span> <span class="mi">2</span><span class="o">;</span>
+<span class="n">CgenSupport</span><span class="o">.</span><span class="na">emitPrologue</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
+</pre></div>
+
+<p>Esto imprimirá lo siguiente:</p>
+<div class="codehilite"><pre><span></span>addi  sp sp -12
+sw    fp 8(sp)
+sw    ra 4(sp)
+addi  fp sp 4
+</pre></div>
+
+<p>Noten que necesitamos 1 palabra para la variable local que aparece dentro del cuerpo de la función y además, 2 palabras adicionales para los registros <code>fp</code> y <code>ra</code> para un total de 3 palabras de 32 bits, es por eso que aparece el <strong>-12</strong> (3 * 4 = 12). También noten como se guardan los registros y como se establece el frame pointer para que apunte hacia <code>ra</code>.</p>
+<p>La función <code>locals()</code> ya está hecha en el laboratorio, pero para el proyecto ustedes la deben implementar. Esta función no es tan trivial como parece, recuerden que en un determinado tiempo hay variables vivas y variables muertas, por ejemplo:</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span> <span class="n">void</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+    <span class="nb">int</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Cuando llegamos a la declaración <code>int z = 30</code>, la variable <code>y</code> estará muerta y el espacio que utilizó se puede reciclar. Para este caso la función <code>locals()</code> tiene que devolver como resultado que se necesitan 2 palabras de 32 bits para las variables locales de la función, sabiendo que el espacio que utilizó <code>y</code> se puede reutilizar para <code>z</code>. Esto es lo que el compilador de referencia de cool <strong>coolc</strong> y <strong>coolc-rv</strong> hacen.</p>
+<p>Ya habiendo impreso el prólogo podemos seguir con el paso 3 y 4, podemos hacer lo siguiente:</p>
+<div class="codehilite"><pre><span></span><span class="n">O</span><span class="o">.</span><span class="na">enterScope</span><span class="o">();</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">formals</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="n">Formal</span> <span class="n">formal</span> <span class="o">=</span> <span class="n">formals</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="n">O</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">formal</span><span class="o">.</span><span class="na">name</span><span class="o">,</span> <span class="n">size</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>Noten como vamos indicando que los formals quedan arriba de los locals con <code>size + i</code>, siguiendo con el ejemplo si <code>size = 3</code>, entonces el parámetro <code>x</code> queda 3 posiciones arriba del frame pointer e <code>y</code> 4 posiciones arriba.</p>
+<p>Para los pasos 5 y 6 basta con llamar a <code>code</code> para los statements y la expresión de retorno:</p>
+<div class="codehilite"><pre><span></span><span class="n">statements</span><span class="o">.</span><span class="na">code</span><span class="o">(</span><span class="k">new</span> <span class="n">Counter</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span> <span class="n">O</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
+<span class="n">ret</span><span class="o">.</span><span class="na">code</span><span class="o">(</span><span class="k">new</span> <span class="n">Counter</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span> <span class="n">O</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
+</pre></div>
+
+<p>Se preguntarán ¿por qué el <code>new Counter(2)</code>? Recuerden que el primer parámetro de la función <code>code</code> es un contador que nos indica el siguiente espacio disponible en el área de variables locales en relación al frame pointer. La primer variable siempre se encontrará 2 posiciones arriba del <code>fp</code> porque <code>ra</code> está al mismo nivel que <code>fp</code> y <code>old fp</code> está una posición arriba.</p>
+<p>Luego hay que cerrar el scope:</p>
+<div class="codehilite"><pre><span></span><span class="n">O</span><span class="o">.</span><span class="na">exitScope</span><span class="o">();</span>
+</pre></div>
+
+<p>Y por último restaurar el stack, el epílogo de la función en otras palabras:</p>
+<div class="codehilite"><pre><span></span><span class="n">CgenSupport</span><span class="o">.</span><span class="na">emitEpilogue</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">formals</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">p</span><span class="o">);</span>
+</pre></div>
+
+<p>Esto imprimirá lo siguiente:</p>
+<div class="codehilite"><pre><span></span>lw    fp 8(sp)
+lw    ra 4(sp)
+addi  sp sp 20
+ret
+</pre></div>
+
+<p>Noten que estamos mandando <code>size + formals.size()</code>, ya que necesitamos restaurar también el espacio reservado por el caller que utilizó para meter los parámetros de la función. Por eso el <strong>20</strong>, porque se reservaron 3 palabras en el prólogo del callee y 2 parámetros tiene la función para un total de 5 palabras de 32 bits (5 * 4 = 20). </p>
+<h3 id="call">Call<a class="headerlink" href="#call" title="Permanent link">&para;</a></h3>
+<p>Para call ustedes tendrían que recorrer los actuals en el orden inverso, mandar a llamar a <code>code</code> y hacer push del resultado (que está en <code>a0</code>) en el stack. Luego hacer un <code>jal</code> hacia la función que se está mandando a llamar utilizando:</p>
+<div class="codehilite"><pre><span></span><span class="n">CgenSupport</span><span class="o">.</span><span class="na">emitJal</span><span class="o">(</span><span class="n">CgenSupport</span><span class="o">.</span><span class="na">DEF</span> <span class="o">+</span> <span class="n">name</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
+</pre></div>
+
+<p>En el nodo call hay un caso especial cuando se está mandando a llamar a la función <code>print/println</code>,  ya que estas aceptan imprimir enteros, booleans y strings, es necesario saber el tipo del argumento, para mandar a llamar a la función correcta:</p>
+<ul>
+<li><code>def_print_int</code>/<code>def_println_int</code> &gt; para un argumento de tipo <code>int</code></li>
+<li><code>def_print_bool</code>/<code>def_println_bool</code> &gt; para un argumento de tipo <code>bool</code></li>
+<li><code>def_print_str</code>/<code>def_println_str</code> &gt; para un argumento de tipo <code>str</code></li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">isPrint()</p>
+<p>Utilicen el método <code>isPrint()</code> del nodo <code>Call</code> para saber si se está mandando a llamar ya sea a <code>print</code> o a <code>println</code>.</p>
+</div>
+<h3 id="constantes">Constantes<a class="headerlink" href="#constantes" title="Permanent link">&para;</a></h3>
+<p>Para las constantes simplemente es cargar al acumulador (registro <code>a0</code>) la constante utilizando los siguientes métodos que están en <strong>CgenSupport.java</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">emitLoadBool</span><span class="o">(</span><span class="n">String</span> <span class="n">dest</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">val</span><span class="o">,</span> <span class="n">PrintStream</span> <span class="n">p</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">emitLoadString</span><span class="o">(</span><span class="n">String</span> <span class="n">dest</span><span class="o">,</span> <span class="n">String</span> <span class="n">val</span><span class="o">,</span> <span class="n">PrintStream</span> <span class="n">p</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">emitLoadInt</span><span class="o">(</span><span class="n">String</span> <span class="n">dest</span><span class="o">,</span> <span class="n">String</span> <span class="n">val</span><span class="o">,</span> <span class="n">PrintStream</span> <span class="n">p</span><span class="o">);</span>
+</pre></div>
+
+<h3 id="nodos-aritmeticos">Nodos Aritméticos<a class="headerlink" href="#nodos-aritmeticos" title="Permanent link">&para;</a></h3>
+<p>Para los nodos aritméticos basta seguir las reglas del accumulator machine vistas en clase, por ejemplo si tuvieramos lo siguiente:</p>
+<div class="codehilite"><pre><span></span>2 + (3 * 2)
+</pre></div>
+
+<p>Un accumulator machine haría lo siguiente:</p>
+<div class="codehilite"><pre><span></span>li a0, 2
+sw a0, 0(sp)
+addi sp, sp, -4
+li a0, 3
+sw a0, 0(sp)
+addi sp, sp, -4
+li a0, 2
+lw t1, 4(sp)
+addi sp, sp, 4
+mul a0, t1, a0
+lw t1, 4(sp)
+addi sp, sp, 4
+add a0, t1, a0
+</pre></div>
+
+<p>Vean los métodos dentro de <strong>CgenSupport.java</strong> que les ayuden a implementar estos nodos, para el nodo <strong>Div</strong> hay algo adicional para manejar la división por cero, miren lo que el compilador de referencia genera.</p>
+<p>!!! info "Label adicional
+    Van a tener que utilizar <code>CgenSupport.nextLabel()</code>en <strong>Div</strong></p>
+<h3 id="return">Return<a class="headerlink" href="#return" title="Permanent link">&para;</a></h3>
+<p>Facilito, simplemente llamar a <code>code</code> de la expresión del return.</p>
+<h2 id="autograder">Autograder<a class="headerlink" href="#autograder" title="Permanent link">&para;</a></h2>
+<p>Para probar su implementación pueden correr lo siguiente:</p>
+<div class="codehilite"><pre><span></span>sudo ./gradlew build
+./check
+</pre></div>
+
+<p>Si todo está bien les tendría que salir lo siguiente:</p>
+<div class="codehilite"><pre><span></span>      Autograder
+
+
++1       <span class="o">(</span>call<span class="o">)</span>        
++1       <span class="o">(</span>arith<span class="o">)</span>       
++1     <span class="o">(</span>constants<span class="o">)</span>     
++1      <span class="o">(</span><span class="k">return</span><span class="o">)</span>       
+
+
+<span class="o">=</span>&gt; You got a score of <span class="m">100</span> out of <span class="m">100</span>.
+</pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lab08/" title="8: RISC-V" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                8: RISC-V
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../lab10/" title="10: Codegen 2" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                10: Codegen 2
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-4
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-4/" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

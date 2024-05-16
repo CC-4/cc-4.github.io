@@ -35,8 +35,8 @@ Ustedes van a correr su parser utilizando `./myparser`, un shell script que pega
 
 Ustedes deberían de probar este parser tanto en archivos bien definidos de COOL, como en malos, para ver si todo está funcionando correctamente. Recuerden, los bugs en su parser se pueden manifestar en alguna otra parte más adelante. Su parser va a ser calificado utilizando nuestro analizador léxico, entonces si ustedes escogen utilizar unicamente su parser, sepan de antemano que esto está sucediendo en el autograder.
 
-!!!info "lexer"
-Nosotros les recomendamos utilizar el analizador léxico de coolc-rv que viene por defecto, ya que este está menos propenso a errores, pero cuando ya tengan un parser funcional utilicen su propio analizar léxico para verificar que todo siga funcionando bien.
+!!!info "Lexer"
+  Al inicio probaremos nuestra fase 2 usando el analizador léxico de coolc-rv que viene por defecto, ya que este está menos propenso a errores. Cuando ya tengan un parser funcional utilicen su propio analizador léxico para verificar que todo siga funcionando bien.
 
 ## 3. Salida del Parser
 

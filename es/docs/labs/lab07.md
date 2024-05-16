@@ -8,8 +8,8 @@ Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom
 https://classroom.github.com/a/bs9-cgvz
 ```
 
-!!! danger ""
-	Por favor lean todas las instrucciones del lab, antes de empezar.
+!!!warning "Lean bien"
+	Este lab es más complejo que los anteriores, por favor lean todas las instrucciones del lab, antes de empezar.
 
 ## Reglas de Inferencia
 

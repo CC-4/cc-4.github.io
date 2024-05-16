@@ -1,0 +1,884 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Ciencias de la Computacion 4 - Compiladores">
+      
+      
+        <link rel="canonical" href="https://cc-4.github.io/projs/proj02/">
+      
+      
+        <meta name="author" content="CC-4">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>2: Parser - Compiladores</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#analisis-sintactico" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-4.github.io/" title="Compiladores" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Compiladores
+              </span>
+              <span class="md-header-nav__topic">
+                2: Parser
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-4/cc-4.github.io/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-4/cc-4.github.io
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-4.github.io/" title="Compiladores" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Compiladores
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-4/cc-4.github.io/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-4/cc-4.github.io
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab01/" title="1: COOL" class="md-nav__link">
+      1: COOL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab02/" title="2: jLex" class="md-nav__link">
+      2: jLex
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab03/" title="3: RDP" class="md-nav__link">
+      3: RDP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab04/" title="4: cup" class="md-nav__link">
+      4: cup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab05/" title="5: SymbolTable" class="md-nav__link">
+      5: SymbolTable
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab06/" title="6: Semantic 1" class="md-nav__link">
+      6: Semantic 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab07/" title="7: Semantic 2" class="md-nav__link">
+      7: Semantic 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab08/" title="8: RISC-V" class="md-nav__link">
+      8: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab09/" title="9: Codegen 1" class="md-nav__link">
+      9: Codegen 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab10/" title="10: Codegen 2" class="md-nav__link">
+      10: Codegen 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab11/" title="11: Optimizaciones" class="md-nav__link">
+      11: Optimizaciones
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj00/" title="0: Instalacion" class="md-nav__link">
+      0: Instalacion
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj01/" title="1: Lexer" class="md-nav__link">
+      1: Lexer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        2: Parser
+      </label>
+    
+    <a href="./" title="2: Parser" class="md-nav__link md-nav__link--active">
+      2: Parser
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-archivos-y-directorios" title="1. Archivos y Directorios" class="md-nav__link">
+    1. Archivos y Directorios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-probando-el-parser" title="2. Probando el Parser" class="md-nav__link">
+    2. Probando el Parser
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-salida-del-parser" title="3. Salida del Parser" class="md-nav__link">
+    3. Salida del Parser
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-manejo-de-errores" title="4. Manejo de Errores" class="md-nav__link">
+    4. Manejo de Errores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-observaciones" title="5. Observaciones" class="md-nav__link">
+    5. Observaciones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-notas-de-java" title="6. Notas de Java" class="md-nav__link">
+    6. Notas de Java
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-autograder" title="7. Autograder" class="md-nav__link">
+    7. Autograder
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" title="Referencias" class="md-nav__link">
+    Referencias
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj03/" title="3: Semantic" class="md-nav__link">
+      3: Semantic
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj04/" title="4: Codegen" class="md-nav__link">
+      4: Codegen
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-archivos-y-directorios" title="1. Archivos y Directorios" class="md-nav__link">
+    1. Archivos y Directorios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-probando-el-parser" title="2. Probando el Parser" class="md-nav__link">
+    2. Probando el Parser
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-salida-del-parser" title="3. Salida del Parser" class="md-nav__link">
+    3. Salida del Parser
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-manejo-de-errores" title="4. Manejo de Errores" class="md-nav__link">
+    4. Manejo de Errores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-observaciones" title="5. Observaciones" class="md-nav__link">
+    5. Observaciones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-notas-de-java" title="6. Notas de Java" class="md-nav__link">
+    6. Notas de Java
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-autograder" title="7. Autograder" class="md-nav__link">
+    7. Autograder
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" title="Referencias" class="md-nav__link">
+    Referencias
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-4/cc-4.github.io/edit/master/page/es/docs/projs/proj02.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="analisis-sintactico">Análisis Sintáctico<a class="headerlink" href="#analisis-sintactico" title="Permanent link">&para;</a></h1>
+<p><img alt="" src="/img/parser.png" /></p>
+<p>En esta asignación ustedes van a escribir un parser para COOL. La asignación hace uso de dos herramientas: el generador de parser cup y el paquete de Java con las clases que representan los nodos de un árbol sintáctico. La salida de su parser va a ser un árbol sintáctico abstracto o AST por sus siglas en inglés. Van a construir un AST utilizando acciones semánticas del generador de parser cup.</p>
+<p>Inicien esta fase consultando la estructura sintáctica de COOL en la figura 1 del manual. Consulte también la documentación de cup y del paquete tree, en los links al final de la página. La documentación del paquete tree le servirá durante el resto del proyecto.</p>
+<p>Por favor lean este documento detenida y cuidadosamente, poniéndole mucha atención a los detalles.</p>
+<h2 id="1-archivos-y-directorios">1. Archivos y Directorios<a class="headerlink" href="#1-archivos-y-directorios" title="Permanent link">&para;</a></h2>
+<p>Para empezar, creen el directorio <strong>PA2</strong> tal como se explicó al inicio.</p>
+<p><strong>ADENTRO</strong> de esa carpeta ejecuten el siguiente comando:</p>
+<div class="codehilite"><pre><span></span>make -f /usr/class/cc4/assignments/PA2/Makefile
+</pre></div>
+
+<p>Este comando va a copiar bastantes archivos en su directorio. Algunos de los archivos que van a ser copiados van a ser de solo lectura (representando a estos con archivos que realmente son enlaces simbólicos hacia otros archivos). Ustedes no deberían de editar estos archivos. De hecho, si ustedes modifican estos archivos, van a encontrar imposible terminar y completar esta asignación. Vean las instrucciones en el archivo README. Los únicos archivos que tienen permitido modificar para esta asignación son:</p>
+<ul>
+<li><strong>cool.cup</strong>: Este archivo contiene un esqueleto que describe un parser para COOL. La sección de declaraciones está casi completa, pero van a necesitar agregar alguna que otra declaración para definir nuevos <strong>no terminales</strong>. Nosotros les hemos dado ya los nombres y tipos de declaración para los terminales de la gramática. Ustedes tienen que agregar declaraciones de precedencia también. La sección de reglas, sin embargo, está incompleta. Les hemos proveído algunas partes para algunas reglas, pero estas son solo un ejemplo. Piense bien qué reglas necesitará.</li>
+<li><strong>good.cl y bad.cl</strong>: Estos archivos prueban algunas características de la gramática de COOL. Pueden modificar estos archivos como ustedes quieran para probar su parser.</li>
+<li><strong>README</strong>: Este archivo contiene instrucciones detalladas para la asignación, así como también un número de recomendaciones útiles. Realmente este archivo no lo van a modificar, pero es bueno mencionar que lo tienen que leer.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Otros archivos</p>
+<p>No modifiquen ningún archivo que no se menciona en el listado, cuando se evalue la asignación únicamente se va a probar el archivo <strong>cool.cup</strong> en un nuevo entorno.</p>
+</div>
+<h2 id="2-probando-el-parser">2. Probando el Parser<a class="headerlink" href="#2-probando-el-parser" title="Permanent link">&para;</a></h2>
+<p>Ustedes van a necesitar un lexer completamente funcional para probar el parser. Pueden utilizar su propio analizador léxico del proyecto pasado o utilizar el lexer de coolc-rv. Por default, el lexer de coolc-rv es utilizado, para cambiar este comportamiento, cambien el archivo ejecutable <strong>lexer</strong> (que es un enlace simbólico en su directorio de proyecto) con su propio lexer. No asuman automáticamente que el lexer que utilicen está libre de errores. Algunos bugs latentes en el analizador léxico pueden generar problemas misteriosos en el parser.</p>
+<p>Ustedes van a correr su parser utilizando <code>./myparser</code>, un shell script que pega el parser con un analizador léxico (el de su elección). Noten que <code>./myparser</code> puede recibir una bandera <strong>-p</strong> para depurar el parser. Utilizar esta bandera causa que un montón de información de lo que el parser está haciendo sea impreso en la terminal. cup produce tablas de parseo de una gramática LALR(1) bastante leíbles en un archivo llamado <strong>cool.output</strong>. Examinar este archivo a veces puede ser útil para depurar la definición del parser.</p>
+<p>Ustedes deberían de probar este parser tanto en archivos bien definidos de COOL, como en malos, para ver si todo está funcionando correctamente. Recuerden, los bugs en su parser se pueden manifestar en alguna otra parte más adelante. Su parser va a ser calificado utilizando nuestro analizador léxico, entonces si ustedes escogen utilizar unicamente su parser, sepan de antemano que esto está sucediendo en el autograder.</p>
+<div class="admonition info">
+<p class="admonition-title">Lexer</p>
+</div>
+<p>Al inicio probaremos nuestra fase 2 usando el analizador léxico de coolc-rv que viene por defecto, ya que este está menos propenso a errores. Cuando ya tengan un parser funcional utilicen su propio analizador léxico para verificar que todo siga funcionando bien.</p>
+<h2 id="3-salida-del-parser">3. Salida del Parser<a class="headerlink" href="#3-salida-del-parser" title="Permanent link">&para;</a></h2>
+<p>Sus acciones semánticas deberían de construir un AST. La raíz (y solamente la raíz) del AST debería de ser de tipo <code>programc</code>. Para los programas que son parseados satisfactoriamente, la salida del parser es un listado del AST.</p>
+<p>Para programas que contengan errores (léxicos o sintácticos), la salida son mensajes de error del parser. Nosotros les hemos proveído con una función que reporta errores imprimiendo los mensajes en un formato estándar, por favor <strong>NO</strong> modifiquen esto. Ustedes no deberían de invocar esta función directamente en las acciones semánticas, cup automáticamente invoca a esta función cuando un error es detectado.</p>
+<p>Para algunas construcciones que puedan abarcar varias líneas de código, por ejemplo:</p>
+<div class="codehilite"><pre><span></span><span class="n">foo</span><span class="p">(</span>
+  <span class="mi">1</span><span class="p">,</span>
+  <span class="mi">2</span><span class="p">,</span>
+  <span class="mi">3</span>
+<span class="p">)</span>
+</pre></div>
+
+<p>Este dispatch abarca 5 líneas, de la 1 a la 5. Ustedes cuando construyan algún nodo que abarque múltiples líneas son libres de indicar a que número de línea pertence este nodo, siempre y cuando, el número esté en el rango que abarque el nodo, en el ejemplo anterior podría ser 1, 2, 3, 4 o 5. No se preocupen si las líneas reportadas por su parser no hacen match exactamente como el compilador de referencia coolc-rv. Su parser solo debería de funcionar para programas que estén contenidos en un solo archivo. No se preocupen por compilar múltiples archivos.</p>
+<div class="admonition info">
+<p class="admonition-title">Número de línea</p>
+<p>Siempre que reporten el número de línea utilicen la función de ayuda <code>curr_lineno()</code> que se encuentra en <strong>cool.cup</strong>.</p>
+</div>
+<h2 id="4-manejo-de-errores">4. Manejo de Errores<a class="headerlink" href="#4-manejo-de-errores" title="Permanent link">&para;</a></h2>
+<p>Ustedes deberían de utilizar el pseudo no terminal <strong>error</strong> (en minúscula, el que ignoramos durante lexer) para manejar errores en el parser. El propósito de <strong>error</strong> es permitirle al parser continuar después de un error anticipado. No es una solución garantizada y el parser puede volverse completamente confuso. Vean la documentación de cup para saber como utilizar <strong>error</strong> de forma eficiente. Para recibir toda la nota, su parser debería de recuperarse por lo menos en las siguientes situaciones:</p>
+<ul>
+<li>Si hay algún error en una definición de clase pero la clase es terminada correctamente y la siguiente clase está correcta sintácticamente, el parser debería de ser capaz de empezar de nuevo en la siguiente definición de clase.</li>
+<li>El parser debería de recuperarse de errores en los features (debe irse a analizar el siguiente feature).</li>
+<li>En un let, debe pasar a la siguiente variable.</li>
+<li>En un bloque, debe ir a la siguiente expresión.</li>
+</ul>
+<p>No se preocupen demasiado por los números de línea que aparecen en los mensajes de error que su parser genera. Si su parser está funcionando correctamente, el número de línea generalmente va a ser la línea donde se encontró el error. Para construcciones erroneas que abarquen múltiples líneas, el número de línea por lo general va a ser la última línea de esa construcción.</p>
+<h2 id="5-observaciones">5. Observaciones<a class="headerlink" href="#5-observaciones" title="Permanent link">&para;</a></h2>
+<p>Ustedes van a necesitar declaraciones de precedencia, pero solo para las expresiones. No las utilicen para resolver otro tipo de problemas.</p>
+<p>El let de COOL se maneja de forma especial, revise la documentación del tree y notará que cada let puede tener únicamente una variable asociada a este. Deberá escribir sus reglas de tal forma que los let queden anidados para que su parser funcione.</p>
+<p>Cuando esté listo para probar el parser usando el autograder, quite cualquier print extra que haya agregado. De igual forma, cualquier print extra o cualquier caracter extraño puede causar problemas en fases siguientes.</p>
+<h2 id="6-notas-de-java">6. Notas de Java<a class="headerlink" href="#6-notas-de-java" title="Permanent link">&para;</a></h2>
+<p>Ustedes deberían de declarar tipos para sus no terminales y los terminales que tengan valor, por ejemplo, en el archivo <strong>cool.cup</strong> está la declaración:</p>
+<div class="codehilite"><pre><span></span><span class="n">nonterminal</span> <span class="n">programc</span> <span class="n">program</span><span class="o">;</span>
+</pre></div>
+
+<p>Esta declaración dice que el no terminal <code>program</code> tiene tipo <code>programc</code>.</p>
+<p>Es crítico que ustedes declaren el tipo correcto para los atributos de los símbolos de la gramática.Si no lo hace, su parser no funcionará correctamente. Note que también hay varios elementos que no llevan tipo.</p>
+<p>Es probable que <strong>javac</strong> se queje si utilizan los constructores de los nodos del árbol con el tipo incorrecto. Si ustedes hacen algún casting para resolver esto por fuerza bruta, es probable que su parser sí compile, pero lance una excepción al ejecutarse.</p>
+<h2 id="7-autograder">7. Autograder<a class="headerlink" href="#7-autograder" title="Permanent link">&para;</a></h2>
+<p>Ustedes deberían de descargar el siguiente script en el mismo directorio donde tienen sus archivos de la segunda fase, y darle permisos.</p>
+<div class="codehilite"><pre><span></span>wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa2-grading.pl
+chmod +x pa2-grading.pl
+</pre></div>
+
+<p>Lo ejecutan de la siguiente manera:</p>
+<div class="codehilite"><pre><span></span>./pa2-grading.pl
+</pre></div>
+
+<p>Esto califica su parser utilizando el analizador léxico de coolc. Si ustedes quieren probar su parser junto con su propia fase 1:</p>
+<div class="codehilite"><pre><span></span>wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa2-grading-all.sh
+chmod +x pa2-grading-all.sh
+</pre></div>
+
+<p>Lo ejecutan de la siguiente manera:</p>
+<div class="codehilite"><pre><span></span>./pa2-grading-all.sh
+</pre></div>
+
+<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="http://web.stanford.edu/class/cs143/javadoc/cool_ast/">The Tree Package</a> - Javadoc del paquete Tree.</li>
+<li><a href="http://www2.cs.tum.edu/projects/cup/manual.html">cup Manual</a> - Manual de JCup.</li>
+<li><a href="http://web.stanford.edu/class/cs143/materials/cool-manual.pdf">The Cool Reference Manual</a> - Manual de COOL.</li>
+<li><a href="http://web.stanford.edu/class/cs143/materials/cool-tour.pdf">Tour of the Cool Support Code</a> - Manual del Código de Soporte de COOL.</li>
+<li><a href="http://web.stanford.edu/class/cs143/javadoc/java_cup/index.html">cup Javadoc</a> - Javadoc de JCup.</li>
+</ol>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../proj01/" title="1: Lexer" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                1: Lexer
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../proj03/" title="3: Semantic" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                3: Semantic
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-4
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-4/" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

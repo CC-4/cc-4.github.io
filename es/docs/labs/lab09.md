@@ -10,6 +10,9 @@ https://classroom.github.com/a/XnJyp8xe
 
 Los archivos base tienen la misma estructura que vieron anteriormente en los laboratorios 6 y 7. Para este laboratorio el análisis semántico ya está hecho, así que no se tienen que preocupar de esta tarea, solamente se tienen que enfocar en generar código implementando un **Accumulator Machine**.
 
+!!!warning "Lean bien"
+	Este lab es más complejo que los anteriores, por favor lean todas las instrucciones del lab, antes de empezar.
+
 ## Activation Record
 
 El activation record para las funciones de Viper es muy similar al que tienen que utilizar para los métodos de COOL.

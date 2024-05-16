@@ -9,9 +9,6 @@ Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom
 https://classroom.github.com/a/lhskxXvi
 ```
 
-!!! danger ""
-	Por favor lean todas las instrucciones del lab, antes de empezar.
-
 ## Jupiter
 
 Los siguientes ejercicios utilizan el simulador que ya han utilizado en CC3 llamado **Jupiter** \(anteriormente llamado V-Sim\) para instalarlo por favor corran lo siguiente en una terminal:

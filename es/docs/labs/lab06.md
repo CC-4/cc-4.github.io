@@ -8,8 +8,8 @@ Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom
 https://classroom.github.com/a/1z-JR4a4
 ```
 
-!!! danger ""
-	Por favor lean todas las instrucciones del lab, antes de empezar.
+!!!warning "Lean bien"
+	Este lab es más complejo que los anteriores, por favor lean todas las instrucciones del lab, antes de empezar.
 
 ## Análisis Semántico del lenguaje Viper
 

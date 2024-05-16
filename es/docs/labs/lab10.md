@@ -8,6 +8,9 @@ Los archivos necesarios para este laboratorio los pueden encontrar en el siguien
 https://classroom.github.com/a/dyAqFODr
 ```
 
+!!!warning "Lean bien"
+	Este lab es más complejo que los anteriores, por favor lean todas las instrucciones del lab, antes de empezar.
+
 ## Recordatorio
 
 Por favor revisen el siguiente enlace para recordarse cómo está estructurado el **Activation Record** en Viper:

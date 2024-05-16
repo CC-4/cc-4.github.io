@@ -1,0 +1,938 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Ciencias de la Computacion 4 - Compiladores">
+      
+      
+        <link rel="canonical" href="https://cc-4.github.io/projs/proj03/">
+      
+      
+        <meta name="author" content="CC-4">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>3: Semantic - Compiladores</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#analisis-semantico" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-4.github.io/" title="Compiladores" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Compiladores
+              </span>
+              <span class="md-header-nav__topic">
+                3: Semantic
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-4/cc-4.github.io/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-4/cc-4.github.io
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-4.github.io/" title="Compiladores" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Compiladores
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-4/cc-4.github.io/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-4/cc-4.github.io
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab01/" title="1: COOL" class="md-nav__link">
+      1: COOL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab02/" title="2: jLex" class="md-nav__link">
+      2: jLex
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab03/" title="3: RDP" class="md-nav__link">
+      3: RDP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab04/" title="4: cup" class="md-nav__link">
+      4: cup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab05/" title="5: SymbolTable" class="md-nav__link">
+      5: SymbolTable
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab06/" title="6: Semantic 1" class="md-nav__link">
+      6: Semantic 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab07/" title="7: Semantic 2" class="md-nav__link">
+      7: Semantic 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab08/" title="8: RISC-V" class="md-nav__link">
+      8: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab09/" title="9: Codegen 1" class="md-nav__link">
+      9: Codegen 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab10/" title="10: Codegen 2" class="md-nav__link">
+      10: Codegen 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab11/" title="11: Optimizaciones" class="md-nav__link">
+      11: Optimizaciones
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj00/" title="0: Instalacion" class="md-nav__link">
+      0: Instalacion
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj01/" title="1: Lexer" class="md-nav__link">
+      1: Lexer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj02/" title="2: Parser" class="md-nav__link">
+      2: Parser
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        3: Semantic
+      </label>
+    
+    <a href="./" title="3: Semantic" class="md-nav__link md-nav__link--active">
+      3: Semantic
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-archivos-y-directorios" title="1. Archivos y Directorios" class="md-nav__link">
+    1. Archivos y Directorios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-atravesar-el-ast" title="2. Atravesar el AST" class="md-nav__link">
+    2. Atravesar el AST
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-herencia" title="3. Herencia" class="md-nav__link">
+    3. Herencia
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-scopes-y-variables" title="4. Scopes y Variables" class="md-nav__link">
+    4. Scopes y Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-verificacion-de-tipos" title="5. Verificación de Tipos" class="md-nav__link">
+    5. Verificación de Tipos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-interfaz-con-codegen" title="6. Interfaz con Codegen" class="md-nav__link">
+    6. Interfaz con Codegen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-salida-esperada" title="7. Salida Esperada" class="md-nav__link">
+    7. Salida Esperada
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-probando-el-analizador" title="8. Probando el Analizador" class="md-nav__link">
+    8. Probando el Analizador
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-observaciones" title="9. Observaciones" class="md-nav__link">
+    9. Observaciones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-autograder" title="10. Autograder" class="md-nav__link">
+    10. Autograder
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" title="Referencias" class="md-nav__link">
+    Referencias
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj04/" title="4: Codegen" class="md-nav__link">
+      4: Codegen
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-archivos-y-directorios" title="1. Archivos y Directorios" class="md-nav__link">
+    1. Archivos y Directorios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-atravesar-el-ast" title="2. Atravesar el AST" class="md-nav__link">
+    2. Atravesar el AST
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-herencia" title="3. Herencia" class="md-nav__link">
+    3. Herencia
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-scopes-y-variables" title="4. Scopes y Variables" class="md-nav__link">
+    4. Scopes y Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-verificacion-de-tipos" title="5. Verificación de Tipos" class="md-nav__link">
+    5. Verificación de Tipos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-interfaz-con-codegen" title="6. Interfaz con Codegen" class="md-nav__link">
+    6. Interfaz con Codegen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-salida-esperada" title="7. Salida Esperada" class="md-nav__link">
+    7. Salida Esperada
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-probando-el-analizador" title="8. Probando el Analizador" class="md-nav__link">
+    8. Probando el Analizador
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-observaciones" title="9. Observaciones" class="md-nav__link">
+    9. Observaciones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-autograder" title="10. Autograder" class="md-nav__link">
+    10. Autograder
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" title="Referencias" class="md-nav__link">
+    Referencias
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-4/cc-4.github.io/edit/master/page/es/docs/projs/proj03.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="analisis-semantico">Análisis Semántico<a class="headerlink" href="#analisis-semantico" title="Permanent link">&para;</a></h1>
+<p><img alt="" src="/img/semant.png" /></p>
+<p><img alt="" src="/img/dragon_meme.png" /></p>
+<p>En está asignación, ustedes van a implementar el análisis semántico para COOL. Ustedes van a utilizar el AST construido por el parser para verificar si el programa está correcto semánticamente siguiendo la especificación de COOL. Su analizador semántico debería de rechazar programas erroneos. Para programas que estén correctos, debería reunir información que va a ser utilizada por el generador de código. La salida del analizador semántico va a ser un <strong>AST anotado</strong> utilizado por su generador de código.</p>
+<p>En esta asignación tiene más libertad para tomar decisiones de diseño que en las últimas dos asignaciones. Su semantic va a ser correcto si puede verificar programas reflejando la especificación. No hay una sola solución para esta asignación, pero si hay muchas malas maneras de implementarla. Hay un número de practicas estándar que creemos que hacen la vida más fácil, y les vamos a tratar de inculcar estas prácticas a ustedes. Sin embargo, lo que ustedes hagan es su responsabilidad, cualquier cosa que ustedes decidan hacer, estén preparados para justificarla y explicarla.</p>
+<p>Ustedes van a necesitar referirse a las reglas de inferencia de tipos descritas en el manual de referencia de COOL. Ustedes también van a necesitar agregar métodos y atributos a los nodos del AST para esta fase. Las funciones que el paquete tree provee están documentadas en el Manual del código de soporte de COOL.</p>
+<p>Hay mucha información en este documento y ustedes necesitan saber la mayoría de esta información para crear un analizador semántico funcional. Por favor lean esta asignación detenida y cuidadosamente. A alto nivel, su analizador semántico debería de poder lograr las siguientes tareas:</p>
+<ul>
+<li>Ver todas las clases y construir un grafo de herencia.</li>
+<li>Verificar que el grafo esté bien formado.</li>
+<li>Anotar el AST con tipos.</li>
+<li>Para cada clase:</li>
+<li>Atravesar el AST, reuniendo todas las declaraciones visibles en una tabla de símbolos.</li>
+<li>Verificar que los tipos de cada expresión sean correctos.</li>
+</ul>
+<p>Esta lista de tareas no es exhaustiva, es responsabilidad de ustedes de implementar la especificación descrita en el manual.</p>
+<h2 id="1-archivos-y-directorios">1. Archivos y Directorios<a class="headerlink" href="#1-archivos-y-directorios" title="Permanent link">&para;</a></h2>
+<p>Para empezar, creen el directorio <strong>PA3</strong> junto a sus carpetas anteriores.</p>
+<p><strong>ADENTRO</strong> de esta carpeta ejecuten el siguiente comando:
+<div class="codehilite"><pre><span></span>make -f /usr/class/cs143/assignments/PA4J/Makefile
+</pre></div></p>
+<p>Este comando va a copiar un número de archivos en su directorio que han creado. Algunos de los archivos que van a ser copiados van a ser de solo lectura (representando a estos con archivos que realmente son enlaces simbólicos hacia otros archivos). Ustedes no deberían de editar estos archivos. De hecho, si ustedes modifican estos archivos, van a encontrar imposible terminar y completar esta asignación. Vean las instrucciones en el archivo README.</p>
+<p>Adicionalmente también tienen que bajar el archivo <strong>SemantErrors.java</strong>:</p>
+<p><a href="/cc4/SemantErrors.java">Descargar SemantErrors</a></p>
+<p>Los únicos archivos que tienen permitido modificar para esta asignación son:</p>
+<ul>
+<li><strong>cool-tree.java</strong>: Este archivo contiene definiciones de los nodos del AST y es el archivo principal de su implementación. Ustedes van a necesitar agregar código para su analizador semántico en este archivo. El analizador semántico es llamado utilizando el método <code>semant()</code> de la clase <code>programc</code>. No modifiquen las declaraciones existentes.</li>
+<li><strong>ClassTable.java</strong>: Esta clase es un placeholder para algunos métodos útiles (incluyendo reporte de errores e inicialización de las clases básicas). Pueden utilizar este archivo y mejorarlo para su analizador semántico.</li>
+<li><strong>TreeConstants.java</strong>: Este archivo define algunos AbstractSymbol útiles.</li>
+<li><strong>good.cl y bad.cl</strong>: Estos archivos prueban algunas características semánticas de COOL. Ustedes deberían de agregar tests que aseguren que good.cl tome en cuenta combinaciones semánticas legales (tantas como se puedan) y en bad.cl lo contrario, combinaciones semánticas ilegales. No es posible tomar en cuenta todas estas combinaciones en un solo archivo, ustedes son responsables de cubrir la mayoría de estas. Expliquen sus pruebas en estos archivos y pongan cualquier comentario en el archivo README.</li>
+<li><strong>SemantErrors.java</strong>: Este archivo contiene métodos que generan los errores correspondientes para el análisis semántico, pueden agregar otros errores que talvez no están cubiertos en este archivo.</li>
+<li><strong>README</strong>: Este archivo contiene instrucciones detalladas para la asignación, así como también un número de recomendaciones útiles. Agregue en este archivo cualquier explicación adicional que considere relevante.</li>
+</ul>
+<h2 id="2-atravesar-el-ast">2. Atravesar el AST<a class="headerlink" href="#2-atravesar-el-ast" title="Permanent link">&para;</a></h2>
+<p>Como resultado de la asignación 2, su parser construye un AST. El método <code>dump_with_types</code>, definido en la mayoría de nodos del AST, ilustra como atravesar el AST y reunir información de él. Esto refleja un estilo de algoritmo recursivo para atravesar el árbol. Esto es bastante importante, porque es una manera natural de estructurar varias operaciones en un AST.</p>
+<p>Su tarea de programación en esta asignación es, primero atravesar el árbol, segundo manejar varias piezas de información que ustedes reunan del árbol y tercero utilizar esa información para forzar la semántica de COOL. Atravesar el árbol una vez se le suele llamar una "pasada". Ustedes probablemente deban realizar tres pasadas sobre el AST para verificar todo.</p>
+<p>Ustedes van a necesitar agregar información adicional en los nodos del AST. Para hacer esto, van a necesitar editar el archivo <strong>cool-tree.java</strong> directamente.</p>
+<h2 id="3-herencia">3. Herencia<a class="headerlink" href="#3-herencia" title="Permanent link">&para;</a></h2>
+<p>Se recomienda que empiece su semantic construyendo un grafo que muestre las relaciones de herencia entre clases. En este grafo no deberían existir ciclos, pues esto le causaría muchos problemas más adelante cuando necesite obtener los features de alguna clase padre.</p>
+<p>Adicionalmente, COOL tiene restricciones en heredar de las clases básicas (vean el manual). Es también un error si la clase <code>A</code> hereda de la clase <code>B</code> pero la clase <code>B</code> no está definida.</p>
+<p>El esqueleto del proyecto incluye definiciones apropiadas de todas las clases básicas. Ustedes van a necesitar incorporar estas clases en el grafo de herencia. </p>
+<p>Les sugerimos que dividan su análisis semántico en varios pequeños componentes. Comience creando un grafo de herencia y revise que este esté bien definido, si hubiera un error, deténgase y no continúe analizando el resto de los errores. Cuando esta estructura ya esté completa y bien revisada, ya podrá usarla para cualquier otra comprobación que necesite más adelante.</p>
+<h2 id="4-scopes-y-variables">4. Scopes y Variables<a class="headerlink" href="#4-scopes-y-variables" title="Permanent link">&para;</a></h2>
+<p>Una gran porción del análisis semántico es manejar los nombres de variables. El problema en específico es determinar qué declaración está activa para cada uso de una variable o identificador, especialmente cuando un nombre de variable puede ser reutilizado. Por ejemplo, si <code>i</code> es declarado en dos expresiones <code>let</code>, una anidada dentro de la otra, entonces en cualquier momento que <code>i</code> sea referenciado la semántica de COOL especifica que declaración de estas dos está activa. Es trabajo del analizador semántico guardar un registro de que declaración hace referencia a una variable.</p>
+<p>Como se discutió en clase, una tabla de símbolos es una estructura de datos conveniente para manejar nombres de variable y scopes. Ustedes pueden utilizar nuestra implementación de una tabla de símbolos para este proyecto. Nuestra implementación provee métodos para entrar, salir y aumentar los scopes como sea posible. Ustedes son libres de implementar su propia tabla de símbolos también, es como ustedes prefieran.</p>
+<p>Además del identificador <code>self</code>, que está implicitamente definido en cada clase, hay cuatro maneras que un objeto pueda ser introducido en COOL:</p>
+<ol>
+<li>Definiciones de atributos de clase.</li>
+<li>Parámetros formales en los métodos.</li>
+<li>Expresiones let.</li>
+<li>Los branches de un case.</li>
+</ol>
+<p>Adicionalmente a los nombres de variables, hay nombres de métodos y nombres de clases. Es un error utilizar cualquier nombre que no tenga una declaración correspondiente. En este caso, sin embargo, el analizador semántico no debería de abortar la compilación después de descubrir este tipo de errores. Recuerden: ni los métodos, ni las clases, ni los atributos necesitan ser declarados antes de ser utilizados. Por ejemplo: es posible que dentro del método <code>main</code> se mande a llamar al método <code>foo</code> y este método esté declarado más abajo en el archivo. Piensen cómo esto afecta su análisis semántico.</p>
+<h2 id="5-verificacion-de-tipos">5. Verificación de Tipos<a class="headerlink" href="#5-verificacion-de-tipos" title="Permanent link">&para;</a></h2>
+<p>La verificación de tipos es otra función principal del analizador semántico. El analizador semántico tiene que verificar que tipos válidos sean declarados en donde sea requerido. Por ejemplo, los tipos de retorno de los métodos tienen que ser declarados. Utilizando esta información, el analizador semántico tiene que verificar también que la expresión dentro del método tiene un tipo válido de acuerdo a las reglas de inferencia. Las reglas de inferencia están detalladas en el manual de referencia de COOL y también fueron explicadas en clase.</p>
+<p>Un problema difícil es qué hacer si una expresión no tiene un tipo válido de acuerdo a las reglas. Primero, un error se debería de imprimir con el número de línea y una descripción de que fue lo que estuvo mal.</p>
+<div class="admonition info">
+<p class="admonition-title">Errores</p>
+<p>Utilicen la clase de ayuda <strong>SemantErrors.java</strong> para imprimir los errores necesarios durante el análisis semántico.</p>
+</div>
+<p>Es relativamente fácil dar mensajes de error coherentes, porque generalmente es obvio que error es. Nosotros esperamos que ustedes den mensajes de error informativos de acuerdo a lo que se encuentra en <strong>SemantErrors.java</strong>. Segundo, el analizador semántico tiene que tratar de recuperarse y continuar. Nosotros sí esperamos que su analizador semántico se recupere, pero no esperamos que evite errores en cascada. Un mecanismo de recuperación simple es asignar el tipo <code>Object</code> a cualquier expresión que no se le pueda dar un tipo (nostros utilizamos esto en coolc).</p>
+<h2 id="6-interfaz-con-codegen">6. Interfaz con Codegen<a class="headerlink" href="#6-interfaz-con-codegen" title="Permanent link">&para;</a></h2>
+<p>Para que el analizador semántico funcione correctamente con el resto del compilador de COOL, algunas precauciones tienen que tomarse en cuenta para que la interfaz con el generador de código sea correcta. Nostros hemos adoptado una simple e ingenua interfaz para evitar reducir sus impulsos de creatividad en el análisis semántico. Sin embargo, una cosa más tienen que hacer. Para cada nodo expression, su campo de tipo tiene que ser cambiado al <code>AbstractSymbol</code> que fue inferido por su analizador semántico. Este <code>AbstractSymbol</code> debería de ser el resultado de utilizar el método <code>addString</code> en fases anteriores en la tabla <code>idtable</code>. La expresión especial <code>no_expr</code> tiene que ser asignada con el tipo <code>No_type</code> que es un símbolo predefinido en el esqueleto del proyecto.</p>
+<h2 id="7-salida-esperada">7. Salida Esperada<a class="headerlink" href="#7-salida-esperada" title="Permanent link">&para;</a></h2>
+<p>Para programas que estén incorrectos semánticamente, la salida de su analizador semántico son mensajes de error. Nosotros esperamos de ustedes que se puedan recuperar de la mayoría de errores exceptuando errores de herencia. También se espera de ustedes que produzcan mensajes de error informativos de acuerdo a <strong>SemantErrors.java</strong> vean este archivo para imprimir los errores. Asumiendo que la herencia está bien formada, el analizador semántico debería de capturar y reportar todos los errores semánticos en el programa.</p>
+<p>Para programas que estén correctos semánticamente, la salida es un AST anotado. Ustedes van a ser calificados si su analizador semántico anota correctamente el AST con tipos y cuando funcione correctamente con el generador de código de coolc.</p>
+<h2 id="8-probando-el-analizador">8. Probando el Analizador<a class="headerlink" href="#8-probando-el-analizador" title="Permanent link">&para;</a></h2>
+<p>Van a necesitar un analizador léxico y sintáctico para probar su analizador semántico. Pueden utilizar sus implementaciones a estas fases o utilizar las que nosotros les proveemos. Por defecto, las que nosotros les proveemos son utilizadas, para cambiar este comportamiento tienen que cambiar los archivos <code>lexer</code> y <code>parser</code> con sus propias implementaciones. De todas maneras el autograder principal de este proyecto utiliza los analizadores del compilador de COOL <strong>coolc</strong>.</p>
+<p>Ustedes pueden probar su analizador semántico utilizando <code>./mysemant</code>, que es un shell script que "pega" el analizador con las fases anteriores. Noten que <code>./mysemant</code> puede tomar una bandera <code>-s</code> para depurar el analizador. Utilizar esta bandera hace que la bandera <code>debug</code> se cambie a verdadero, esta está definida en el archivo <strong>Flags.java</strong>. Agregar el código que hace la depuración es su responsabilidad. Vean el README para más detalles e información.</p>
+<p>Una vez que estén bastante confiados de que su analizador está funcionando correctamente, intenten ejecutar <code>./mycoolc</code> para invocar su analizador con todas las fases del compilador. Ustedes deberían de probar este compilador en archivos de entrada buenos y malos, para ver si funciona correctamente. Recuerden, los bugs en el análisis semántico pueden manifestarse en el código generado o solo cuando el programa compilado sea ejecutado con spim.</p>
+<h2 id="9-observaciones">9. Observaciones<a class="headerlink" href="#9-observaciones" title="Permanent link">&para;</a></h2>
+<p>El análisis semántico es la fase más larga y compleja hasta el momento del compilador. Nuestra solución es de aproximadamente 1000 líneas de código de Java bien documentado. Ustedes van a encontrar esta asignación fácil si se toman un tiempo para diseñar el verificador de tipos antes de programar. Pregúntense a ustedes mismos lo siguiente:</p>
+<ul>
+<li>¿Qué requerimientos necesito verificar?</li>
+<li>¿Cuándo necesito verificar un requerimiento?</li>
+<li>¿Cuándo la información es requerida para verificar un requerimiento?</li>
+<li>¿Dónde está la información que necesito para verificar un requerimiento?</li>
+</ul>
+<h2 id="10-autograder">10. Autograder<a class="headerlink" href="#10-autograder" title="Permanent link">&para;</a></h2>
+<p>Ustedes deberían de descargar el siguiente script en el mismo directorio donde tienen sus archivos de la tercera fase, y volverlo ejecutable:</p>
+<div class="codehilite"><pre><span></span>wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa3-grading.pl
+chmod +x pa3-grading.pl
+</pre></div>
+
+<p>Luego lo ejecutan usando:</p>
+<div class="codehilite"><pre><span></span>./pa3-grading.pl
+</pre></div>
+
+<p>Esto califica su parser utilizando el analizador léxico de coolc. </p>
+<p>Si ustedes quieren probar su parser utilizando su fase 1 y 2 descarguen el siguiente archivo, y vuélvanlo ejecutable:</p>
+<div class="codehilite"><pre><span></span>wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa3-grading-all.sh
+chmod +x pa3-grading-all.sh
+</pre></div>
+
+<p>Luego lo ejecutan usando:</p>
+<div class="codehilite"><pre><span></span>./pa3-grading-all.sh
+</pre></div>
+
+<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="http://web.stanford.edu/class/cs143/javadoc/cool_ast/">The Tree Package</a> - Javadoc del paquete Tree.</li>
+<li><a href="http://web.stanford.edu/class/cs143/materials/cool-manual.pdf">The Cool Reference Manual</a> - Manual de COOL.</li>
+<li><a href="http://web.stanford.edu/class/cs143/materials/cool-tour.pdf">Tour of the Cool Support Code</a> - Manual del Código de Soporte de COOL.</li>
+<li><a href="http://web.stanford.edu/class/cs143/materials/SPIM_Manual.pdf">SPIM Manual</a> - Manual de SPIM.</li>
+</ol>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../proj02/" title="2: Parser" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                2: Parser
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../proj04/" title="4: Codegen" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                4: Codegen
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-4
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-4/" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

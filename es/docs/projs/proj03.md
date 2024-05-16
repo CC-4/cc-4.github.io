@@ -55,8 +55,6 @@ Ustedes van a necesitar agregar información adicional en los nodos del AST. Par
 
 ## 3. Herencia
 
-TO DO
-
 Se recomienda que empiece su semantic construyendo un grafo que muestre las relaciones de herencia entre clases. En este grafo no deberían existir ciclos, pues esto le causaría muchos problemas más adelante cuando necesite obtener los features de alguna clase padre.
 
 Adicionalmente, COOL tiene restricciones en heredar de las clases básicas \(vean el manual\). Es también un error si la clase `A` hereda de la clase `B` pero la clase `B` no está definida.
@@ -78,27 +76,27 @@ Además del identificador `self`, que está implicitamente definido en cada clas
 3. Expresiones let.
 4. Los branches de un case.
 
-Adicionalmente a los nombres de variables, hay nombres de métodos y nombres de clases. Es un error utilizar cualquier nombre que no tenga una declaración correspondiente. En este caso, sin embargo, el analizador semántico no debería de abortar la compilación después de descubrir este tipo de errores. Recuerden, ni los métodos, ni las clases, ni los atributos necesitan ser declarados antes de ser utilizados, esto es por ejemplo que dentro del método `main` se mande a llamar al método `foo` y este método esté declarado más abajo en el archivo. Piensen cómo esto afecta su análisis semántico.
+Adicionalmente a los nombres de variables, hay nombres de métodos y nombres de clases. Es un error utilizar cualquier nombre que no tenga una declaración correspondiente. En este caso, sin embargo, el analizador semántico no debería de abortar la compilación después de descubrir este tipo de errores. Recuerden: ni los métodos, ni las clases, ni los atributos necesitan ser declarados antes de ser utilizados. Por ejemplo: es posible que dentro del método `main` se mande a llamar al método `foo` y este método esté declarado más abajo en el archivo. Piensen cómo esto afecta su análisis semántico.
 
 ## 5. Verificación de Tipos
 
 La verificación de tipos es otra función principal del analizador semántico. El analizador semántico tiene que verificar que tipos válidos sean declarados en donde sea requerido. Por ejemplo, los tipos de retorno de los métodos tienen que ser declarados. Utilizando esta información, el analizador semántico tiene que verificar también que la expresión dentro del método tiene un tipo válido de acuerdo a las reglas de inferencia. Las reglas de inferencia están detalladas en el manual de referencia de COOL y también fueron explicadas en clase.
 
-Un problema difícil es que hacer si una expresión no tiene un tipo válido de acuerdo a las reglas. Primero, un error se debería de imprimir con el número de línea y una descripción de que fue lo que estuvo mal.
+Un problema difícil es qué hacer si una expresión no tiene un tipo válido de acuerdo a las reglas. Primero, un error se debería de imprimir con el número de línea y una descripción de que fue lo que estuvo mal.
 
-{% hint style="success" %}
-Utilicen la clase de ayuda **SemantErrors.java** para imprimir los errores necesarios durante el análisis semántico.
-{% endhint %}
+!!!info "Errores"
+	Utilicen la clase de ayuda **SemantErrors.java** para imprimir los errores necesarios durante el análisis semántico.
 
-Es relativamente fácil dar mensajes de error coherentes, porque generalmente es obvio que error es. Nosotros esperamos que ustedes den mensajes de error informativos de acuerdo a lo que se encuentra en **SemantErros.java**. Segundo, el analizador semántico tiene que tratar de recuperarse y continuar. Nostros si esperamos que su analizador semántico se recupere, pero no esperamos que evite errores en cascada. Un mecanismo de recuperación simple es asignar el tipo `Object` a cualquier expresión que no se le pueda dar un tipo \(nostros utilizamos esto en coolc\).
 
-## 6. Interfaz con CodeGen
+Es relativamente fácil dar mensajes de error coherentes, porque generalmente es obvio que error es. Nosotros esperamos que ustedes den mensajes de error informativos de acuerdo a lo que se encuentra en **SemantErrors.java**. Segundo, el analizador semántico tiene que tratar de recuperarse y continuar. Nosotros sí esperamos que su analizador semántico se recupere, pero no esperamos que evite errores en cascada. Un mecanismo de recuperación simple es asignar el tipo `Object` a cualquier expresión que no se le pueda dar un tipo \(nostros utilizamos esto en coolc\).
+
+## 6. Interfaz con Codegen
 
 Para que el analizador semántico funcione correctamente con el resto del compilador de COOL, algunas precauciones tienen que tomarse en cuenta para que la interfaz con el generador de código sea correcta. Nostros hemos adoptado una simple e ingenua interfaz para evitar reducir sus impulsos de creatividad en el análisis semántico. Sin embargo, una cosa más tienen que hacer. Para cada nodo expression, su campo de tipo tiene que ser cambiado al `AbstractSymbol` que fue inferido por su analizador semántico. Este `AbstractSymbol` debería de ser el resultado de utilizar el método `addString` en fases anteriores en la tabla `idtable`. La expresión especial `no_expr` tiene que ser asignada con el tipo `No_type` que es un símbolo predefinido en el esqueleto del proyecto.
 
 ## 7. Salida Esperada
 
-Para programas que estén incorrectos semánticamente, la salida de su analizador semántico son mensajes de error. Nosotros esperamos de ustedes que se puedan recuperar de la mayoría de errores exceptuando errores de herencia. También se espera de ustedes que produzcan mensajes de error informativos de acuerdo a **SemantErros.java** vean este archivo para imprimir los errores. Asumiendo que la herencia está bien formada, el analizador semántico debería de agarrar y reportar todos los errores semánticos en el programa.
+Para programas que estén incorrectos semánticamente, la salida de su analizador semántico son mensajes de error. Nosotros esperamos de ustedes que se puedan recuperar de la mayoría de errores exceptuando errores de herencia. También se espera de ustedes que produzcan mensajes de error informativos de acuerdo a **SemantErrors.java** vean este archivo para imprimir los errores. Asumiendo que la herencia está bien formada, el analizador semántico debería de capturar y reportar todos los errores semánticos en el programa.
 
 Para programas que estén correctos semánticamente, la salida es un AST anotado. Ustedes van a ser calificados si su analizador semántico anota correctamente el AST con tipos y cuando funcione correctamente con el generador de código de coolc.
 
@@ -106,50 +104,45 @@ Para programas que estén correctos semánticamente, la salida es un AST anotado
 
 Van a necesitar un analizador léxico y sintáctico para probar su analizador semántico. Pueden utilizar sus implementaciones a estas fases o utilizar las que nosotros les proveemos. Por defecto, las que nosotros les proveemos son utilizadas, para cambiar este comportamiento tienen que cambiar los archivos `lexer` y `parser` con sus propias implementaciones. De todas maneras el autograder principal de este proyecto utiliza los analizadores del compilador de COOL **coolc**.
 
-Ustedes pueden probar su analizador semántico utilizando `./mysemant`, que es un shell script que "pega" el analizador con las fases anteriores. Noten que `./mysemant` puede tomar una bandera -s para depurar el analizador. Utilizar esta bandera hace que la bandera `debug` se cambie a verdadero, esta está definida en el archivo **Flags.java**. Agregar el código que hace la depuración es su responsabilidad. Vean el README para más detalles e información.
+Ustedes pueden probar su analizador semántico utilizando `./mysemant`, que es un shell script que "pega" el analizador con las fases anteriores. Noten que `./mysemant` puede tomar una bandera `-s` para depurar el analizador. Utilizar esta bandera hace que la bandera `debug` se cambie a verdadero, esta está definida en el archivo **Flags.java**. Agregar el código que hace la depuración es su responsabilidad. Vean el README para más detalles e información.
 
-Una vez que estén bastante confiados de que su analizador está funcionando correctamente, traten correr `./mycoolc` para invocar su analizador con todas las fases del compilador. Ustedes deberían de probar este compilador en archivos de entrada buenos y malos, para ver si funciona correctamente. Recuerden, los bugs en el análisis semántico pueden manifestarse en el código generado o solo cuando el programa compilado sea ejecutado con spim.
+Una vez que estén bastante confiados de que su analizador está funcionando correctamente, intenten ejecutar `./mycoolc` para invocar su analizador con todas las fases del compilador. Ustedes deberían de probar este compilador en archivos de entrada buenos y malos, para ver si funciona correctamente. Recuerden, los bugs en el análisis semántico pueden manifestarse en el código generado o solo cuando el programa compilado sea ejecutado con spim.
 
 ## 9. Observaciones
 
-El análisis semántico es la fase más larga y compleja hasta el momento del compilador. Nuestra solución es de aproximadamente 1,300 líneas de código bien documentadas en C++. Ustedes van a encontrar esta asignación fácil si se toman un tiempo para diseñar el verificador de tipos antes de programar. Pregúntense a ustedes mismos lo siguiente:
+El análisis semántico es la fase más larga y compleja hasta el momento del compilador. Nuestra solución es de aproximadamente 1000 líneas de código de Java bien documentado. Ustedes van a encontrar esta asignación fácil si se toman un tiempo para diseñar el verificador de tipos antes de programar. Pregúntense a ustedes mismos lo siguiente:
 
 * ¿Qué requerimientos necesito verificar?
 * ¿Cuándo necesito verificar un requerimiento?
 * ¿Cuándo la información es requerida para verificar un requerimiento?
 * ¿Dónde está la información que necesito para verificar un requerimiento?
 
-Si ustedes pueden contestar estas preguntas para cada aspecto de COOL, implementar una solución debería de ser **AS EASY AS PIE**.
 
 ## 10. Autograder
 
-Ustedes deberían de descargar el siguiente script en el mismo directorio donde tienen sus archivos de la tercera fase:
-
-{% file src="../.gitbook/assets/pa3-grading.pl" caption="pa3-grading.pl" %}
-
-Volverlo ejecutable de la siguiente manera:
+Ustedes deberían de descargar el siguiente script en el mismo directorio donde tienen sus archivos de la tercera fase, y volverlo ejecutable:
 
 ```bash
+wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa3-grading.pl
 chmod +x pa3-grading.pl
 ```
 
-y ejecutarlo haciendo lo siguiente:
+Luego lo ejecutan usando:
 
 ```bash
 ./pa3-grading.pl
 ```
 
-Esto califica su parser utilizando el analizador léxico de coolc. Si ustedes quieren probar su parser utilizando su fase 1 y 2 descarguen el siguiente archivo:
+Esto califica su parser utilizando el analizador léxico de coolc. 
 
-{% file src="../.gitbook/assets/pa3-grading-all.sh" %}
-
-Volverlo ejecutable de la siguiente manera:
+Si ustedes quieren probar su parser utilizando su fase 1 y 2 descarguen el siguiente archivo, y vuélvanlo ejecutable:
 
 ```bash
+wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa3-grading-all.sh
 chmod +x pa3-grading-all.sh
 ```
 
-y ejecutarlo haciendo lo siguiente:
+Luego lo ejecutan usando:
 
 ```bash
 ./pa3-grading-all.sh
