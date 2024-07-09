@@ -3,7 +3,7 @@
 Para poder realizar las fases del proyecto del compilador se requiere que utilicen una distribución de Linux por lo que se les proporcionarán dos opciones:
 
 1. Descargar una máquina virtual con el contenido necesario \(opción recomendada\).
-2. Instalar una distribución de Linux y descargar e instalar el material en su computadora.
+2. Instalar un Ubuntu 20, y descargar e instalar el material en su computadora.
 
 El material que se incluye es el código base que les serivirá para poder comenzar las fases del proyecto, el compilador **coolc-rv** que compilará de COOL hacia RISC-V, y **jupitercl** que nos permitirá usar Jupiter desde la línea de comandos y con un runtime apto para nuestros programas de COOL.
 
@@ -24,12 +24,12 @@ git init
 
 ## Opción 1: Máquina Virtual
 
-La máquina virtual la pueden descargar desde cualquiera de los siguientes enlaces \(ocupa 4.9GB\):
+La máquina virtual la pueden descargar desde cualquiera de los siguientes enlaces:
 
-* [Google Drive](https://drive.google.com/file/d/1-OAPQfv1rEqZbJut4Hj29kubMkiwLKp5/view?usp=sharing)
-* [Mega](https://mega.nz/file/rRo2ELZK#Ak5sMz0YF_7QwlYuSAr45n9RP3EV1cInf6PehU3Y3Pg)
+* [Google Drive](https://drive.google.com/file/d/1S8yC9frBNXHPRAO6fYP34Km1h4lplE8N/view?usp=drive_link)
+* [Mega](https://mega.nz/file/Hc4B2CKb#HP8bRU5ABovuX-76B1gqlieyKfoMeicJWBBH3janW44)
 
-Es una máquina virtual de **Ubuntu 20.04 LTS** para ejecutarse en VMware, después de descargar el archivo debe descomprimirlo y abrir el archivo .vmx que le permitirá usar la máquina virtual desde su VMware.
+Es una máquina virtual de **Ubuntu 20 LTS** para ejecutarse en VMware, después de descargar el archivo debe descomprimirlo y abrir el archivo .vmx que le permitirá usar la máquina virtual desde su VMware.
 
 !!!info "Contraseña"
 	La contraseña de la máquina virtual es **student**
@@ -39,8 +39,8 @@ Es una máquina virtual de **Ubuntu 20.04 LTS** para ejecutarse en VMware, despu
 Para esta opción se asume que tienen ya una máquina con Ubuntu 20 instalado. Debe descargar el script correspondiente desde **Material de Apoyo** en su GES. Luego abra una terminal y ejecute lo siguiente:
 
 ```bash
-chmod +x install_ubuntu20.sh
-./install_ubuntu20.sh
+chmod +x install.sh
+./install.sh
 ```
 
 Esto descargará Java 11, JLex, cup, git, coolc-rv y jupitercl.
