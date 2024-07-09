@@ -277,6 +277,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../labs/lab00/" title="0: Java" class="md-nav__link">
+      0: Java
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../labs/lab01/" title="1: COOL" class="md-nav__link">
       1: COOL
     </a>
@@ -596,7 +608,7 @@
 <p>Para poder realizar las fases del proyecto del compilador se requiere que utilicen una distribución de Linux por lo que se les proporcionarán dos opciones:</p>
 <ol>
 <li>Descargar una máquina virtual con el contenido necesario (opción recomendada).</li>
-<li>Instalar una distribución de Linux y descargar e instalar el material en su computadora.</li>
+<li>Instalar un Ubuntu 20, y descargar e instalar el material en su computadora.</li>
 </ol>
 <p>El material que se incluye es el código base que les serivirá para poder comenzar las fases del proyecto, el compilador <strong>coolc-rv</strong> que compilará de COOL hacia RISC-V, y <strong>jupitercl</strong> que nos permitirá usar Jupiter desde la línea de comandos y con un runtime apto para nuestros programas de COOL.</p>
 <p>Luego de tener instalado el material deben de crear una carpeta en donde guardarán su código y que contendrá cada una de las fases del proyecto. Esta carpeta se puede llamar como ustedes quieram la carpeta debe contener las siguientes carpetas:</p>
@@ -612,20 +624,20 @@
 </pre></div>
 
 <h2 id="opcion-1-maquina-virtual">Opción 1: Máquina Virtual<a class="headerlink" href="#opcion-1-maquina-virtual" title="Permanent link">&para;</a></h2>
-<p>La máquina virtual la pueden descargar desde cualquiera de los siguientes enlaces (ocupa 4.9GB):</p>
+<p>La máquina virtual la pueden descargar desde cualquiera de los siguientes enlaces:</p>
 <ul>
-<li><a href="https://drive.google.com/file/d/1-OAPQfv1rEqZbJut4Hj29kubMkiwLKp5/view?usp=sharing">Google Drive</a></li>
-<li><a href="https://mega.nz/file/rRo2ELZK#Ak5sMz0YF_7QwlYuSAr45n9RP3EV1cInf6PehU3Y3Pg">Mega</a></li>
+<li><a href="https://drive.google.com/file/d/1S8yC9frBNXHPRAO6fYP34Km1h4lplE8N/view?usp=drive_link">Google Drive</a></li>
+<li><a href="https://mega.nz/file/Hc4B2CKb#HP8bRU5ABovuX-76B1gqlieyKfoMeicJWBBH3janW44">Mega</a></li>
 </ul>
-<p>Es una máquina virtual de <strong>Ubuntu 20.04 LTS</strong> para ejecutarse en VMware, después de descargar el archivo debe descomprimirlo y abrir el archivo .vmx que le permitirá usar la máquina virtual desde su VMware.</p>
+<p>Es una máquina virtual de <strong>Ubuntu 20 LTS</strong> para ejecutarse en VMware, después de descargar el archivo debe descomprimirlo y abrir el archivo .vmx que le permitirá usar la máquina virtual desde su VMware.</p>
 <div class="admonition info">
 <p class="admonition-title">Contraseña</p>
 <p>La contraseña de la máquina virtual es <strong>student</strong></p>
 </div>
 <h2 id="opcion-2-instalar-el-material">Opción 2: Instalar el Material<a class="headerlink" href="#opcion-2-instalar-el-material" title="Permanent link">&para;</a></h2>
 <p>Para esta opción se asume que tienen ya una máquina con Ubuntu 20 instalado. Debe descargar el script correspondiente desde <strong>Material de Apoyo</strong> en su GES. Luego abra una terminal y ejecute lo siguiente:</p>
-<div class="codehilite"><pre><span></span>chmod +x install_ubuntu20.sh
-./install_ubuntu20.sh
+<div class="codehilite"><pre><span></span>chmod +x install.sh
+./install.sh
 </pre></div>
 
 <p>Esto descargará Java 11, JLex, cup, git, coolc-rv y jupitercl.</p>
