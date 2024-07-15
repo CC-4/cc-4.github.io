@@ -1,4 +1,4 @@
-# Lab 1 \(Java\)
+# Lab 0 \(Java\)
 
 En este laboratorio practicaremos estructuras de datos en Java. Este laboratorio será revisado manualmente para ver que tal programa, por favor agregue suficientes comentarios para que su código sea fácil de entender.
 

@@ -13,10 +13,10 @@ En un archivo llamado **io.cl**, escriban un programa en COOL que pregunte al us
 Su programa debe de funcionar de la siguiente manera:
 
 ```bash
-Ingrese su nombre: Pepe
+Ingrese su nombre: Timmy
 Ingrese su edad: 19
 
-Pepe tendrá 22 años al graduarse :)
+Timmy tendrá 22 años al graduarse :)
 ```
 
 ## 3. Métodos
@@ -38,10 +38,10 @@ Ingrese grados Celsius: 32
 ```
 
 !!!info "Punto flotante"
-	COOL no tiene punto flotante, por que su implementación no tiene que ser exacta, si por ejemplo el usuario ingresa 32 Celsius, su salida debe de ser 89 Fahrenheit a pesar de que la respuesta exacta es 89.6
+	COOL no tiene punto flotante, por lo tanto su implementación no tiene que ser exacta. Por ejemplo el usuario ingresa 32 Celsius, su salida puede ser 89 Fahrenheit a pesar de que la respuesta exacta es 89.6
 
 
-## 3. Ciclos
+## 4. Ciclos
 
 En un archivo llamado **loop.cl**, escriban un programa que despliegue una tabla de conversion de -50 a 150 grados Celsius hacia grados Fahrenheit en incrementos de 10. Para este ejercico es obligatorio que utilicen un `while`.
 
@@ -66,37 +66,7 @@ Su programa debe de producir el siguiente resultado:
 100 Celsius son 212 Fahrenheit
 ```
 
-## 4. Calculadora
-
-En un archivo llamado **calc.cl**, hagan un programa que reciba una string y despliegue el resultado de la operación, las operaciones válidas son:
-
-* +
-* -
-* \*
-* /
-
-Su calculadora debería de aceptar operaciones simples como `3 + 4`, `125 - 70`, etc. Noten que el formato siempre es el mismo de acuerdo a la siguiente expresión regular: `( )*[0-9]+( )+[+-*/]( )+[0-9]+( )*`.
-
-!!!info "Recomendación"
-	Creen un método para buscar espacios.
-
-!!!warning "Solo operaciones simples"
-	Las operaciones que van a ser ingresadas por el usuario siempre son binarias, y no algo como esto: `3 + 2 - 5 / 3 * 2` así que no se compliquen la vida.
-
-Su programa debe de funcionar de la siguiente manera:
-
-```bash
->>> 2 + 2
-= 4
->>> 3 * 2
-= 6
->>> 6 / 2
-= 3
->>> 3 - 3
-= 0
-```
-
-## 6. Strings
+## 5. Strings
 
 En un archivo llamado **str.cl**, escriban un programa que le pida al usuario 2 Strings y verifiquen si el segundo String está contenido en el primero.
 
@@ -116,4 +86,3 @@ shampoo no está contenido en Anita lava la tina.
 
 !!!info "Recomendación"
 	En el manual de referencia de COOL hay algo que podría ayudarnos, página número 14, en específico el método: `substr(i : Int, l : Int)`.
-	
