@@ -2,6 +2,14 @@
 
 Para este lab, deben hacer los ejercicios que se les pide a continuación, estos ejercicios son bastante básicos y están con el único propósito de que ustedes sepan qué se puede hacer en el lenguaje COOL. Este lab será la única vez en que sea necesario programar en COOL, pero no significa que luego pueda olvidar el lenguaje, ya que para los proyectos es necesario que ustedes sean capaces de crear sus propios archivos de pruebas para probar sus implementaciones.
 
+## Archivos base
+
+Acepte el siguiente repositorio para acceder a los archivos base.
+
+```
+https://classroom.github.com/a/z40kaGWQ
+```
+
 ## 1. Hola Mundo
 
 Cree un archivo llamado **hello.cl** e imprima "Hola mundo" en consola. Esto ya lo tenemos en algún ejemplo, escríbalo sin consultar esos archivos.
