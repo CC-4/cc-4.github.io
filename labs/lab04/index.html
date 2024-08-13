@@ -637,7 +637,7 @@
 <p>En este laboratorio aprenderán a utilizar <strong>cup</strong>, el analizador sintáctico para la fase 2 del proyecto.</p>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>Descarguen todos los archivos del siguiente repositorio:</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/RYr4XVtS
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/eV_cMHnC
 </pre></div>
 
 <p>Ahora que han terminado la fase 1 de su proyecto, saben utilizar JLex para el análisis léxico de una cadena de caracteres. Como han visto en clase, el análisis sintáctico se basa en gramáticas, y tiene algoritmos muy bien definidos para poder ser implementado. Para prepararlos para la fase 2, utilizaremos una herramienta llamada <strong>cup</strong> que funciona para analizar la sintáxis de un texto dado.</p>
@@ -647,55 +647,61 @@
 <span class="n">terminal</span> <span class="n">Float</span> <span class="n">FLOAT</span><span class="o">;</span>
 </pre></div>
 
-<p>Luego pueden especificar una precedencia. Por ejemplo, una multiplicación se debe hacer antes que una suma. Para este tipo de precedencia deben emplear <strong>precedence left</strong>, como en el siguiente ejemplo:</p>
+<p>Luego pueden especificar una precedencia. Por ejemplo, una multiplicación se debe hacer antes que una suma. A continuación un ejemplo:</p>
 <div class="codehilite"><pre><span></span><span class="n">precedence</span> <span class="n">left</span> <span class="n">PLUS</span><span class="o">,</span> <span class="n">MINUS</span><span class="o">;</span>
 <span class="n">precedence</span> <span class="n">left</span> <span class="n">TIMES</span><span class="o">;</span>
 </pre></div>
 
 <p>Es importante recordar que a cup no le importa la aritmética, le importan los árboles. Esto quiere decir que un operador con una mayor precedencia quedará más cerca de la raíz de su árbol.</p>
-<p>Seguido de eso, van todas las reglas de producción. Siguiendo la siguiente sintáxis, en donde <code>RESULT</code> es la derivación usando bottom-up parsing.</p>
+<p>Seguido de eso, van todas las reglas de producción. Usamos la siguiente sintáxis, en donde <code>RESULT</code> es un dato que estaremos haciendo disponible para que nuestro nodo padre pueda utilizar.</p>
 <div class="codehilite"><pre><span></span><span class="n">parent_expr</span> <span class="o">::=</span> <span class="n">LPAREN</span> <span class="n">expr</span><span class="o">:</span><span class="n">e</span> <span class="n">RPAREN</span> <span class="o">{:</span> <span class="n">RESULT</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span> <span class="o">:};</span>
 </pre></div>
 
 <h2 id="2-lexer">2. Lexer<a class="headerlink" href="#2-lexer" title="Permanent link">&para;</a></h2>
 <p>La gramática con la que trabajaremos es la siguiente:</p>
 <div class="codehilite"><pre><span></span>S         ::<span class="o">=</span> S expr_part
-          <span class="p">|</span>   expr_part <span class="p">;</span>
+          <span class="p">|</span>   expr_part
 expr_part ::<span class="o">=</span> expr <span class="p">;</span>
 expr      ::<span class="o">=</span> exprI <span class="p">|</span> exprF
-exprI     ::<span class="o">=</span> I + I
-          <span class="p">|</span>   I - I
-          <span class="p">|</span>   I * I
-          <span class="p">|</span>   I / I
-          <span class="p">|</span>   I % I
-          <span class="p">|</span>   <span class="o">(</span>I<span class="o">)</span>
-exprF     ::<span class="o">=</span> I + F
-          <span class="p">|</span>   F + I
-          <span class="p">|</span>   F + F
-          <span class="p">|</span>   I - F
-          <span class="p">|</span>   F - I
-          <span class="p">|</span>   F - F
-          <span class="p">|</span>   I * F
-          <span class="p">|</span>   F * I
-          <span class="p">|</span>   F * F
-          <span class="p">|</span>   I / F
-          <span class="p">|</span>   F / I
-          <span class="p">|</span>   F / F
-          <span class="p">|</span>   I ^ F
-          <span class="p">|</span>   F ^ I
-          <span class="p">|</span>   F ^ F
-          <span class="p">|</span>   sin I
-          <span class="p">|</span>   sin F
-          <span class="p">|</span>   cos I
-          <span class="p">|</span>   cos F
-          <span class="p">|</span>   tan I
-          <span class="p">|</span>   tan F
-          <span class="p">|</span>   <span class="o">(</span>F<span class="o">)</span>
+exprI     ::<span class="o">=</span> exprI + exprI
+          <span class="p">|</span>   exprI - exprI
+          <span class="p">|</span>   exprI * exprI
+          <span class="p">|</span>   exprI / exprI
+          <span class="p">|</span>   exprI % exprI
+          <span class="p">|</span>   <span class="o">(</span>exprI<span class="o">)</span>
+          <span class="p">|</span>   I
+exprF     ::<span class="o">=</span> exprI + exprF
+          <span class="p">|</span>   exprF + exprI
+          <span class="p">|</span>   exprF + exprF
+          <span class="p">|</span>   exprI - exprF
+          <span class="p">|</span>   exprF - exprI
+          <span class="p">|</span>   exprF - exprF
+          <span class="p">|</span>   exprI * exprF
+          <span class="p">|</span>   exprF * exprI
+          <span class="p">|</span>   exprF * exprF
+          <span class="p">|</span>   exprI / exprF
+          <span class="p">|</span>   exprF / exprI
+          <span class="p">|</span>   exprF / exprF
+          <span class="p">|</span>   exprI ^ exprF
+          <span class="p">|</span>   exprF ^ exprI
+          <span class="p">|</span>   exprF ^ exprF
+          <span class="p">|</span>   sin <span class="o">(</span>exprI<span class="o">)</span>
+          <span class="p">|</span>   sin <span class="o">(</span>exprF<span class="o">)</span>
+          <span class="p">|</span>   cos <span class="o">(</span>exprI<span class="o">)</span>
+          <span class="p">|</span>   cos <span class="o">(</span>exprF<span class="o">)</span>
+          <span class="p">|</span>   tan <span class="o">(</span>exprI<span class="o">)</span>
+          <span class="p">|</span>   tan <span class="o">(</span>exprF<span class="o">)</span>
+          <span class="p">|</span>   <span class="o">(</span>exprF<span class="o">)</span>
+          <span class="p">|</span>   F
 
-<span class="c1"># donde I es un entero y F es un float.</span>
+<span class="c1"># donde I es un token entero y F es un token float</span>
+
+<span class="c1"># noten que </span>
+<span class="c1"># expr_part ::= expr ; </span>
+<span class="c1"># nos indica que debemos colocar un punto y coma</span>
 </pre></div>
 
-<p>Para la primer parte deben completar el archivo <strong>calculator.lex</strong> generando los tokens necesarios para una calculadora con operaciones básicas y que maneje tanto floats como enteros. Noten que las funciones trigonométricas no son case sensitive, por lo que "sin" y "sIN" son aceptadas de igual manera. Esta es la lista de tokens que debe tener:</p>
+<p>Para la primer parte deben completar el archivo <strong>calculator.lex</strong> generando los tokens necesarios para una calculadora con operaciones básicas y que maneje tanto floats como enteros. Esta es la lista de tokens que debe tener:</p>
 <div class="codehilite"><pre><span></span>SEMI
 PLUS
 MINUS
@@ -712,7 +718,6 @@ INTEGER
 FLOAT
 </pre></div>
 
-<p>Si analizan la gramática, pueden ver que una expresión puede ser una expresión entera, o una expresión de punto flotante.</p>
 <h2 id="3-parser">3. Parser<a class="headerlink" href="#3-parser" title="Permanent link">&para;</a></h2>
 <p>Para la segunda parte, ustedes deben completar el archivo <strong>calculator.cup</strong>, agregando las reglas de derivación. Pueden agregar tantos símbolos no terminales como quieran, pero no pueden modificar ninguno de los símbolos terminales. Una vez agregadas todas las reglas de derivación, pueden compilar su archivo de la siguiente manera:</p>
 <div class="codehilite"><pre><span></span>sh make.sh
@@ -729,7 +734,7 @@ FLOAT
 <span class="o">=</span> <span class="m">9</span><span class="p">;</span>
 </pre></div>
 
-<p>Puede trabajar las trigonométricas en grados o radianes, solo deje indicado en un comentario cuál indicó.</p>
+<p>Puede trabajar las trigonométricas en grados o radianes, solo deje indicado en un comentario cuál utilizó.</p>
 <p>Una vez terminado, tienen que realizar un commit de los archivos .cup y .lex y subir al GES el link de su repositorio.</p>
 <h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
 <ol>
