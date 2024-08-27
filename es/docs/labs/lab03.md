@@ -55,7 +55,7 @@ Para el primer ejercicio de este laboratorio, ustedes van a implementar el lexer
 Para empezar clonen el siguiente repositorio de Github Classroom:
 
 ```bash
-https://classroom.github.com/a/8E68G6Nz
+https://classroom.github.com/a/EsfgDA-Z
 ```
 
 Dentro del repositorio van a encontrar un archivo llamado **lexer.lex**, en ese archivo ustedes tienen que definir el lexer para la gramática. Dentro de ese archivo hay en forma de comentarios algunas instrucciones para guiarlos.
@@ -153,3 +153,6 @@ make parser
 >>>
 ```
 
+## Entrega
+
+Recuerde hacer add + commit + push y subir el link de su repositorio al GES.

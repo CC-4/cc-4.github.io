@@ -9,7 +9,7 @@ En este laboratorio aprenderán a utilizar **cup**, el analizador sintáctico pa
 Descarguen todos los archivos del siguiente repositorio:
 
 ```text
-https://classroom.github.com/a/RYr4XVtS
+https://classroom.github.com/a/eV_cMHnC
 ```
 
 Ahora que han terminado la fase 1 de su proyecto, saben utilizar JLex para el análisis léxico de una cadena de caracteres. Como han visto en clase, el análisis sintáctico se basa en gramáticas, y tiene algoritmos muy bien definidos para poder ser implementado. Para prepararlos para la fase 2, utilizaremos una herramienta llamada **cup** que funciona para analizar la sintáxis de un texto dado.
@@ -22,7 +22,7 @@ terminal Integer INTEGER;
 terminal Float FLOAT;
 ```
 
-Luego pueden especificar una precedencia. Por ejemplo, una multiplicación se debe hacer antes que una suma. Para este tipo de precedencia deben emplear **precedence left**, como en el siguiente ejemplo:
+Luego pueden especificar una precedencia. Por ejemplo, una multiplicación se debe hacer antes que una suma. A continuación un ejemplo:
 
 ```java
 precedence left PLUS, MINUS;
@@ -31,7 +31,7 @@ precedence left TIMES;
 
 Es importante recordar que a cup no le importa la aritmética, le importan los árboles. Esto quiere decir que un operador con una mayor precedencia quedará más cerca de la raíz de su árbol.
 
-Seguido de eso, van todas las reglas de producción. Siguiendo la siguiente sintáxis, en donde `RESULT` es la derivación usando bottom-up parsing.
+Seguido de eso, van todas las reglas de producción. Usamos la siguiente sintáxis, en donde `RESULT` es un dato que estaremos haciendo disponible para que nuestro nodo padre pueda utilizar.
 
 ```java
 parent_expr ::= LPAREN expr:e RPAREN {: RESULT = e; :};
@@ -43,42 +43,48 @@ La gramática con la que trabajaremos es la siguiente:
 
 ```bash
 S         ::= S expr_part
-          |   expr_part ;
+          |   expr_part
 expr_part ::= expr ;
 expr      ::= exprI | exprF
-exprI     ::= I + I
-          |   I - I
-          |   I * I
-          |   I / I
-          |   I % I
-          |   (I)
-exprF     ::= I + F
-          |   F + I
-          |   F + F
-          |   I - F
-          |   F - I
-          |   F - F
-          |   I * F
-          |   F * I
-          |   F * F
-          |   I / F
-          |   F / I
-          |   F / F
-          |   I ^ F
-          |   F ^ I
-          |   F ^ F
-          |   sin I
-          |   sin F
-          |   cos I
-          |   cos F
-          |   tan I
-          |   tan F
-          |   (F)
+exprI     ::= exprI + exprI
+          |   exprI - exprI
+          |   exprI * exprI
+          |   exprI / exprI
+          |   exprI % exprI
+          |   (exprI)
+          |   I
+exprF     ::= exprI + exprF
+          |   exprF + exprI
+          |   exprF + exprF
+          |   exprI - exprF
+          |   exprF - exprI
+          |   exprF - exprF
+          |   exprI * exprF
+          |   exprF * exprI
+          |   exprF * exprF
+          |   exprI / exprF
+          |   exprF / exprI
+          |   exprF / exprF
+          |   exprI ^ exprF
+          |   exprF ^ exprI
+          |   exprF ^ exprF
+          |   sin (exprI)
+          |   sin (exprF)
+          |   cos (exprI)
+          |   cos (exprF)
+          |   tan (exprI)
+          |   tan (exprF)
+          |   (exprF)
+          |   F
 
-# donde I es un entero y F es un float.
+# donde I es un token entero y F es un token float
+
+# noten que 
+# expr_part ::= expr ; 
+# nos indica que debemos colocar un punto y coma
 ```
 
-Para la primer parte deben completar el archivo **calculator.lex** generando los tokens necesarios para una calculadora con operaciones básicas y que maneje tanto floats como enteros. Noten que las funciones trigonométricas no son case sensitive, por lo que "sin" y "sIN" son aceptadas de igual manera. Esta es la lista de tokens que debe tener:
+Para la primer parte deben completar el archivo **calculator.lex** generando los tokens necesarios para una calculadora con operaciones básicas y que maneje tanto floats como enteros. Esta es la lista de tokens que debe tener:
 
 ```text
 SEMI
@@ -96,8 +102,6 @@ TAN
 INTEGER
 FLOAT
 ```
-
-Si analizan la gramática, pueden ver que una expresión puede ser una expresión entera, o una expresión de punto flotante.
 
 ## 3. Parser
 
@@ -122,7 +126,7 @@ Así se deberá de ver al probarlo:
 = 9;
 ```
 
-Puede trabajar las trigonométricas en grados o radianes, solo deje indicado en un comentario cuál indicó.
+Puede trabajar las trigonométricas en grados o radianes, solo deje indicado en un comentario cuál utilizó.
 
 Una vez terminado, tienen que realizar un commit de los archivos .cup y .lex y subir al GES el link de su repositorio.
 

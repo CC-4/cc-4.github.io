@@ -36,7 +36,7 @@ Ustedes van a correr su parser utilizando `./myparser`, un shell script que pega
 Ustedes deberían de probar este parser tanto en archivos bien definidos de COOL, como en malos, para ver si todo está funcionando correctamente. Recuerden, los bugs en su parser se pueden manifestar en alguna otra parte más adelante. Su parser va a ser calificado utilizando nuestro analizador léxico, entonces si ustedes escogen utilizar unicamente su parser, sepan de antemano que esto está sucediendo en el autograder.
 
 !!!info "Lexer"
-  Al inicio probaremos nuestra fase 2 usando el analizador léxico de coolc-rv que viene por defecto, ya que este está menos propenso a errores. Cuando ya tengan un parser funcional utilicen su propio analizador léxico para verificar que todo siga funcionando bien.
+	Al inicio probaremos nuestra fase 2 usando el analizador léxico de coolc-rv que viene por defecto, ya que este está menos propenso a errores. Cuando ya tengan un parser funcional utilicen su propio analizador léxico para verificar que todo siga funcionando bien.
 
 ## 3. Salida del Parser
 
@@ -123,9 +123,9 @@ Lo ejecutan de la siguiente manera:
 
 ## Referencias
 
-1. [The Tree Package](http://web.stanford.edu/class/cs143/javadoc/cool_ast/) - Javadoc del paquete Tree.
+1. [The Tree Package](https://web.stanford.edu/class/archive/cs/cs143/cs143.1112/javadoc/cool_ast/index.html) - Javadoc del paquete Tree.
 2. [cup Manual](http://www2.cs.tum.edu/projects/cup/manual.html) - Manual de JCup.
 3. [The Cool Reference Manual](http://web.stanford.edu/class/cs143/materials/cool-manual.pdf) - Manual de COOL.
 4. [Tour of the Cool Support Code](http://web.stanford.edu/class/cs143/materials/cool-tour.pdf) - Manual del Código de Soporte de COOL.
-5. [cup Javadoc](http://web.stanford.edu/class/cs143/javadoc/java_cup/index.html) - Javadoc de JCup.
+5. [cup Javadoc](https://web.stanford.edu/class/archive/cs/cs143/cs143.1112/javadoc/java_cup/) - Javadoc de JCup.
 
