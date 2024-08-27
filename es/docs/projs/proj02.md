@@ -97,7 +97,7 @@ Es probable que **javac** se queje si utilizan los constructores de los nodos de
 Ustedes deberían de descargar el siguiente script en el mismo directorio donde tienen sus archivos de la segunda fase, y darle permisos.
 
 ```bash
-wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa2-grading.pl
+wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/assets/scripts/pa2-grading.pl
 chmod +x pa2-grading.pl
 ```
 
@@ -111,7 +111,7 @@ Esto califica su parser utilizando el analizador léxico de coolc. Si ustedes qu
 
 
 ```bash
-wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa2-grading-all.sh
+wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/assets/scripts/pa2-grading-all.sh
 chmod +x pa2-grading-all.sh
 ```
 
@@ -128,4 +128,3 @@ Lo ejecutan de la siguiente manera:
 3. [The Cool Reference Manual](http://web.stanford.edu/class/cs143/materials/cool-manual.pdf) - Manual de COOL.
 4. [Tour of the Cool Support Code](http://web.stanford.edu/class/cs143/materials/cool-tour.pdf) - Manual del Código de Soporte de COOL.
 5. [cup Javadoc](https://web.stanford.edu/class/archive/cs/cs143/cs143.1112/javadoc/java_cup/) - Javadoc de JCup.
-

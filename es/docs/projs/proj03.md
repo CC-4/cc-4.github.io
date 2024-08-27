@@ -123,7 +123,7 @@ El análisis semántico es la fase más larga y compleja hasta el momento del co
 Ustedes deberían de descargar el siguiente script en el mismo directorio donde tienen sus archivos de la tercera fase, y volverlo ejecutable:
 
 ```bash
-wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa3-grading.pl
+wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/assets/scripts/pa3-grading.pl
 chmod +x pa3-grading.pl
 ```
 
@@ -138,7 +138,7 @@ Esto califica su parser utilizando el analizador léxico de coolc.
 Si ustedes quieren probar su parser utilizando su fase 1 y 2 descarguen el siguiente archivo, y vuélvanlo ejecutable:
 
 ```bash
-wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa3-grading-all.sh
+wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/assets/scripts/pa3-grading-all.sh
 chmod +x pa3-grading-all.sh
 ```
 
@@ -150,10 +150,6 @@ Luego lo ejecutan usando:
 
 ## Referencias
 
-1. [The Tree Package](http://web.stanford.edu/class/cs143/javadoc/cool_ast/) - Javadoc del paquete Tree.
+1. [The Tree Package](https://web.stanford.edu/class/archive/cs/cs143/cs143.1112/javadoc/cool_ast/index.html) - Javadoc del paquete Tree.
 2. [The Cool Reference Manual](http://web.stanford.edu/class/cs143/materials/cool-manual.pdf) - Manual de COOL.
 3. [Tour of the Cool Support Code](http://web.stanford.edu/class/cs143/materials/cool-tour.pdf) - Manual del Código de Soporte de COOL.
-4. [SPIM Manual](http://web.stanford.edu/class/cs143/materials/SPIM_Manual.pdf) - Manual de SPIM.
-
-
-
