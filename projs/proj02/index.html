@@ -715,8 +715,8 @@
 <p>Ustedes deberían de probar este parser tanto en archivos bien definidos de COOL, como en malos, para ver si todo está funcionando correctamente. Recuerden, los bugs en su parser se pueden manifestar en alguna otra parte más adelante. Su parser va a ser calificado utilizando nuestro analizador léxico, entonces si ustedes escogen utilizar unicamente su parser, sepan de antemano que esto está sucediendo en el autograder.</p>
 <div class="admonition info">
 <p class="admonition-title">Lexer</p>
-</div>
 <p>Al inicio probaremos nuestra fase 2 usando el analizador léxico de coolc-rv que viene por defecto, ya que este está menos propenso a errores. Cuando ya tengan un parser funcional utilicen su propio analizador léxico para verificar que todo siga funcionando bien.</p>
+</div>
 <h2 id="3-salida-del-parser">3. Salida del Parser<a class="headerlink" href="#3-salida-del-parser" title="Permanent link">&para;</a></h2>
 <p>Sus acciones semánticas deberían de construir un AST. La raíz (y solamente la raíz) del AST debería de ser de tipo <code>programc</code>. Para los programas que son parseados satisfactoriamente, la salida del parser es un listado del AST.</p>
 <p>Para programas que contengan errores (léxicos o sintácticos), la salida son mensajes de error del parser. Nosotros les hemos proveído con una función que reporta errores imprimiendo los mensajes en un formato estándar, por favor <strong>NO</strong> modifiquen esto. Ustedes no deberían de invocar esta función directamente en las acciones semánticas, cup automáticamente invoca a esta función cuando un error es detectado.</p>
@@ -756,7 +756,7 @@
 <p>Es probable que <strong>javac</strong> se queje si utilizan los constructores de los nodos del árbol con el tipo incorrecto. Si ustedes hacen algún casting para resolver esto por fuerza bruta, es probable que su parser sí compile, pero lance una excepción al ejecutarse.</p>
 <h2 id="7-autograder">7. Autograder<a class="headerlink" href="#7-autograder" title="Permanent link">&para;</a></h2>
 <p>Ustedes deberían de descargar el siguiente script en el mismo directorio donde tienen sus archivos de la segunda fase, y darle permisos.</p>
-<div class="codehilite"><pre><span></span>wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa2-grading.pl
+<div class="codehilite"><pre><span></span>wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/assets/scripts/pa2-grading.pl
 chmod +x pa2-grading.pl
 </pre></div>
 
@@ -765,7 +765,7 @@ chmod +x pa2-grading.pl
 </pre></div>
 
 <p>Esto califica su parser utilizando el analizador léxico de coolc. Si ustedes quieren probar su parser junto con su propia fase 1:</p>
-<div class="codehilite"><pre><span></span>wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/projects/grading/pa2-grading-all.sh
+<div class="codehilite"><pre><span></span>wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/assets/scripts/pa2-grading-all.sh
 chmod +x pa2-grading-all.sh
 </pre></div>
 
