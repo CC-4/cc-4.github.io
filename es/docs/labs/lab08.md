@@ -6,12 +6,12 @@ En este laboratorio van a programar en lenguaje ensamblador para practicar y ref
 Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:
 
 ```bash
-https://classroom.github.com/a/lhskxXvi
+https://classroom.github.com/a/XEqsO7p_
 ```
 
 ## Jupiter
 
-Los siguientes ejercicios utilizan el simulador que ya han utilizado en CC3 llamado **Jupiter** \(anteriormente llamado V-Sim\) para instalarlo por favor corran lo siguiente en una terminal:
+Si está utilizando un Linux distinto al nuestro, instale Jupiter:
 
 ```bash
 sudo add-apt-repository ppa:andrescv/jupiter
@@ -19,7 +19,7 @@ sudo apt-get update
 sudo apt-get install jupiter
 ```
 
-Pueden correr jupiter de forma gráfica utilizando lo siguiente:
+Pueden correr Jupiter de forma gráfica utilizando lo siguiente:
 
 ```bash
 jupiter
@@ -216,11 +216,3 @@ void hanoi(int numeroDeDiscos, int T_origen, int T_destino, int T_alterna) {
     }
 }
 ```
-
-## Ejercicio 3: syscall.s
-
-Realice un programa que lee del teclado un número y una cadena de caracteres. Imprimia la cadena la cantidad de veces que su número indica.
-
-!!! info "ecall"
-	El código ecall para leer un número es **5** y para leer un string es **8**.
-

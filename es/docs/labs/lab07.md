@@ -5,7 +5,7 @@ En este laboratorio van a continuar con el análisis semántico del lenguaje Vip
 Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:
 
 ```bash
-https://classroom.github.com/a/bs9-cgvz
+https://classroom.github.com/a/qNKtGDri
 ```
 
 !!!warning "Lean bien"

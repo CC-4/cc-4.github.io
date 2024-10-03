@@ -54,7 +54,7 @@ public Object lookup(AbstractSymbol sym)
 public String toString()
 ```
 
-Vean que las entradas de la tabla de símbolos son pares \(Key,Value\), donde el valor es de tipo **Object**. En este laboratorio, para simplificar la calificación, ingresaremos únicamente valores de tipo **String**.
+Vean que las entradas de la tabla de símbolos son pares \(Key,Value\), donde la llave es de tipo **AbstractSymbol** y el valor es de tipo **Object**. En este laboratorio, para simplificar la calificación, ingresaremos únicamente valores de tipo **String**.
 
 Ahora que se han familiarizado un poco con la tabla de símbolos, es hora de modificar el archivo **SymtabExample.java**. Agreguen a este un menú en el que se puedan realizar las siguientes operaciones:
 

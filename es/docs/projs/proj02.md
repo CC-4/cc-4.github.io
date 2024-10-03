@@ -97,7 +97,7 @@ Es probable que **javac** se queje si utilizan los constructores de los nodos de
 Ustedes deberían de descargar el siguiente script en el mismo directorio donde tienen sus archivos de la segunda fase, y darle permisos.
 
 ```bash
-wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/assets/scripts/pa2-grading.pl
+wget https://cc-4.github.io/cc4/pa2-grading.pl
 chmod +x pa2-grading.pl
 ```
 
@@ -111,7 +111,7 @@ Esto califica su parser utilizando el analizador léxico de coolc. Si ustedes qu
 
 
 ```bash
-wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/assets/scripts/pa2-grading-all.sh
+wget https://cc-4.github.io/cc4/pa2-grading-all.sh
 chmod +x pa2-grading-all.sh
 ```
 

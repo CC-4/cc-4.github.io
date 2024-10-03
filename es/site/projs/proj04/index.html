@@ -103,6 +103,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#generacion-de-codigo" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -496,10 +500,122 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        4: Codegen
+      </label>
     
     <a href="./" title="4: Codegen" class="md-nav__link md-nav__link--active">
       4: Codegen
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion" title="1. Introducción" class="md-nav__link">
+    1. Introducción
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generar-codigo-valido" title="Generar código válido" class="md-nav__link">
+    Generar código válido
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ambiente" title="2. Ambiente" class="md-nav__link">
+    2. Ambiente
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-archivos-y-directorios" title="3. Archivos y directorios" class="md-nav__link">
+    3. Archivos y directorios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-diseno" title="4. Diseño" class="md-nav__link">
+    4. Diseño
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-runtime-error-checking" title="4.1. Runtime Error Checking" class="md-nav__link">
+    4.1. Runtime Error Checking
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-garbage-collection" title="4.2. Garbage Collection" class="md-nav__link">
+    4.2. Garbage Collection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-probando-su-codegen" title="5. Probando su Codegen" class="md-nav__link">
+    5. Probando su Codegen
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-jupiter" title="5.1. Jupiter" class="md-nav__link">
+    5.1. Jupiter
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-autograder" title="6. Autograder" class="md-nav__link">
+    6. Autograder
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -516,6 +632,118 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion" title="1. Introducción" class="md-nav__link">
+    1. Introducción
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generar-codigo-valido" title="Generar código válido" class="md-nav__link">
+    Generar código válido
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ambiente" title="2. Ambiente" class="md-nav__link">
+    2. Ambiente
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-archivos-y-directorios" title="3. Archivos y directorios" class="md-nav__link">
+    3. Archivos y directorios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-diseno" title="4. Diseño" class="md-nav__link">
+    4. Diseño
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-runtime-error-checking" title="4.1. Runtime Error Checking" class="md-nav__link">
+    4.1. Runtime Error Checking
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-garbage-collection" title="4.2. Garbage Collection" class="md-nav__link">
+    4.2. Garbage Collection
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-probando-su-codegen" title="5. Probando su Codegen" class="md-nav__link">
+    5. Probando su Codegen
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-jupiter" title="5.1. Jupiter" class="md-nav__link">
+    5.1. Jupiter
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-autograder" title="6. Autograder" class="md-nav__link">
+    6. Autograder
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -524,9 +752,130 @@
                   <a href="https://github.com/cc-4/cc-4.github.io/edit/master/page/es/docs/projs/proj04.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>4: Codegen</h1>
-                
-                
+                <h1 id="generacion-de-codigo">Generación de código<a class="headerlink" href="#generacion-de-codigo" title="Permanent link">&para;</a></h1>
+<h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
+<p>En esta asignación, ustedes van a implementar un generador de código para COOL. Cuando hayan terminado satisfactoriamente esta parte, ustedes van a tener un compilador de COOL totalmente funcional.</p>
+<div class="admonition info">
+<p class="admonition-title">Última fase</p>
+<p>Esperamos que se den cuenta, que al finalizar esta fase, resolvieron un problema de ingeniería sustancialmente complejo. De ahora en adelante cualquier reto en cuestión de diseño e implementación debería de ser por lo menos un poco más fácil.</p>
+</div>
+<p>El generador de código hace uso del Abstract Syntax Tree (AST) construido durante la fase 2 del proyecto (Parser) y anotado en la fase 3 del proyecto (Semantic). Su generador de código debería de producir código de ensamblador, que representa cualquier programa de COOL correcto para la arquitectura RISC-V.</p>
+<p>En esta fase (casi) no hay recuperación de errores, en la generación de código ya podemos estar seguros de que cualquier programa erroneo de COOL ya ha sido detectado en las fases anteriores del compilador.</p>
+<p>Al igual que la anterior, esta fase tiene bastantes decisiones de diseño que tomar. Nosotros les haremos varias recomendaciones, pero la decisión final de que estructuras utilizar, que algoritmos implementar, etc. es suya. Se recomienda que la estructura de esta fase sea lo más parecida posible a la anterior.</p>
+<h3 id="generar-codigo-valido">Generar código válido<a class="headerlink" href="#generar-codigo-valido" title="Permanent link">&para;</a></h3>
+<p>En varios momentos quizás mencionemos "generar código válido" o "generar código equivalente". Su código no necesita ser 100% igual al generado por coolc-rv, sin embargo sí debe funcionar igual.</p>
+<p>Recuerde que el autograder se basa en prints, entonces al final de cuentas los programas que usted compile con su proyecto deberían imprimir exactamente lo mismo que los compilados con coolc-rv.</p>
+<h2 id="2-ambiente">2. Ambiente<a class="headerlink" href="#2-ambiente" title="Permanent link">&para;</a></h2>
+<p>Debe tener instalado coolc-rv y jupitercl, si no los tiene, revise la seccion de Instalacion de Material.</p>
+<p>Para comprobar que todo este instalado correctamente, compilen y corran un programa simple de COOL:
+<div class="codehilite"><pre><span></span>class Main inherits IO {
+
+  main(): Object {
+    out_string(&quot;hello world&quot;)
+  };
+
+};
+</pre></div></p>
+<p>Utilizando coolc-rv compilamos:
+<div class="codehilite"><pre><span></span>coolc-rv main.cl
+</pre></div></p>
+<p>Y al ejecutar veremos un resultado como este:
+<div class="codehilite"><pre><span></span>jupitercl main.s
+hello world
+COOL program successfully executed
+
+Jupiter: exit(0)
+</pre></div></p>
+<div class="admonition info">
+<p class="admonition-title">jupitercl</p>
+<p>Noten que se está haciendo uso del comando <strong>jupitercl</strong>, este a diferencia del comando <strong>jupiter</strong> carga automáticamente el runtime system de COOL.</p>
+</div>
+<h2 id="3-archivos-y-directorios">3. Archivos y directorios<a class="headerlink" href="#3-archivos-y-directorios" title="Permanent link">&para;</a></h2>
+<p>A diferencia de las fases anteriores no comenzaremos con un make, sino que obtendremos nuestros archivos base desde este repositorio:
+<div class="codehilite"><pre><span></span>git clone https://github.com/CC-4/PA4.git
+</pre></div></p>
+<p>Casi todos estos archivos han sido explicados en las fases anteriores del proyecto. Esta es una lista de los archivos que ustedes tal vez quieran modificar.</p>
+<ul>
+<li><strong>CgenClassTable.java</strong> y <strong>CgenNode.java</strong>: Estos archivos proveen una implementación del grafo de herencia para el generador de código. Ustedes van a tener que completar CgenClassTable para poder construir su generador de código. Ustedes pueden utilizar el código que se les provee o pueden reemplazarlo con el suyo o con el que hicieron en la fase anterior.</li>
+<li><strong>StringSymbol.java</strong>, <strong>IntSymbol.java</strong>, y <strong>BoolConst.java</strong>: Estos archivos proveen soporte para las constantes de COOL. Ustedes van a tener que completar el método para generar definiciones de estas constantes.</li>
+<li><strong>cool-tree.java</strong>: Este archivo contiene la definición del los nodos del AST. Ustedes van a tener que añadir rutinas de generación de código code(PrintStream) para todas las expresiones en este archivo. <strong>El generador de código es mandado a llamar, empezando por <code>code(PrintStream)</code> que está en la clase program</strong>. Ustedes tal vez quieran añadir más métodos, pero no modifiquen los métodos ya existentes.</li>
+<li><strong>TreeConstants.java</strong>: Como antes, este archivo define algunas constantes útiles, siéntanse libres de añadir las suyas y lo que quieran.</li>
+<li><strong>CgenSupport.java</strong>: Este archivo contiene soporte general para generar código. Van a encontrar una serie de funciones que se vuelven bastantes útiles para emitir instrucciones de RISC-V, aquí está todo lo que necesitan. Pueden añadir también las que ustedes quieran, pero no modifiquen nada de lo que ya está definido.</li>
+<li><strong>example.cl</strong>: Este es su archivo de prueba para ver si lo que genera su generador de código funciona correctamente. Hagan bastantes pruebas con este archivo como lo requieran.</li>
+</ul>
+<h2 id="4-diseno">4. Diseño<a class="headerlink" href="#4-diseno" title="Permanent link">&para;</a></h2>
+<p>En consideración a su diseño, así a grandes rasgos, su generador de código deberá hacer las siguientes tareas:</p>
+<ul>
+<li>Determinar y emitir código para las constantes globales, como los prototipos de objeto.</li>
+<li>Determinar y emitir código para las tablas globales, como la <code>class_nameTab</code>, la <code>class_objTab</code> y las dispatch tables.</li>
+<li>Determinar y emitir código para las inicializaciones de atributos.</li>
+<li>Determinar y emitir código para cada método de cada clase.</li>
+</ul>
+<p>Hay varias maneras posibles de implementar un generador de código. Una estrategia razonable es hacer el generador de código en dos pasadas. La primera pasada decide el layout para cada clase, particularmente el offset en donde cada atributo es guardado en un objeto. Utilizando esta información, la segunda pasada recursivamente visita cada feature y genera código de accumulator machine para cada expresión.</p>
+<p>Hay un número de cosas que ustedes tienen que mantener en mente mientras diseñan su generador de código:</p>
+<ul>
+<li>Su generador de código tiene que funcionar correctamente con el Runtime de COOL (<strong>runtime.s</strong>) que se le provee.</li>
+<li>Debe entender el convenio utilizado, este se basa en dos principios: 1) Todo espacio que pedimos en el stack debemos devolverlo. 2) Los resultados que obtenemos van quedando en el acumulador (<strong>a0</strong>).</li>
+</ul>
+<h3 id="41-runtime-error-checking">4.1. Runtime Error Checking<a class="headerlink" href="#41-runtime-error-checking" title="Permanent link">&para;</a></h3>
+<p>Al final del manual de COOL existe una lista de errores que pueden terminar un programa antes de lo esperado. De esta lista su generador de código debería de ser capaz de atrapar las primeras tres: <strong>dispatch on void</strong>, <strong>case on void</strong> y <strong>missing branch</strong> e imprimir un mensaje de error antes de abortar. Atrapar errores de <strong>substring out of range</strong> y <strong>heap overflow</strong> es responsabilidad del runtime system que está en runtime.s. Finalmente, la división entre 0 también es su responsabilidad, la maneja con <strong>_div_by_zero</strong>.</p>
+<h3 id="42-garbage-collection">4.2. Garbage Collection<a class="headerlink" href="#42-garbage-collection" title="Permanent link">&para;</a></h3>
+<p>Cerca del final del curso hablaremos sobre Garbage Collection. Si encuentra este término en algún lugar ignórelo por el momento, probablemente es un remanente de cuando el proyecto se trabajaba en MIPS.</p>
+<p>Todo lo necesario para que el Garbage Collector funcione ya va implementado en el runtime que se le provee. Usted solo debe encargarse que sus objetos tengan la forma correcta (tag, size, pointer, attr).</p>
+<h2 id="5-probando-su-codegen">5. Probando su Codegen<a class="headerlink" href="#5-probando-su-codegen" title="Permanent link">&para;</a></h2>
+<p>Van a necesitar un analizador léxico, sintáctico y semántico para probar su generador de código. Pueden utilizar sus implementaciones a estas fases o utilizar las que nosotros les proveemos. Por defecto, las que nosotros les proveemos son utilizadas, para cambiar este comportamiento tienen que cambiar los archivos lexer, parser y semant con sus propias implementaciones.</p>
+<p>Ustedes van a tener que correr su generador de código utilizando <code>./mycoolc</code>, que es un shell script que pega el generador de código que ustedes implementaron con el resto de fases. Tomen en cuenta que <code>./mycoolc</code> puede tomar una bandera <code>-c</code> para depurar el generador de código, utilizando esta bandera, se cambia la bandera debug a verdadero, que está en <strong>Flags.java</strong>. Agregar código para producir información de depuración es tarea de ustedes si quieren utilizarlo.</p>
+<h3 id="51-jupiter">5.1. Jupiter<a class="headerlink" href="#51-jupiter" title="Permanent link">&para;</a></h3>
+<p>El ejecutable de Jupiter <code>jupitercl</code> es el simulador para la arquitectura RISC-V en donde pueden probar su generador de código. Tiene muchas funcionalidades que les permite examinar el estado de la memoria, símbolos globales y locales, registros, etc del programa. Ustedes también pueden poner breakpoints y hacer step de su programa. Para poder utilizar el debugger de Jupiter ustedes pueden hacer lo siguiente:</p>
+<div class="codehilite"><pre><span></span>jupitercl -g &lt;archivo.s&gt;
+&gt;&gt;&gt; help
+Available commands:
+
+[General Commands]
+ help/?                - show this help message
+ exit/quit/q           - exit the simulator and debugger
+ !                     - execute previous command
+
+[Display]
+ rvi                   - print all RVI registers
+ rvi &lt;reg&gt;             - print RVI register reg
+ rvf                   - print all RVF registers
+ rvf &lt;reg&gt;             - print RVF register reg
+ memory &lt;addr&gt;         - print 12 x 4 cells of memory starting at the given address
+ memory &lt;addr&gt; &lt;rows&gt;  - print rows x 4 cells of memory starting at the given address
+ globals               - print global symbol table
+ locals                - print local symbol tables
+
+[Execution Control]
+ step/s                - continue until another instruction reached
+ backstep/b            - back to the previous instruction
+ continue/c            - continue running
+ reset                 - reset
+
+[Breakpoints]
+ break &lt;addr&gt;          - set a breakpoint at the given address
+ clear                 - delete all breakpoints
+ delete &lt;addr&gt;         - delete breakpoint at the given address
+ list                  - show defined breakpoints
+</pre></div>
+
+<h2 id="6-autograder">6. Autograder<a class="headerlink" href="#6-autograder" title="Permanent link">&para;</a></h2>
+<p>Descargue el autograder en la misma carpeta donde tiene su cuarta fase:</p>
+<div class="codehilite"><pre><span></span>wget https://cc-4.github.io/cc4/pa4-grading.py
+chmod +x pa4-grading.py
+</pre></div>
+
+<p>Luego ejecute el siguiente comando:
+<div class="codehilite"><pre><span></span>./pa4-grading.py
+</pre></div></p>
+<p>Si quiere probar todas sus fases juntas, utilice el siguiente autograder:
+<div class="codehilite"><pre><span></span>wget https://cc-4.github.io/cc4/pa4-grading-all.sh
+chmod +x pa4-grading-all.sh
+</pre></div></p>
+<p>Luego ejecute el siguiente comando:
+<div class="codehilite"><pre><span></span>./pa4-grading-all.sh
+</pre></div></p>
+<p>Si no está conforme con la nota del autograder, es su responsabilidad elaborar y presentar testcases propios al momento de la calificación. Estos testcases deben mostrar de qué es capaz su Codegen. Realizarlos no le garantiza que tendrá la misma nota que alguien a quién el autograder sí le funcionó, pero le ayudará a quitarse el cero.</p>
                 
                   
                 

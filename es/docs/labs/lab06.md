@@ -5,7 +5,7 @@ Es hora de empezar a poner en práctica el análisis semántico. El motivo de es
 Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:
 
 ```bash
-https://classroom.github.com/a/1z-JR4a4
+https://classroom.github.com/a/EmL-zwJ1
 ```
 
 !!!warning "Lean bien"
@@ -203,6 +203,9 @@ bad operand types for binary operator '+'
 ```
 
 Esto es una forma de recuperación de errores que también van a tener que realizar en su proyecto.
+
+!!! info "Vamos a mentir"
+    En otras palabras, implementaremos lo visto en clase. Aunque suceda un error, mentiremos y reportaremos que nuestra operación aritmética tiene tipo **Int**, esto nos ayuda a que el error no se propague sino que se reporte una sola vez.
 
 #### Return
 

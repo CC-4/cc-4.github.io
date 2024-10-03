@@ -27,7 +27,7 @@ Para empezar, creen el directorio **PA3** junto a sus carpetas anteriores.
 
 **ADENTRO** de esta carpeta ejecuten el siguiente comando:
 ```bash
-make -f /usr/class/cs143/assignments/PA4J/Makefile
+make -f /usr/class/cc4/assignments/PA3/Makefile
 ```
 
 Este comando va a copiar un número de archivos en su directorio que han creado. Algunos de los archivos que van a ser copiados van a ser de solo lectura \(representando a estos con archivos que realmente son enlaces simbólicos hacia otros archivos\). Ustedes no deberían de editar estos archivos. De hecho, si ustedes modifican estos archivos, van a encontrar imposible terminar y completar esta asignación. Vean las instrucciones en el archivo README.
@@ -123,7 +123,7 @@ El análisis semántico es la fase más larga y compleja hasta el momento del co
 Ustedes deberían de descargar el siguiente script en el mismo directorio donde tienen sus archivos de la tercera fase, y volverlo ejecutable:
 
 ```bash
-wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/assets/scripts/pa3-grading.pl
+wget https://cc-4.github.io/cc4/pa3-grading.pl
 chmod +x pa3-grading.pl
 ```
 
@@ -138,7 +138,7 @@ Esto califica su parser utilizando el analizador léxico de coolc.
 Si ustedes quieren probar su parser utilizando su fase 1 y 2 descarguen el siguiente archivo, y vuélvanlo ejecutable:
 
 ```bash
-wget https://raw.githubusercontent.com/CC-4/cc-4.github.io/master/assets/scripts/pa3-grading-all.sh
+wget https://cc-4.github.io/cc4/pa3-grading-all.sh
 chmod +x pa3-grading-all.sh
 ```
 
