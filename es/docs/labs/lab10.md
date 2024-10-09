@@ -5,7 +5,7 @@ Para este laboratorio van a completar la generación de código para el lenguaje
 Los archivos necesarios para este laboratorio los pueden encontrar en el siguiente enlace:
 
 ```bash
-https://classroom.github.com/a/dyAqFODr
+https://classroom.github.com/a/hI0ofQwY
 ```
 
 !!!warning "Lean bien"

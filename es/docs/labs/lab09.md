@@ -5,7 +5,7 @@ En este laboratorio van a generar código en lenguaje ensamblador RISC-V para al
 Los archivos necesarios para este laboratorio los pueden encontrar en el siguiente enlace:
 
 ```bash
-https://classroom.github.com/a/XnJyp8xe
+https://classroom.github.com/a/dVwKmUVB
 ```
 
 Los archivos base tienen la misma estructura que vieron anteriormente en los laboratorios 6 y 7. Para este laboratorio el análisis semántico ya está hecho, así que no se tienen que preocupar de esta tarea, solamente se tienen que enfocar en generar código implementando un **Accumulator Machine**.
