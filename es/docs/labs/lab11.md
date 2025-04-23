@@ -7,7 +7,7 @@ El objetivo de este laboratorio es preparar el **AST** para la generación de c�
 Antes de empezar, obtener los archivos desde Github Classroom:
 
 ```text
-https://classroom.github.com/a/Y9g1Qfv4
+https://classroom.github.com/a/GJXSN7iR
 ```
 
 ## Descripción
