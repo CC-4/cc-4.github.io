@@ -4,7 +4,7 @@ if [ ! -d ../PA1 ] || [ ! -d ../PA2 ]; then
 fi
 
 if [ ! -f pa2-grading.pl ]; then
-    wget http://raw.githubusercontent.com/CC-4/cc-4.github.io/master/proyectos/scripts/pa2-grading.pl
+    wget https://cc-4.github.io/cc4/pa2-grading.pl
 fi
 
 chmod +x pa2-grading.pl
