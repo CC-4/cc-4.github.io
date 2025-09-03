@@ -7,7 +7,7 @@ Para este lab, deben hacer los ejercicios que se les pide a continuación, estos
 Acepte el siguiente repositorio para acceder a los archivos base.
 
 ```
-https://classroom.github.com/a/z40kaGWQ
+https://classroom.github.com/a/RoJ_bFrb
 ```
 
 ## 1. Hola Mundo
@@ -74,23 +74,6 @@ Su programa debe de producir el siguiente resultado:
 100 Celsius son 212 Fahrenheit
 ```
 
-## 5. Strings
+## Entrega
 
-En un archivo llamado **str.cl**, escriban un programa que le pida al usuario 2 Strings y verifiquen si el segundo String está contenido en el primero.
-
-Su programa debe de funcionar de la siguiente manera:
-
-```bash
-Ingrese String 1: Anita lava la tina.
-Ingrese String 2: lava
-
-lava está contenido en Anita lava la tina.
-
-Ingrese String 1: Anita lava la tina.
-Ingrese String 2: shampoo
-
-shampoo no está contenido en Anita lava la tina.
-```
-
-!!!info "Recomendación"
-	En el manual de referencia de COOL hay algo que podría ayudarnos, página número 14, en específico el método: `substr(i : Int, l : Int)`.
+Al finalizar realice add + commit + push, coloque el link de su repositorio en la asignación correspondiente del GES.

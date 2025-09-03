@@ -2,21 +2,23 @@
 
 ![](/img/st.gif)
 
-En este laboratorio aprenderán a implementar una tabla de símbolos como la que usarán en la fase 3 del proyecto.
+En este laboratorio practicarán el uso de una tabla de símbolos como la que usarán en la fase 3 del proyecto.
 
 ## 1. Introducción
 
-Han terminado las primeras 2 fases de su proyecto y ahora es donde empieza la verdadera batalla contra el dragón. En la fase 3 se encargarán de hacer el análisis semántico del compilador, es decir, deberán asignar un tipo a cada nodo del árbol generado en la fase 2 y así terminar de capturar cualquier error o inconsistencia en el código o programa a compilar. Para realizar esta fase, ustedes deben implementar una tabla de símbolos en donde guardarán todas las variables declaradas para validar su existencia en base a su scope, y poder asignar un tipo a cada una.
+En la fase 3 se encargarán de hacer el análisis semántico del compilador, es decir, deberán asignar un tipo a cada nodo del árbol generado en la fase 2 y así terminar de capturar cualquier error o inconsistencia en el código o programa a compilar. 
 
-Para iniciar, ejecuten el comando para generar los archivos necesarios:
+Para realizar esta fase, ustedes deben implementar una tabla de símbolos en donde guardarán todas las variables declaradas para validar su existencia en base a su scope, y poder asignar un tipo a cada una.
+
+La estructura de este laboratorio será similar a la que utilizarán en fase 3. Obtenga sus archivos base aquí:
 
 ```bash
-make -f /usr/class/cc4/assignments/PA3/Makefile
+https://classroom.github.com/a/JMRPKgYs
 ```
 
 ## 2. Tabla de Símbolos
 
-Estos son los archivos necesarios para implementar la fase 3 del proyecto, pero por ahora nos enfocaremos únicamente en **SymtabExample.java**. Noten que este archivo contiene un ejemplo de como funciona la tabla de símbolos:
+Nos enfocaremos únicamente en **SymtabExample.java**. Noten que este archivo contiene un ejemplo de como funciona la tabla de símbolos:
 
 ```java
 // se crea la tabla de sibolos.
@@ -79,5 +81,4 @@ Para ejecutarlo:
 ./symtab-example
 ```
 
-Una vez terminado todo, envíen al GES un archivo **.zip** conteniendo únicamente el archivo **SymtabExample.java**
-
+Una vez terminado todo, haga add + commit + push de su código a Github. En el GES suba el link de su repositorio.

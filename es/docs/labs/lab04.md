@@ -9,7 +9,7 @@ En este laboratorio aprenderán a utilizar **cup**, el analizador sintáctico pa
 Descarguen todos los archivos del siguiente repositorio:
 
 ```text
-https://classroom.github.com/a/eV_cMHnC
+https://classroom.github.com/a/uFj7_0l7
 ```
 
 Ahora que han terminado la fase 1 de su proyecto, saben utilizar JLex para el análisis léxico de una cadena de caracteres. Como han visto en clase, el análisis sintáctico se basa en gramáticas, y tiene algoritmos muy bien definidos para poder ser implementado. Para prepararlos para la fase 2, utilizaremos una herramienta llamada **cup** que funciona para analizar la sintáxis de un texto dado.

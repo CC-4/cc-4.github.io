@@ -99,8 +99,7 @@ stop.bat		Archivo ejecutable para detener su contenedor.
 
 La máquina virtual la pueden descargar desde cualquiera de los siguientes enlaces.
 
-* [Máquina virtual 2025 - Google Drive]()
-* [Máquina virtual 2025 - Mega]()
+* [Máquina virtual 2025 - Google Drive](https://drive.google.com/file/d/1zeJGlwkdhdKOuJ2u2mb9ACZeJmenn4qo/view?usp=drive_link)
 
 Es una máquina virtual de **Ubuntu 24.04 LTS** para ejecutarse en VMware Workstation Pro, después de descargar el archivo debe descomprimirlo y abrir el archivo **.vmx** que le permitirá usar la máquina virtual desde su VMware.
 

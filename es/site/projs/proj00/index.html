@@ -103,7 +103,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#instalacion-material" tabindex="1" class="md-skip">
+      <a href="#instalacion-de-material" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -474,15 +474,49 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#opcion-1-maquina-virtual" title="Opción 1: Máquina Virtual" class="md-nav__link">
-    Opción 1: Máquina Virtual
+  <a href="#opcion-1-docker-y-contenedor" title="Opción 1: Docker y contenedor" class="md-nav__link">
+    Opción 1: Docker y contenedor
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalando-docker" title="Instalando Docker" class="md-nav__link">
+    Instalando Docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-docker" title="Usando Docker" class="md-nav__link">
+    Usando Docker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opcion-2-maquina-virtual" title="Opción 2: Máquina Virtual" class="md-nav__link">
+    Opción 2: Máquina Virtual
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#opcion-2-instalar-el-material" title="Opción 2: Instalar el Material" class="md-nav__link">
-    Opción 2: Instalar el Material
+  <a href="#opcion-3-nativo" title="Opción 3: Nativo" class="md-nav__link">
+    Opción 3: Nativo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-del-proyecto" title="Estructura del proyecto" class="md-nav__link">
+    Estructura del proyecto
   </a>
   
 </li>
@@ -572,15 +606,49 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#opcion-1-maquina-virtual" title="Opción 1: Máquina Virtual" class="md-nav__link">
-    Opción 1: Máquina Virtual
+  <a href="#opcion-1-docker-y-contenedor" title="Opción 1: Docker y contenedor" class="md-nav__link">
+    Opción 1: Docker y contenedor
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalando-docker" title="Instalando Docker" class="md-nav__link">
+    Instalando Docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-docker" title="Usando Docker" class="md-nav__link">
+    Usando Docker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opcion-2-maquina-virtual" title="Opción 2: Máquina Virtual" class="md-nav__link">
+    Opción 2: Máquina Virtual
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#opcion-2-instalar-el-material" title="Opción 2: Instalar el Material" class="md-nav__link">
-    Opción 2: Instalar el Material
+  <a href="#opcion-3-nativo" title="Opción 3: Nativo" class="md-nav__link">
+    Opción 3: Nativo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-del-proyecto" title="Estructura del proyecto" class="md-nav__link">
+    Estructura del proyecto
   </a>
   
 </li>
@@ -604,43 +672,160 @@
                   <a href="https://github.com/cc-4/cc-4.github.io/edit/master/page/es/docs/projs/proj00.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="instalacion-material">Instalación Material<a class="headerlink" href="#instalacion-material" title="Permanent link">&para;</a></h1>
-<p>Para poder realizar las fases del proyecto del compilador se requiere que utilicen una distribución de Linux por lo que se les proporcionarán dos opciones:</p>
+                <h1 id="instalacion-de-material">Instalación de material<a class="headerlink" href="#instalacion-de-material" title="Permanent link">&para;</a></h1>
+<p>Sus laboratorios y proyectos de CC4 se trabajarán en Ubuntu. Todas las entregas se realizarán a través de Github. Contamos con varias opciones para que trabaje:</p>
 <ol>
-<li>Descargar una máquina virtual con el contenido necesario (opción recomendada).</li>
-<li>Instalar un Ubuntu 20, y descargar e instalar el material en su computadora.</li>
+<li>Docker: Se le proveerá un contenedor con todo el material necesario listo para usarse. El staff de la clase dará soporte únicamente para esta opción.</li>
+<li>Máquina virtual: Tendremos disponible una máquina virtual con todo el material instalado. No se dará soporte a VMware.</li>
+<li>Nativo: Contamos también con un script para instalar el material necesario en Ubuntu 24.04. No se dará soporte a instalaciones nativas.</li>
 </ol>
-<p>El material que se incluye es el código base que les serivirá para poder comenzar las fases del proyecto, el compilador <strong>coolc-rv</strong> que compilará de COOL hacia RISC-V, y <strong>jupitercl</strong> que nos permitirá usar Jupiter desde la línea de comandos y con un runtime apto para nuestros programas de COOL.</p>
-<p>Luego de tener instalado el material deben de crear una carpeta en donde guardarán su código y que contendrá cada una de las fases del proyecto. Esta carpeta se puede llamar como ustedes quieram la carpeta debe contener las siguientes carpetas:</p>
+<p>El material que se incluye es:</p>
 <ul>
-<li><strong>PA1</strong> (Análisis Léxico)</li>
-<li><strong>PA2</strong> (Análisis Sintáctico)</li>
-<li><strong>PA3</strong> (Análisis Semántico)</li>
-<li><strong>PA4</strong> (Generación de Código)</li>
+<li>Código base para empezar sus fases del proyecto.</li>
+<li>Compilador <strong>coolc-rv</strong> para compilar de COOL hacia RISC-V y <strong>jupitercl</strong> para ejectuar Jupiter desde la terminal con un runtime apto para nuestros programas de COOL.</li>
+<li>Herramientas varias como <strong>git</strong>, <strong>make</strong>, <strong>gcc</strong>, <strong>jLex</strong>, <strong>cup</strong> y <strong>Java</strong>.</li>
 </ul>
-<p>Cada una de estas carpetas corresponderá a una fase del proyecto. <strong>Utilizaremos scripts automatizados para calificar por lo que si usted no respeta este convenio de nombres de carpetas, puede tener problemas con su nota</strong>.</p>
-<p>Después de haber realizado lo anterior, como se les mencionó en clase, el uso de Git será <strong>obligatorio</strong>. Por lo tanto, dentro de la carpeta inicial (la cual nombraron como ustedes deseaban), deben iniciar un repositorio de Git.</p>
-<div class="codehilite"><pre><span></span>git init
+<h2 id="opcion-1-docker-y-contenedor">Opción 1: Docker y contenedor<a class="headerlink" href="#opcion-1-docker-y-contenedor" title="Permanent link">&para;</a></h2>
+<p>Antes de empezar con Docker <strong>lea todas las instrucciones de esta sección</strong>.</p>
+<h4 id="instalando-docker">Instalando Docker<a class="headerlink" href="#instalando-docker" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Paso 1: Descargue e instale Docker Desktop: <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a></p>
+</li>
+<li>
+<p>Paso 2: Al finalizar el instalador le pedirá que reinicie su máquina. Reinicie para poder continuar.</p>
+</li>
+<li>
+<p>Paso 3: Después de reiniciar debería abrirse una terminal de Windows y una ventana de Docker Desktop. Si alguna de estas no se abre, ejecute manualmente Docker Desktop.</p>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Terminal de Windows</p>
+<p>No haga nada aún en Docker Desktop. Vaya primero a la terminal de Windows.</p>
+</div>
+<ul>
+<li>Paso 4: La terminal le dará las instrucciones para instalar o activar WSL. Siga esas instrucciones, por lo general solo le pedirá que presione alguna tecla para continuar y espere mientras se descarga, instala y activa.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Terminal de Windows</p>
+<p>Continue en Docker Desktop solo si ya tiene listo WSL.</p>
+</div>
+<ul>
+<li>
+<p>Paso 5: Docker Desktop le pedirá que cree una cuenta, puede usar cualquier correo para esto.</p>
+</li>
+<li>
+<p>Paso 6: Listo. Docker ya está instalado y listo para funcionar.</p>
+</li>
+</ul>
+<h4 id="usando-docker">Usando Docker<a class="headerlink" href="#usando-docker" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Paso 0: Instale Git en Windows si aún no lo tiene. <a href="https://git-scm.com/downloads/win">Git para Windows</a></li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Git vs Github</p>
+<p>Se le pide instalar Git. Git es una herramienta de código abierto que usaremos desde la terminal.</p>
+<p>Github también ofrece una herramienta llamada Github Desktop. En clase <strong>no</strong> usaremos esta herramienta, todo lo trabajamos desde la terminal. </p>
+</div>
+<ul>
+<li>Paso 1: Use su terminal de Windows para clonar el siguiente repositorio:</li>
+</ul>
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc-4/container
 </pre></div>
 
-<h2 id="opcion-1-maquina-virtual">Opción 1: Máquina Virtual<a class="headerlink" href="#opcion-1-maquina-virtual" title="Permanent link">&para;</a></h2>
-<p>La máquina virtual la pueden descargar desde cualquiera de los siguientes enlaces:</p>
 <ul>
-<li><a href="https://drive.google.com/file/d/1S8yC9frBNXHPRAO6fYP34Km1h4lplE8N/view?usp=drive_link">Google Drive</a></li>
-<li><a href="https://mega.nz/file/Hc4B2CKb#HP8bRU5ABovuX-76B1gqlieyKfoMeicJWBBH3janW44">Mega</a></li>
+<li>Paso 2: Explore el repositorio recién clonado:</li>
 </ul>
-<p>Es una máquina virtual de <strong>Ubuntu 20 LTS</strong> para ejecutarse en VMware, después de descargar el archivo debe descomprimirlo y abrir el archivo .vmx que le permitirá usar la máquina virtual desde su VMware.</p>
+<div class="codehilite"><pre><span></span>workspace		Carpeta que contiene un README.
+			Dentro de esta carpeta quedarán todos sus archivos
+			como laboratorios, proyectos, etc.
+			Usted puede acceder a esta carpeta tanto
+			desde Windows como desde Linux.
+
+Dockerfile		Archivo de texto con las instrucciones para
+			que Docker cree su contenedor.
+
+create.bat		Archivo ejecutable para que Docker cree su
+			contenedor siguiendo las instrucciones del
+			Dockerfile.
+			Si hace doble clic, este se ejecuta en la terminal
+			de Windows.
+
+run.bat			Archivo ejecutable para que su contenedor
+			se ejecute.
+			Si hace doble clic, abre una terminal de Windows
+			que está &quot;conectada&quot; con su contenedor.
+
+stop.bat		Archivo ejecutable para detener su contenedor.
+			Cuando termine de trabajar use este archivo para
+			detener el contenedor y que este no ocupe recursos
+			de su máquina.
+</pre></div>
+
+<ul>
+<li>Paso 3: Asegúrese que Docker Desktop está corriendo en su máquina. Ejecute <strong>create.bat</strong>. Esto de forma automática descargará e instalará todo el material dentro de un <strong>contenedor</strong>.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Cree el contenedor una sola vez</p>
+<p><strong>Solo necesita crear el contenedor una vez.</strong></p>
+<p>Bueno... si sufre algún problema mayor, la solución más sencilla será eliminar el contenedor anterior y crearlo de nuevo.</p>
+</div>
+<ul>
+<li>
+<p>Paso 4: Después de unos minutos de espera, su contenedor debería ya estar listo. Notará que la terminal no muestra su usuario de Windows sino muestra <strong>root</strong>. Cuando vea esto sabrá que está dentro del contenedor, es decir, está trabajando en Linux.</p>
+</li>
+<li>
+<p>Paso 5: Si se le cierra esa terminal, o la próxima vez que vaya a trabajar, use <strong>run.bat</strong>. Este automáticamente detecta si el contenedor ya está iniciado y abre una terminal conectada a este.</p>
+</li>
+<li>
+<p>Paso 6: Cuando termine de trabajar puede usar <strong>stop.bat</strong> para detener su contenedor. Se recomienda siempre hacerlo para ahorrar recursos, sin embargo no hay mayor problema si se le olvida.</p>
+</li>
+<li>
+<p>Paso 7: Listo. Por el momento ya sabe lo necesario para empezar a trabajar en Docker. Más adelante en el semestre veremos un poco más sobre contenedores.</p>
+</li>
+</ul>
+<h2 id="opcion-2-maquina-virtual">Opción 2: Máquina Virtual<a class="headerlink" href="#opcion-2-maquina-virtual" title="Permanent link">&para;</a></h2>
+<p>La máquina virtual la pueden descargar desde cualquiera de los siguientes enlaces.</p>
+<ul>
+<li><a href="https://drive.google.com/file/d/1zeJGlwkdhdKOuJ2u2mb9ACZeJmenn4qo/view?usp=drive_link">Máquina virtual 2025 - Google Drive</a></li>
+</ul>
+<p>Es una máquina virtual de <strong>Ubuntu 24.04 LTS</strong> para ejecutarse en VMware Workstation Pro, después de descargar el archivo debe descomprimirlo y abrir el archivo <strong>.vmx</strong> que le permitirá usar la máquina virtual desde su VMware.</p>
+<p>Utilice VMware Workstation Pro, no utilice la versión Player. Si no lo tiene puede descargarlo en el siguiente enlace o buscarlo en el sitio de Broadcom.</p>
+<ul>
+<li><a href="https://drive.google.com/file/d/1FOlcddkuRQk5Wg_6L7Zvl6kjoqHrqppg/view?usp=sharing">VMware Workstation Pro - Google Drive</a></li>
+<li><a href="https://knowledge.broadcom.com/external/article/344595/downloading-and-installing-vmware-workst.html">VMware Workstation Pro - Broadcom</a></li>
+</ul>
 <div class="admonition info">
 <p class="admonition-title">Contraseña</p>
 <p>La contraseña de la máquina virtual es <strong>student</strong></p>
 </div>
-<h2 id="opcion-2-instalar-el-material">Opción 2: Instalar el Material<a class="headerlink" href="#opcion-2-instalar-el-material" title="Permanent link">&para;</a></h2>
-<p>Para esta opción se asume que tienen ya una máquina con Ubuntu 20 instalado. Debe descargar el script correspondiente desde <strong>Material de Apoyo</strong> en su GES. Luego abra una terminal y ejecute lo siguiente:</p>
-<div class="codehilite"><pre><span></span>chmod +x install.sh
-./install.sh
+<div class="admonition warning">
+<p class="admonition-title">Soporte</p>
+<p><strong>La herramienta oficial para CC4 es Docker.</strong></p>
+<p>No daremos soporte de forma oficial a la máquina virtual. Si nos pregunta alguna duda intentaremos resolverla, pero si el problema persiste le pediremos que se cambie a Docker.</p>
+</div>
+<h2 id="opcion-3-nativo">Opción 3: Nativo<a class="headerlink" href="#opcion-3-nativo" title="Permanent link">&para;</a></h2>
+<p>Para esta opción se asume que tienen ya una máquina con Ubuntu 24.04 LTS instalado. Debe descargar el script correspondiente desde <strong>Material de Apoyo</strong> en su GES. Luego abra una terminal y ejecute lo siguiente:</p>
+<div class="codehilite"><pre><span></span>chmod u+x install24.sh
+./install24.sh
 </pre></div>
 
-<p>Esto descargará Java 11, JLex, cup, git, coolc-rv y jupitercl.</p>
+<p>Esto descargará e instalará todas las herramientas a su máquina.</p>
+<div class="admonition warning">
+<p class="admonition-title">Soporte</p>
+<p><strong>La herramienta oficial para CC4 es Docker.</strong></p>
+<p>No daremos soporte de forma oficial a instalación nativa. Si nos pregunta alguna duda intentaremos resolverla, pero si el problema persiste le pediremos que se cambie a Docker.</p>
+</div>
+<h2 id="estructura-del-proyecto">Estructura del proyecto<a class="headerlink" href="#estructura-del-proyecto" title="Permanent link">&para;</a></h2>
+<p>Su proyecto consta de cuatro fases, cada una se realizará dentro de su propia carpeta.</p>
+<div class="codehilite"><pre><span></span>PA1			Análisis léxico (lexer)
+PA2			Análisis sintáctico (parser)
+PA3			Análisis semántico (semant)
+PA4			Generación de código (codegen)
+</pre></div>
+
+<p>Estas cuatro carpetas se encontrarán dentro de la carpeta de su repositorio de proyecto. En clases se les dará instrucciones para crear los grupos y obtener esta carpeta.</p>
+<p>Si usted está trabajando en Docker, la carpeta de su proyecto con las subcarpetas PA1...PA4 quedarán dentro de <strong>workspace</strong>.</p>
                 
                   
                 

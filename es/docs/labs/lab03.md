@@ -55,7 +55,7 @@ Para el primer ejercicio de este laboratorio, ustedes van a implementar el lexer
 Para empezar clonen el siguiente repositorio de Github Classroom:
 
 ```bash
-https://classroom.github.com/a/EsfgDA-Z
+https://classroom.github.com/a/88CBQbEu
 ```
 
 Dentro del repositorio van a encontrar un archivo llamado **lexer.lex**, en ese archivo ustedes tienen que definir el lexer para la gramática. Dentro de ese archivo hay en forma de comentarios algunas instrucciones para guiarlos.

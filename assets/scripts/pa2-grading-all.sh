@@ -1,11 +1,11 @@
 if [ ! -d ../PA1 ] || [ ! -d ../PA2 ]; then
-	echo "Recuerde que la estructura de carpetas debe ser PA1, PA2, PA3, PA4";
-	exit 1;
+    echo "Recuerde que la estructura de carpetas debe ser PA1, PA2, PA3, PA4"
+    exit 1
 fi
 
-if [ -f pa2-grading.pl ]; then
-	wget http://raw.githubusercontent.com/CC-4/cc-4.github.io/master/proyectos/scripts/pa2-grading.pl
-fi 
+if [ ! -f pa2-grading.pl ]; then
+    wget http://raw.githubusercontent.com/CC-4/cc-4.github.io/master/proyectos/scripts/pa2-grading.pl
+fi
 
 chmod +x pa2-grading.pl
 
@@ -22,8 +22,10 @@ cd ../PA2
 
 mv lexer lexer.back
 
-echo '#!/bin/sh' >> lexer
-echo 'java -classpath /usr/class/cs143/cool/lib/java-cup-11a.jar:/usr/class/cs143/cool/lib/jlex.jar:'$(pwd)'/../PA1/:/usr/java/lib/rt.jar:`dirname $0` Lexer $*' >> lexer
+cat > lexer <<'EOF'
+#!/bin/sh
+java -classpath /usr/class/cc4/cool/lib/java-cup-11a.jar:/usr/class/cc4/cool/lib/jlex.jar:$(dirname "$0")/../PA1/:/usr/java/lib/rt.jar:`dirname $0` Lexer "$@"
+EOF
 
 chmod +x lexer
 
@@ -31,5 +33,5 @@ chmod +x lexer
 
 mv lexer.back lexer
 
-echo "Usando fases compiladas" $INIT_SCORE
-echo "Usando todas sus fases" $(cat grading/SCORE)
+echo "Usando fases compiladas" "$INIT_SCORE"
+echo "Usando todas sus fases" "$(cat grading/SCORE)"

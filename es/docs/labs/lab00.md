@@ -7,7 +7,7 @@ En este laboratorio practicaremos estructuras de datos en Java. Este laboratorio
 Acepte el siguiente repositorio para acceder a los archivos base.
 
 ```
-https://classroom.github.com/a/oN8krkiH
+https://classroom.github.com/a/3ck4n3fG
 ```
 
 ## 1. Categories

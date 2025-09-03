@@ -60,13 +60,17 @@ expr    ::= ID <- expr
         |   false
 ```
 
-Los archivos necesarios para este laboratorio ya los tiene en su máquina, son los mismos que usaremos para el proyecto 1. Para obtenerlos ejecute esta instrucción **adentro de la carpeta donde trabajará:**
+Los archivos necesarios para este laboratorio ya los tiene en su máquina, son los mismos que usaremos para el proyecto 1. Para obtenerlos ejecute esta instrucción **adentro de la carpeta donde trabajará**. Se recomienda crear una carpeta propia para este lab, aunque también podría usar la PA1 del proyecto.
 
 ```bash
 make -f /usr/class/cc4/assignments/PA1/Makefile
 ```
 
 De todos los archivos que se copiarán, únicamente deben de modificar **cool.lex**, y agregar las expresiones regulares necesarias para que se generen los tokens indicados. Puede leer pero no modificar el archivo **TokenConstants.java**, que contiene todos los tokens necesarios para el proyecto. Recuerde que para facilitar la implementación de este laboratorio, retiraremos los comentarios y los strings.
+
+## Entrega
+
+Al finalizar su laboratorio tome el archivo **cool.lex** y coloquelo dentro de un ZIP. Suba este ZIP al GES.
 
 ## Referencias
 
