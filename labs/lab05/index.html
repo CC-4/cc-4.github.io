@@ -379,13 +379,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#como-abrir-el-archivo-symtabexample" title="Cómo abrir el archivo SymtabExample" class="md-nav__link">
-    Cómo abrir el archivo SymtabExample
-  </a>
-  
-</li>
-      
       
       
       
@@ -592,13 +585,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#como-abrir-el-archivo-symtabexample" title="Cómo abrir el archivo SymtabExample" class="md-nav__link">
-    Cómo abrir el archivo SymtabExample
-  </a>
-  
-</li>
-      
       
       
       
@@ -620,15 +606,16 @@
                 
                 <h1 id="lab-5-40symbol-table41">Lab 5 (Symbol Table)<a class="headerlink" href="#lab-5-40symbol-table41" title="Permanent link">&para;</a></h1>
 <p><img alt="" src="/img/st.gif" /></p>
-<p>En este laboratorio aprenderán a implementar una tabla de símbolos como la que usarán en la fase 3 del proyecto.</p>
+<p>En este laboratorio practicarán el uso de una tabla de símbolos como la que usarán en la fase 3 del proyecto.</p>
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
-<p>Han terminado las primeras 2 fases de su proyecto y ahora es donde empieza la verdadera batalla contra el dragón. En la fase 3 se encargarán de hacer el análisis semántico del compilador, es decir, deberán asignar un tipo a cada nodo del árbol generado en la fase 2 y así terminar de capturar cualquier error o inconsistencia en el código o programa a compilar. Para realizar esta fase, ustedes deben implementar una tabla de símbolos en donde guardarán todas las variables declaradas para validar su existencia en base a su scope, y poder asignar un tipo a cada una.</p>
-<p>Para iniciar, ejecuten el comando para generar los archivos necesarios:</p>
-<div class="codehilite"><pre><span></span>make -f /usr/class/cc4/assignments/PA3/Makefile
+<p>En la fase 3 se encargarán de hacer el análisis semántico del compilador, es decir, deberán asignar un tipo a cada nodo del árbol generado en la fase 2 y así terminar de capturar cualquier error o inconsistencia en el código o programa a compilar. </p>
+<p>Para realizar esta fase, ustedes deben implementar una tabla de símbolos en donde guardarán todas las variables declaradas para validar su existencia en base a su scope, y poder asignar un tipo a cada una.</p>
+<p>La estructura de este laboratorio será similar a la que utilizarán en fase 3. Obtenga sus archivos base aquí:</p>
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/JMRPKgYs
 </pre></div>
 
 <h2 id="2-tabla-de-simbolos">2. Tabla de Símbolos<a class="headerlink" href="#2-tabla-de-simbolos" title="Permanent link">&para;</a></h2>
-<p>Estos son los archivos necesarios para implementar la fase 3 del proyecto, pero por ahora nos enfocaremos únicamente en <strong>SymtabExample.java</strong>. Noten que este archivo contiene un ejemplo de como funciona la tabla de símbolos:</p>
+<p>Nos enfocaremos únicamente en <strong>SymtabExample.java</strong>. Noten que este archivo contiene un ejemplo de como funciona la tabla de símbolos:</p>
 <div class="codehilite"><pre><span></span><span class="c1">// se crea la tabla de sibolos.</span>
 <span class="n">SymbolTable</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SymbolTable</span><span class="o">();</span>
 <span class="c1">// se crea un nuevo AbstractSymbol</span>
@@ -682,14 +669,7 @@
 <div class="codehilite"><pre><span></span>./symtab-example
 </pre></div>
 
-<p>Una vez terminado todo, copie su código a un archivo nuevo, guárdelo en un .zip y súbalo al GES.</p>
-<h2 id="como-abrir-el-archivo-symtabexample">Cómo abrir el archivo SymtabExample<a class="headerlink" href="#como-abrir-el-archivo-symtabexample" title="Permanent link">&para;</a></h2>
-<p>Instale estas dos extensiones en su Visual Studio Code:</p>
-<p><img alt="" src="/img/vs1.png" /></p>
-<p><img alt="" src="/img/vs2.png" /></p>
-<p>Esto agregará a su IDE una nueva pestaña llamada Containers. Cuando vaya a esta pestaña, encontrará su contenedor y desde aquí podrá acceder a <strong>todos</strong> los archivos de este (sea cuidadoso y no rompa nada). </p>
-<p>Busque la carpeta <code>usr/class/cc4/cool/src/PA3</code>, allí dentro encontrará el archivo <code>SymtabExample.java</code>, use el botón de Open para abrirlo (doble click seguro no le funcionará).</p>
-<p><img alt="" src="/img/vs3.png" /></p>
+<p>Una vez terminado todo, haga add + commit + push de su código a Github. En el GES suba el link de su repositorio.</p>
                 
                   
                 
