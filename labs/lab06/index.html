@@ -743,7 +743,7 @@
                 <h1 id="lab-6-40analisis-semantico-i41">Lab 6 (Análisis Semántico I)<a class="headerlink" href="#lab-6-40analisis-semantico-i41" title="Permanent link">&para;</a></h1>
 <p>Es hora de empezar a poner en práctica el análisis semántico. El motivo de este laboratorio es que puedan ganar experiencia en como se hace el análisis semántico de un lenguaje simple y que posteriormente en su proyecto plasmen estas ideas. En el laboratorio anterior se enteraron de como funcionaba la tabla de símbolos, en este la vamos a utilizar juntamente con otras herramientas para anotar el árbol (<em>AST</em>) de un lenguaje llamado <strong>Viper</strong> con los tipos correspondientes.</p>
 <p>Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/EmL-zwJ1
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/TUjy3lnN
 </pre></div>
 
 <div class="admonition warning">
@@ -881,17 +881,17 @@
 <p><code>operator</code> tiene que ser un <strong>String</strong> que represente la operación binaria, por ejemplo <code>"+"</code></p>
 </div>
 <p>Siempre tienen que asumir que el tipo de una expresión aritmética es un <strong>int</strong>, de lo contrario nos encontrariamos con errores en cascada poco informativos, consideren lo siguiente:</p>
-<div class="codehilite"><pre><span></span><span class="nb">true</span> + <span class="m">2</span> + <span class="m">2</span> + <span class="m">2</span>
+<div class="codehilite"><pre><span></span><span class="nb">true</span> * <span class="m">2</span> * <span class="m">2</span> * <span class="m">2</span>
 </pre></div>
 
 <p>Si no asumieramos lo de arriba pasaría lo siguiente:</p>
-<div class="codehilite"><pre><span></span>bad operand types for binary operator &#39;+&#39;
-bad operand types for binary operator &#39;+&#39;
-bad operand types for binary operator &#39;+&#39;
+<div class="codehilite"><pre><span></span>bad operand types for binary operator &#39;*&#39;
+bad operand types for binary operator &#39;*&#39;
+bad operand types for binary operator &#39;*&#39;
 </pre></div>
 
 <p>A pesar que solo el primer operando de esa serie de sumas es el incorrecto. Lo correcto sería desplegar lo siguiente:</p>
-<div class="codehilite"><pre><span></span>bad operand types <span class="k">for</span> binary operator <span class="s1">&#39;+&#39;</span>
+<div class="codehilite"><pre><span></span>bad operand types <span class="k">for</span> binary operator <span class="s1">&#39;*&#39;</span>
 </pre></div>
 
 <p>Esto es una forma de recuperación de errores que también van a tener que realizar en su proyecto.</p>
@@ -903,12 +903,12 @@ bad operand types for binary operator &#39;+&#39;
 <p>Cuando hagan el análisis semántico de <strong>Return</strong> recuerden que el tipo del return es el mismo que el de la expresión <code>e</code> del return.</p>
 <h3 id="autograder">Autograder<a class="headerlink" href="#autograder" title="Permanent link">&para;</a></h3>
 <p>Para compilar un programa usando el semantic que acaba de implementar, use el comando:
-<div class="codehilite"><pre><span></span>sudo ./gradlew build
+<div class="codehilite"><pre><span></span>./gradlew build
 ./run -viper examples/viper/nombreDelArchivo.vp
 </pre></div></p>
 <p>Para correr todas las pruebas, use el comando:</p>
-<div class="codehilite"><pre><span></span>sudo ./gradlew build
-./check viper
+<div class="codehilite"><pre><span></span>./gradlew build
+./check
 </pre></div>
 
 <p>Si todo lo tienen bien, les debería de salir lo siguiente:</p>
