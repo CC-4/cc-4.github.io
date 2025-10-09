@@ -5,7 +5,7 @@ En este laboratorio van a continuar con el análisis semántico del lenguaje Vip
 Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:
 
 ```bash
-https://classroom.github.com/a/qNKtGDri
+https://classroom.github.com/a/xeEvohoI
 ```
 
 !!!warning "Lean bien"
@@ -204,7 +204,7 @@ Luego mandar a llamar recursivamente a **body**, nuevamente abriendo un **scope*
 Para probar su implementación pueden utitlizar lo siguiente:
 
 ```bash
-sudo ./gradlew build
+./gradlew build
 ./check
 ```
 
@@ -257,11 +257,11 @@ Si todo lo tienen bien, les debería de salir lo siguiente:
 Si ustedes desean probar en un archivo en específico pueden hacer lo siguiente:
 
 ```bash
-sudo ./gradlew build
+./gradlew build
 ./run <archivo>
 ```
 
 En la carpeta **examples/** hay algunos ejemplos para que puedan probar. 
 
-**¡LISTO!** Han terminado el análisis semántico de **Viper**, es hora de lograr terminar el análisis semántico de **COOL**, esperamos que esta serie de laboratorios les hayan ayudado bastante.
+**¡LISTO!** Han terminado el análisis semántico de **Viper**, es hora de lograr terminar el análisis semántico de **COOL**, esperamos que este par de laboratorios les hayan ayudado bastante.
 

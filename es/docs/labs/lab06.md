@@ -5,7 +5,7 @@ Es hora de empezar a poner en práctica el análisis semántico. El motivo de es
 Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:
 
 ```bash
-https://classroom.github.com/a/EmL-zwJ1
+https://classroom.github.com/a/TUjy3lnN
 ```
 
 !!!warning "Lean bien"
@@ -185,21 +185,21 @@ SemantErrors.badOperandTypesForBinaryOp(line, col, operator)
 Siempre tienen que asumir que el tipo de una expresión aritmética es un **int**, de lo contrario nos encontrariamos con errores en cascada poco informativos, consideren lo siguiente:
 
 ```bash
-true + 2 + 2 + 2
+true * 2 * 2 * 2
 ```
 
 Si no asumieramos lo de arriba pasaría lo siguiente:
 
 ```text
-bad operand types for binary operator '+'
-bad operand types for binary operator '+'
-bad operand types for binary operator '+'
+bad operand types for binary operator '*'
+bad operand types for binary operator '*'
+bad operand types for binary operator '*'
 ```
 
 A pesar que solo el primer operando de esa serie de sumas es el incorrecto. Lo correcto sería desplegar lo siguiente:
 
 ```bash
-bad operand types for binary operator '+'
+bad operand types for binary operator '*'
 ```
 
 Esto es una forma de recuperación de errores que también van a tener que realizar en su proyecto.
@@ -215,15 +215,15 @@ Cuando hagan el análisis semántico de **Return** recuerden que el tipo del ret
 
 Para compilar un programa usando el semantic que acaba de implementar, use el comando:
 ```bash
-sudo ./gradlew build
+./gradlew build
 ./run -viper examples/viper/nombreDelArchivo.vp
 ```
 
 Para correr todas las pruebas, use el comando:
 
 ```bash
-sudo ./gradlew build
-./check viper
+./gradlew build
+./check
 ```
 
 Si todo lo tienen bien, les debería de salir lo siguiente:
