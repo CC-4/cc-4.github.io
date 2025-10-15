@@ -409,15 +409,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#detalles-de-risc-v" title="Detalles de RISC-V" class="md-nav__link">
-    Detalles de RISC-V
+  <a href="#recordando-risc-v" title="Recordando RISC-V" class="md-nav__link">
+    Recordando RISC-V
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#recordatorio-de-assembler" title="Recordatorio de Assembler" class="md-nav__link">
-    Recordatorio de Assembler
+  <a href="#instrucciones-importantes" title="Instrucciones importantes" class="md-nav__link">
+    Instrucciones importantes
   </a>
   
 </li>
@@ -600,15 +600,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#detalles-de-risc-v" title="Detalles de RISC-V" class="md-nav__link">
-    Detalles de RISC-V
+  <a href="#recordando-risc-v" title="Recordando RISC-V" class="md-nav__link">
+    Recordando RISC-V
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#recordatorio-de-assembler" title="Recordatorio de Assembler" class="md-nav__link">
-    Recordatorio de Assembler
+  <a href="#instrucciones-importantes" title="Instrucciones importantes" class="md-nav__link">
+    Instrucciones importantes
   </a>
   
 </li>
@@ -649,59 +649,23 @@
                 <h1 id="lab-8-40risc-v41">Lab 8 (RISC-V)<a class="headerlink" href="#lab-8-40risc-v41" title="Permanent link">&para;</a></h1>
 <p>En este laboratorio van a programar en lenguaje ensamblador para practicar y reforzar los conocimientos que adquirieron durante CC3.</p>
 <p>Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/XEqsO7p_
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/Ye5uh7oc
 </pre></div>
 
 <h2 id="jupiter">Jupiter<a class="headerlink" href="#jupiter" title="Permanent link">&para;</a></h2>
-<p>Si está utilizando un Linux distinto al nuestro, instale Jupiter:</p>
-<div class="codehilite"><pre><span></span>sudo add-apt-repository ppa:andrescv/jupiter
-sudo apt-get update
-sudo apt-get install jupiter
+<p>Jupiter ya viene instalado en el contenedor que estamos usando. Para ejecutar un archivo utilice:</p>
+<div class="codehilite"><pre><span></span>jupiter archivo.s
 </pre></div>
 
-<p>Pueden correr Jupiter de forma gráfica utilizando lo siguiente:</p>
-<div class="codehilite"><pre><span></span>jupiter
-</pre></div>
-
-<p>o en modo línea de comandos utilizando lo siguiente:</p>
-<div class="codehilite"><pre><span></span>jupiter <span class="o">[</span>options<span class="o">]</span> &lt;files&gt;
-</pre></div>
-
-<p>las opciones disponibles son las siguientes:</p>
-<div class="codehilite"><pre><span></span><span class="o">[</span>General Options<span class="o">]</span>
-  -h, --help               show Jupiter <span class="nb">help</span> message and <span class="nb">exit</span>
-  -v, --version            show Jupiter version
-  -l, --license            show Jupiter license
-
-<span class="o">[</span>Simulator Options<span class="o">]</span>
-  -b, --bare               bare machine <span class="o">(</span>no pseudo-instructions<span class="o">)</span>
-  -s, --self               <span class="nb">enable</span> self-modifying code
-  -e, --extrict            assembler warnings are consider errors
-  -g, --debug              start debugger
-      --start &lt;label&gt;      <span class="nb">set</span> global start label <span class="o">(</span>default: __start<span class="o">)</span>
-      --hist &lt;size&gt;        <span class="nb">history</span> size <span class="k">for</span> debugging
-
-<span class="o">[</span>Cache Options<span class="o">]</span>
-  -c, --cache              <span class="nb">enable</span> cache simulation
-      --assoc &lt;assoc&gt;      cache associativity as a power of <span class="m">2</span> <span class="o">(</span>default: <span class="m">1</span><span class="o">)</span>
-      --block-size &lt;size&gt;  cache block size as a power of <span class="m">2</span> <span class="o">(</span>default: <span class="m">16</span><span class="o">)</span>
-      --num-blocks &lt;num&gt;   number of cache blocks as a power of <span class="m">2</span> <span class="o">(</span>default: <span class="m">4</span><span class="o">)</span>
-      --policy &lt;policy&gt;    cache block replace policy <span class="o">(</span>LRU<span class="p">|</span>FIFO<span class="p">|</span>RAND<span class="o">)</span> <span class="o">(</span>default: LRU<span class="o">)</span>
-
-<span class="o">[</span>Dump Options<span class="o">]</span>
-      --dump-code &lt;file&gt;   dump generated machine code to a file
-      --dump-data &lt;file&gt;   dump static data to a file
-</pre></div>
-
-<p>La documentación de Jupiter la pueden encontrar en el siguiente <a href="https://jupitersim.gitbook.io/jupiter/">link</a>.</p>
-<h2 id="detalles-de-risc-v">Detalles de RISC-V<a class="headerlink" href="#detalles-de-risc-v" title="Permanent link">&para;</a></h2>
+<p>Nota: cuando queremos ejecutar algún programa de COOL que usamos <code>jupitercl archivo.s</code>, para el laboratorio usamos <code>jupiter archivo.s</code> sin el <code>cl</code>, pronto veremos en clase por qué</p>
+<h2 id="recordando-risc-v">Recordando RISC-V<a class="headerlink" href="#recordando-risc-v" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Los programas de RISC-V van en un archivo de texto con extension <strong>.s</strong>.</li>
+<li>Los programas de RISC-V van en un archivo con extension <strong>.s</strong>.</li>
 <li>Los programas deberían de llevar un label global <strong>__start</strong> que se utilizará como punto de inicio.</li>
 <li>Los programas deberían de terminar de la siguiente manera:</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="n">li</span> <span class="n">a0</span><span class="p">,</span> <span class="mi">10</span> <span class="c1"># codigo 10: exit</span>
-<span class="n">ecall</span>     <span class="c1"># llamada al entorno</span>
+<div class="codehilite"><pre><span></span><span class="n">li</span> <span class="n">a0</span><span class="p">,</span> <span class="mi">10</span>
+<span class="n">ecall</span>
 </pre></div>
 
 <ul>
@@ -709,7 +673,7 @@ sudo apt-get install jupiter
 <li>Los comentarios comienzan con un numeral o con punto y coma.</li>
 <li>No pueden poner más de una instrucción por línea.</li>
 </ul>
-<h2 id="recordatorio-de-assembler">Recordatorio de Assembler<a class="headerlink" href="#recordatorio-de-assembler" title="Permanent link">&para;</a></h2>
+<h2 id="instrucciones-importantes">Instrucciones importantes<a class="headerlink" href="#instrucciones-importantes" title="Permanent link">&para;</a></h2>
 <p>Uno de los requisitos de CC4 es dominar los temas de CC3, incluyendo programar en lenguaje ensamblador. RISC-V es una arquitectura RISC por lo cual es muy fácil de utilizar. Algunas instrucciones que deberían conocer hasta el momento son:</p>
 <div class="codehilite"><pre><span></span><span class="c1"># carga el contenido de memoria en la direccion (pc + 8) y lo guarda en t1</span>
 <span class="n">lw</span> <span class="n">t1</span><span class="p">,</span> <span class="mi">8</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
@@ -739,15 +703,16 @@ sudo apt-get install jupiter
 </pre></div>
 
 <p>Cuando realizamos llamadas a funciones en assembler debemos ser cuidadosos de no perder las direcciones de retorno. Este y otros datos deben ser guardados en el stack al inicio de la llamada y restaurados cuando esta termina.</p>
-<p>El convenio de RISC-V es el siguiente:</p>
+<p>El convenio de RISC-V que conocimos en CC3 el siguiente:</p>
 <ul>
 <li>Los registros aX se utilizan como argumentos cuando se manda a llamar a una función.</li>
-<li>Los registros aX se utilizan como valores de retorno de las funciones.</li>
+<li>El registro a0 se utiliza para devolver resultados.</li>
 <li>Los registros tX se utilizan como temporales, cuyo valor puede perderse entre llamadas.</li>
 <li>Los registros sX sobreviven a llamadas.</li>
 <li>El registro sp es el puntero hacia el stack.</li>
 <li>El registro ra contiene la dirección de retorno (pc + 4).</li>
 </ul>
+<p>Este convenio cambiará en CC4 pues usaremos un accumulator machine, pero aún nos sirve para este laboratorio.</p>
 <p>Veamos un ejemplo sencillo de un ciclo en RISC-V:</p>
 <div class="codehilite"><pre><span></span><span class="o">.</span><span class="n">text</span>
 <span class="o">.</span><span class="n">globl</span> <span class="n">__start</span>           <span class="c1"># indicamos que __start es global y punto de partida</span>
@@ -770,7 +735,7 @@ sudo apt-get install jupiter
 </pre></div>
 
 <p>Veamos ahora un programa con llamadas recursivas:</p>
-<div class="codehilite"><pre><span></span><span class="o">.</span><span class="n">rodata</span>
+<div class="codehilite"><pre><span></span><span class="o">.</span><span class="n">data</span>
     <span class="n">msg</span><span class="p">:</span> <span class="o">.</span><span class="n">string</span> <span class="s2">&quot;El resultado es: &quot;</span>
 
 <span class="o">.</span><span class="n">text</span>
@@ -819,6 +784,7 @@ sudo apt-get install jupiter
     <span class="n">jr</span> <span class="n">ra</span>                  <span class="c1"># saltamos a la direccion de retorno</span>
 </pre></div>
 
+<p>Para el laboratorio realizaremos dos ejercicios, ambos utilizan recursión. La recursión es importante en ensamblador pues nos transmite la idea de <strong>al finalizar una tarea, el stack debe quedar tal como llegó originalmente.</strong></p>
 <h2 id="ejercicio-1-fibonaccis">Ejercicio 1: fibonacci.s<a class="headerlink" href="#ejercicio-1-fibonaccis" title="Permanent link">&para;</a></h2>
 <p>En un archivo llamado <strong>fibonacci.s</strong> implementen la función de fibonacci en lenguaje ensamblador RISC-V.</p>
 <h2 id="ejercicio-2-hanois">Ejercicio 2: hanoi.s<a class="headerlink" href="#ejercicio-2-hanois" title="Permanent link">&para;</a></h2>
