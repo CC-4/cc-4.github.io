@@ -5,7 +5,7 @@ Para este laboratorio van a completar la generación de código para el lenguaje
 Los archivos necesarios para este laboratorio los pueden encontrar en el siguiente enlace:
 
 ```bash
-https://classroom.github.com/a/hI0ofQwY
+https://classroom.github.com/a/TYQvGTZA
 ```
 
 !!!warning "Lean bien"
@@ -71,15 +71,21 @@ lw a0, 8(fp)
 Se les provee como en el laboratorio pasado un compilador completo de Viper:
 
 ```bash
-./vipercl <archivo .vp>
+./vipercl archivo.vp
 ```
 
 pueden probar esto para tener una referencia de como es que se tiene que generar código para los diferentes nodos de este laboratorio \(pueden hacer lo mismo en el proyecto con `coolc-rv`\).
 
+Para compilar un archivo, utilizando su propio generador de código pueden hacer lo siguiente.
+
+```bash
+./compile archivo.vp
+```
+
 Para correr un archivo compilado, pueden utilizar:
 
 ```bash
-./run <archivo .s>
+./run archivo.s
 ```
 
 Adicionalmente pueden utilizar los métodos y variables estáticas de la clase  **CgenSupport** para ayudarse a generar código.
@@ -187,23 +193,25 @@ def main(): int {
 }
 ```
 
-## Pruebas
+## Pruebas y autograder
 
-Para probar lo que genera su implementación pueden utilizar lo siguiente:
-
+Compile su código usando:
 ```bash
-sudo ./gradlew build # para compilar su laboratorio
-sudo ./gradlew clean assemble # no deberia necesitarlo, pero si hay algun problema que no se quita
-./compile <archivo.vp>  # compilar usando su laboratorio
-./vipercl <archivo.vp>  # usar el compilador de prueba
+./gradlew build
 ```
 
-En la carpeta **examples/** hay un par de ejemplos.
+Puede compilar un programa en Viper usando:
+```bash
+./compile archivo.vp        # compilar usando su laboratorio
+./vipercl archivo.vp        # compilar usando el compi de prueba
+```
 
-## Autograder
+Después de compilar un programa de Viper, lo puede ejecutar con:
+```bash
+./run archivo.s
+```
 
-Después de hacer build, puede obtener su nota con este comando:
-
+Si ya está listo, puede usar el autograder:
 ```bash
 ./check
 ```

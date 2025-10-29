@@ -476,8 +476,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#autograder" title="Autograder" class="md-nav__link">
-    Autograder
+  <a href="#pruebas-y-autograder" title="Pruebas y autograder" class="md-nav__link">
+    Pruebas y autograder
   </a>
   
 </li>
@@ -689,8 +689,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#autograder" title="Autograder" class="md-nav__link">
-    Autograder
+  <a href="#pruebas-y-autograder" title="Pruebas y autograder" class="md-nav__link">
+    Pruebas y autograder
   </a>
   
 </li>
@@ -717,7 +717,7 @@
                 <h1 id="lab-9-40codegen-i41">Lab 9 (CodeGen I)<a class="headerlink" href="#lab-9-40codegen-i41" title="Permanent link">&para;</a></h1>
 <p>En este laboratorio van a generar código en lenguaje ensamblador RISC-V para algunos nodos del lenguaje <strong>Viper</strong> que utilizarón en el laboratorio 6 y 7. Debido a que este lenguaje no es orientado a objetos es más fácil generar código. </p>
 <p>Los archivos necesarios para este laboratorio los pueden encontrar en el siguiente enlace:</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/dVwKmUVB
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/KQ2w0Tqx
 </pre></div>
 
 <p>Los archivos base tienen la misma estructura que vieron anteriormente en los laboratorios 6 y 7. Para este laboratorio el análisis semántico ya está hecho, así que no se tienen que preocupar de esta tarea, solamente se tienen que enfocar en generar código implementando un <strong>Accumulator Machine</strong>.</p>
@@ -740,15 +740,15 @@
 <h2 id="soporte">Soporte<a class="headerlink" href="#soporte" title="Permanent link">&para;</a></h2>
 <p>Tanto en el proyecto, como en este laboratorio, van a encontrar una clase de ayuda llamada <strong>CgenSupport.java</strong> que contiene algunas definiciones que sirven para generar código, revisen esta clase para hacerse una idea de lo que pueden hacer con ella. </p>
 <p>Aplicar ingeniería inversa es factible, siempre y cuando tengamos claro que está sucediendo. Utilizando el siguiente comando podemos compilar un archivo y ver lo que el generador de código ya hecho genera, para que podamos imitar ese comportamiento.</p>
-<div class="codehilite"><pre><span></span>./vipercl &lt;archivo&gt;
+<div class="codehilite"><pre><span></span>./vipercl archivo.vp
 </pre></div>
 
 <p>Para compilar un archivo, utilizando su propio generador de código pueden hacer lo siguiente.</p>
-<div class="codehilite"><pre><span></span>./compile &lt;archivo&gt;
+<div class="codehilite"><pre><span></span>./compile archivo.vp
 </pre></div>
 
 <p>Pueden correr un programa compilado utilizando lo siguiente.</p>
-<div class="codehilite"><pre><span></span>./run &lt;archivo&gt;
+<div class="codehilite"><pre><span></span>./run archivo.s
 </pre></div>
 
 <h2 id="generando-codigo">Generando Código<a class="headerlink" href="#generando-codigo" title="Permanent link">&para;</a></h2>
@@ -905,16 +905,26 @@ add a0, t1, a0
 </pre></div>
 
 <p>Vean los métodos dentro de <strong>CgenSupport.java</strong> que les ayuden a implementar estos nodos, para el nodo <strong>Div</strong> hay algo adicional para manejar la división por cero, miren lo que el compilador de referencia genera.</p>
-<p>!!! info "Label adicional
-    Van a tener que utilizar <code>CgenSupport.nextLabel()</code>en <strong>Div</strong></p>
+<div class="admonition info">
+<p class="admonition-title">Label adicional</p>
+<p>Tendrán que utilizar <code>CgenSupport.nextLabel()</code>en <strong>Div</strong></p>
+</div>
 <h3 id="return">Return<a class="headerlink" href="#return" title="Permanent link">&para;</a></h3>
-<p>Facilito, simplemente llamar a <code>code</code> de la expresión del return.</p>
-<h2 id="autograder">Autograder<a class="headerlink" href="#autograder" title="Permanent link">&para;</a></h2>
-<p>Para probar su implementación pueden correr lo siguiente:</p>
-<div class="codehilite"><pre><span></span>sudo ./gradlew build
-./check
-</pre></div>
-
+<p>Para terminar, simplemente llamar a <code>code</code> de la expresión del return.</p>
+<h2 id="pruebas-y-autograder">Pruebas y autograder<a class="headerlink" href="#pruebas-y-autograder" title="Permanent link">&para;</a></h2>
+<p>Compile su código usando:
+<div class="codehilite"><pre><span></span>./gradlew build
+</pre></div></p>
+<p>Puede compilar un programa en Viper usando:
+<div class="codehilite"><pre><span></span>./compile archivo.vp        <span class="c1"># compilar usando su laboratorio</span>
+./vipercl archivo.vp        <span class="c1"># compilar usando el compi de prueba</span>
+</pre></div></p>
+<p>Después de compilar un programa de Viper, lo puede ejecutar con:
+<div class="codehilite"><pre><span></span>./run archivo.s
+</pre></div></p>
+<p>Si ya está listo, puede usar el autograder:
+<div class="codehilite"><pre><span></span>./check
+</pre></div></p>
 <p>Si todo está bien les tendría que salir lo siguiente:</p>
 <div class="codehilite"><pre><span></span>      Autograder
 

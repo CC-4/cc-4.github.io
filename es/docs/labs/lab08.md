@@ -6,77 +6,35 @@ En este laboratorio van a programar en lenguaje ensamblador para practicar y ref
 Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:
 
 ```bash
-https://classroom.github.com/a/XEqsO7p_
+https://classroom.github.com/a/Ye5uh7oc
 ```
 
 ## Jupiter
 
-Si está utilizando un Linux distinto al nuestro, instale Jupiter:
+Jupiter ya viene instalado en el contenedor que estamos usando. Para ejecutar un archivo utilice:
 
 ```bash
-sudo add-apt-repository ppa:andrescv/jupiter
-sudo apt-get update
-sudo apt-get install jupiter
+jupiter archivo.s
 ```
 
-Pueden correr Jupiter de forma gráfica utilizando lo siguiente:
+Nota: cuando queremos ejecutar algún programa de COOL que usamos `jupitercl archivo.s`, para el laboratorio usamos `jupiter archivo.s` sin el `cl`, pronto veremos en clase por qué
 
-```bash
-jupiter
-```
+## Recordando RISC-V
 
-o en modo línea de comandos utilizando lo siguiente:
-
-```bash
-jupiter [options] <files>
-```
-
-las opciones disponibles son las siguientes:
-
-```bash
-[General Options]
-  -h, --help               show Jupiter help message and exit
-  -v, --version            show Jupiter version
-  -l, --license            show Jupiter license
-
-[Simulator Options]
-  -b, --bare               bare machine (no pseudo-instructions)
-  -s, --self               enable self-modifying code
-  -e, --extrict            assembler warnings are consider errors
-  -g, --debug              start debugger
-      --start <label>      set global start label (default: __start)
-      --hist <size>        history size for debugging
-
-[Cache Options]
-  -c, --cache              enable cache simulation
-      --assoc <assoc>      cache associativity as a power of 2 (default: 1)
-      --block-size <size>  cache block size as a power of 2 (default: 16)
-      --num-blocks <num>   number of cache blocks as a power of 2 (default: 4)
-      --policy <policy>    cache block replace policy (LRU|FIFO|RAND) (default: LRU)
-
-[Dump Options]
-      --dump-code <file>   dump generated machine code to a file
-      --dump-data <file>   dump static data to a file
-```
-
-La documentación de Jupiter la pueden encontrar en el siguiente [link](https://jupitersim.gitbook.io/jupiter/).
-
-## Detalles de RISC-V
-
-* Los programas de RISC-V van en un archivo de texto con extension **.s**.
+* Los programas de RISC-V van en un archivo con extension **.s**.
 * Los programas deberían de llevar un label global **\_\_start** que se utilizará como punto de inicio.
 * Los programas deberían de terminar de la siguiente manera:
 
 ```python
-li a0, 10 # codigo 10: exit
-ecall     # llamada al entorno
+li a0, 10
+ecall
 ```
 
 * Las etiquetas o labels terminal con dos puntos.
 * Los comentarios comienzan con un numeral o con punto y coma.
 * No pueden poner más de una instrucción por línea.
 
-## Recordatorio de Assembler
+## Instrucciones importantes
 
 Uno de los requisitos de CC4 es dominar los temas de CC3, incluyendo programar en lenguaje ensamblador. RISC-V es una arquitectura RISC por lo cual es muy fácil de utilizar. Algunas instrucciones que deberían conocer hasta el momento son:
 
@@ -110,14 +68,16 @@ beq t1, t2, foo
 
 Cuando realizamos llamadas a funciones en assembler debemos ser cuidadosos de no perder las direcciones de retorno. Este y otros datos deben ser guardados en el stack al inicio de la llamada y restaurados cuando esta termina.
 
-El convenio de RISC-V es el siguiente:
+El convenio de RISC-V que conocimos en CC3 el siguiente:
 
 * Los registros aX se utilizan como argumentos cuando se manda a llamar a una función.
-* Los registros aX se utilizan como valores de retorno de las funciones.
+* El registro a0 se utiliza para devolver resultados.
 * Los registros tX se utilizan como temporales, cuyo valor puede perderse entre llamadas.
 * Los registros sX sobreviven a llamadas.
 * El registro sp es el puntero hacia el stack.
 * El registro ra contiene la dirección de retorno \(pc + 4\).
+
+Este convenio cambiará en CC4 pues usaremos un accumulator machine, pero aún nos sirve para este laboratorio.
 
 Veamos un ejemplo sencillo de un ciclo en RISC-V:
 
@@ -145,7 +105,7 @@ endLoop:
 Veamos ahora un programa con llamadas recursivas:
 
 ```python
-.rodata
+.data
     msg: .string "El resultado es: "
 
 .text
@@ -193,6 +153,8 @@ notZero:
     
     jr ra                  # saltamos a la direccion de retorno
 ```
+
+Para el laboratorio realizaremos dos ejercicios, ambos utilizan recursión. La recursión es importante en ensamblador pues nos transmite la idea de **al finalizar una tarea, el stack debe quedar tal como llegó originalmente.**
 
 ## Ejercicio 1: fibonacci.s
 

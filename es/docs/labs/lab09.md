@@ -5,7 +5,7 @@ En este laboratorio van a generar código en lenguaje ensamblador RISC-V para al
 Los archivos necesarios para este laboratorio los pueden encontrar en el siguiente enlace:
 
 ```bash
-https://classroom.github.com/a/dVwKmUVB
+https://classroom.github.com/a/KQ2w0Tqx
 ```
 
 Los archivos base tienen la misma estructura que vieron anteriormente en los laboratorios 6 y 7. Para este laboratorio el análisis semántico ya está hecho, así que no se tienen que preocupar de esta tarea, solamente se tienen que enfocar en generar código implementando un **Accumulator Machine**.
@@ -39,19 +39,19 @@ Tanto en el proyecto, como en este laboratorio, van a encontrar una clase de ayu
 Aplicar ingeniería inversa es factible, siempre y cuando tengamos claro que está sucediendo. Utilizando el siguiente comando podemos compilar un archivo y ver lo que el generador de código ya hecho genera, para que podamos imitar ese comportamiento.
 
 ```bash
-./vipercl <archivo>
+./vipercl archivo.vp
 ```
 
 Para compilar un archivo, utilizando su propio generador de código pueden hacer lo siguiente.
 
 ```bash
-./compile <archivo>
+./compile archivo.vp
 ```
 
 Pueden correr un programa compilado utilizando lo siguiente.
 
 ```bash
-./run <archivo>
+./run archivo.s
 ```
 
 ## Generando Código
@@ -251,19 +251,33 @@ add a0, t1, a0
 
 Vean los métodos dentro de **CgenSupport.java** que les ayuden a implementar estos nodos, para el nodo **Div** hay algo adicional para manejar la división por cero, miren lo que el compilador de referencia genera.
 
-!!! info "Label adicional
-	Van a tener que utilizar `CgenSupport.nextLabel()`en **Div**
+!!! info "Label adicional"
+	Tendrán que utilizar `CgenSupport.nextLabel()`en **Div**
 
 ### Return
 
-Facilito, simplemente llamar a `code` de la expresión del return.
+Para terminar, simplemente llamar a `code` de la expresión del return.
 
-## Autograder
+## Pruebas y autograder
 
-Para probar su implementación pueden correr lo siguiente:
-
+Compile su código usando:
 ```bash
-sudo ./gradlew build
+./gradlew build
+```
+
+Puede compilar un programa en Viper usando:
+```bash
+./compile archivo.vp        # compilar usando su laboratorio
+./vipercl archivo.vp        # compilar usando el compi de prueba
+```
+
+Después de compilar un programa de Viper, lo puede ejecutar con:
+```bash
+./run archivo.s
+```
+
+Si ya está listo, puede usar el autograder:
+```bash
 ./check
 ```
 
