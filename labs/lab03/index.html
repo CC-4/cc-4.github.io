@@ -729,9 +729,13 @@
                 <h1 id="lab-3-40rdp41">Lab 3 (RDP)<a class="headerlink" href="#lab-3-40rdp41" title="Permanent link">&para;</a></h1>
 <p><img alt="" src="/img/rdp.gif" /></p>
 <p>En este laboratorio aprenderán a implementar un Recursive Descent Parser para una gramática simple.</p>
+<p>Los repositorios ya fueron creados, obtenga sus archivos con:</p>
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc-4/lab03-2026-mi-usuario
+</pre></div>
+
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
-<p>En las últimas clases ustedes vieron el tema de <strong>Recursive Descent Parsing (RDP para simplificar)</strong>, aprendieron que es un tipo de parser predictivo y que entra en la categoría de top-down parsing. También vieron de forma general un algoritmo para implementarlo y en este laboratorio lo pondremos en práctica.</p>
-<p>Como el nombre sugiere, un <strong>Recursive Descent Parser</strong> usa funciones recursivas para implementar un parser predictivo. La idea central es que cada <strong>no terminal</strong> en la gramática es representado por una de esas funciones recursivas. Cada función entonces mira el siguiente <strong>token</strong> (1 token de lookahead) para poder escoger así, una de las producciones de algún <strong>no-terminal</strong>. De esta manera es como vamos analizando la entrada y construyendo nuestro árbol (si es que la entrada tiene una sintáxis correcta, de lo contrario desplegaríamos algún error).</p>
+<p>En las últimas clases ustedes vieron el tema de <strong>Recursive Descent Parsing (RDP para simplificar)</strong>, aprendieron que es un parser top-down bastante ineficiente pero a cambio muy fácil de implementar. También vieron de forma general un algoritmo para implementarlo y en este laboratorio lo pondremos en práctica.</p>
+<p>Como el nombre sugiere, un <strong>Recursive Descent Parser</strong> usa funciones recursivas para implementar un parser predictivo. La idea central es que cada no terminal es representado por una función (no numerada) que a su vez llama otras funciones (numeradas) que representan a cada posible producción</p>
 <p><strong>Recuerden que</strong>:</p>
 <ol>
 <li>Un analizador léxico (lexer) convierte texto (raw-text) en un stream de tokens.</li>
@@ -742,7 +746,10 @@
 <p>En este laboratorio realizaremos <strong>una calculadora con un par de operaciones</strong> e iremos un paso más adelante al implementar un <strong>intérprete</strong>, es decir no crearemos un árbol sintáctico sino que evaluaremos en el momento las expresiones.</p>
 <h2 id="2-gramatica">2. Gramática<a class="headerlink" href="#2-gramatica" title="Permanent link">&para;</a></h2>
 <p>La gramática con la que trabajaremos es la siguiente:</p>
-<div class="codehilite"><pre><span></span>S ::<span class="o">=</span> E<span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="c1"># note que S -&gt; E ; tiene un semicolon al final</span>
+<span class="c1"># es la unica que lo tiene</span>
+
+S ::<span class="o">=</span> E <span class="p">;</span>
 E ::<span class="o">=</span> E + E
   <span class="p">|</span>   E - E
   <span class="p">|</span>   E * E
@@ -756,14 +763,13 @@ E ::<span class="o">=</span> E + E
 <span class="c1"># number en nuestro caso significara un double</span>
 </pre></div>
 
-<p>Esta gramática tiene un gran <strong>problema</strong> para nuestro RDP. Si se recuerdan por lo visto en clase, sufre de un problema llamado <strong>left-recursion</strong>. Una de las desventajas de este tipo de parsers es que las gramáticas con las que puede trabajar son aquellas que no son recursivas hacia la izquierda y claramente esta lo es, <code>E ::= E + E</code> por ejemplo. Así que lo que necesitamos hacer primero es transformar nuestra gramática para que no tenga este problema, teniendo en cuenta siempre que el lenguaje que describe nuestra nueva gramatica <strong>G1</strong> es el mismo que describe nuestra gramática <strong>G</strong> original, es decir:</p>
-<p>$$L(G1) = L(G)$$</p>
+<p>Esta gramática tiene un gran problema para nuestro RDP. Si se recuerdan por lo visto en clase, sufre de un problema llamado <strong>left-recursion</strong>. Una de las desventajas de este tipo de parsers es que las gramáticas con las que puede trabajar son aquellas que no son recursivas hacia la izquierda y claramente esta lo es. Lo que necesitamos hacer primero es limpiar nuestra gramática, asegurándonos que la nueva gramática sea equivalente a la original.</p>
+<div class="admonition note">
+<p class="admonition-title">Tarea 1</p>
+<p>Limpie su gramática. Asegúrese que la nueva gramática no tenga ambigüedad, tome en cuenta la precedencia de operaciones, no tenga recursión por la izquierda, sea equivalente a la gramática original. Escriba su gramática resultante en <strong>grammar.txt</strong></p>
+</div>
 <h2 id="3-lexer">3. Lexer<a class="headerlink" href="#3-lexer" title="Permanent link">&para;</a></h2>
-<p>Para el primer ejercicio de este laboratorio, ustedes van a implementar el lexer para la gramática de nuestra calculadora utilizando <strong>JLex</strong>. El motivo principal de esto es para que sigan ganando práctica con esta herramienta, que surgan dudas y que los ayude a empezar/avanzar con el proyecto.</p>
-<p>Para empezar clonen el siguiente repositorio de Github Classroom:</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/88CBQbEu
-</pre></div>
-
+<p>Luego de limpiar la gramática, ustedes van a implementar el lexer para la gramática de nuestra calculadora utilizando <strong>JLex</strong>. El motivo principal de esto es para que sigan ganando práctica con esta herramienta, que surgan dudas y que los ayude a empezar/avanzar con el proyecto.</p>
 <p>Dentro del repositorio van a encontrar un archivo llamado <strong>lexer.lex</strong>, en ese archivo ustedes tienen que definir el lexer para la gramática. Dentro de ese archivo hay en forma de comentarios algunas instrucciones para guiarlos.</p>
 <h3 id="31-clase-token">3.1 Clase Token<a class="headerlink" href="#31-clase-token" title="Permanent link">&para;</a></h3>
 <p>En el directorio de trabajo hay una clase llamada <strong>Token</strong> que nos va a servir para representar los tokens de la gramática y es el tipo de objeto que tenemos que devolver dentro de las acciones del lexer. Esta clase tiene 2 constructores:</p>
@@ -788,13 +794,17 @@ NUMBER : <span class="m">2</span>
 </pre></div>
 
 <p><strong>Aviso:</strong> En ocasiones el símbolo * puede dar problema al probar esta parte del lab. No se preocupe mucho por esto y siga trabajando las demás partes.</p>
+<div class="admonition note">
+<p class="admonition-title">Tarea 2</p>
+<p>Escriba sus expresiones regulares en <strong>lexer.lex</strong>, construya y pruebe su lexer.</p>
+</div>
 <h2 id="4-parser">4. Parser<a class="headerlink" href="#4-parser" title="Permanent link">&para;</a></h2>
 <p>Para el segundo ejercicio de este laboratorio ustedes implementarán un <strong>RDP</strong>. Esta gramática es bastante simple y prácticamente se trata solo de expresiones aritméticas. Parsear expresiones de este tipo con recursive descent tiene 2 problemas:</p>
 <ol>
 <li>Obtener un árbol sintáctico que siga la precedencia y la asociatividad de los operadores.</li>
 <li>Hacerlo eficientemente cuando hay muchos niveles de precedencia.</li>
 </ol>
-<p>En clase ustedes vieron la clásica solución para el primer problema, que a pesar de que es bastante buena y elegante, no resuelve el segundo problema. En este laboratorio les vamos a enseñar una técnica llamada <strong>Shunting Yard Algorithm</strong> que es más eficiente y resuelve los dos problemas, la base de este algoritmo se encuentra hasta en las <strong>calculadoras chicleras</strong>.</p>
+<p>En clase ustedes vieron la clásica solución para el primer problema, que a pesar de que es bastante buena y elegante, no resuelve el segundo problema. En este laboratorio les vamos a enseñar una técnica llamada <strong>Shunting Yard Algorithm</strong> que es más eficiente y resuelve los dos problemas.</p>
 <h3 id="41-clase-parser">4.1 Clase Parser<a class="headerlink" href="#41-clase-parser" title="Permanent link">&para;</a></h3>
 <p>En el directorio de trabajo van a encontrar un archivo llamado <strong>Parser.java</strong>, en este archivo es donde ustedes tienen que implementar el parser. Prácticamente lo que tienen que hacer es crear una plantilla con funciones recursivas de la gramatica que modificamos. Aquí hay unas funciones que les pueden ser útiles como <strong>term()</strong>.</p>
 <p><strong>Ejemplo:</strong></p>
@@ -808,6 +818,10 @@ NUMBER : <span class="m">2</span>
 <span class="o">}</span>
 </pre></div>
 
+<div class="admonition note">
+<p class="admonition-title">Tarea 3</p>
+<p>Implemente un RDP basado en la gramática que limpió, escriba las funciones necesarias en <strong>Parser.java</strong></p>
+</div>
 <h3 id="42-shunting-yard-algorithm">4.2 Shunting Yard Algorithm<a class="headerlink" href="#42-shunting-yard-algorithm" title="Permanent link">&para;</a></h3>
 <p>La idea del algoritmo <strong>Shunting Yard</strong> es mantener los operadores en un stack hasta que todos los operandos han sido parseados. Los operandos se mantienen en un segundo stack. El algoritmo shunting yard puede utilizarse directamente para evaluar las expresiones mientras son parseadas (como un interprete, que es lo que vamos hacer).</p>
 <p>La idea central del algoritmo es mantener los operadores en el stack ordenados por precedencia <strong>(la precedencia más baja en el fondo del stack y la más alta en el top del stack)</strong>, por lo menos en la ausencia de paréntesis. Antes de meter un operador en el stack de operadores, todos los operadores que tienen mayor precedencia son sacados del stack. Sacar un operador del stack de operadores consiste en remover el operador y sus operandos del stack de operandos, evaluar, y meter el resultado en el stack de operandos. Al final de una expresión los operadores que quedan son sacados y evaluados con sus respectivos operandos.</p>
@@ -818,6 +832,10 @@ NUMBER : <span class="m">2</span>
 <li><strong>pushOp(op)</strong> : hace push de un operador en el stack de operadores</li>
 <li><strong>pre(op)</strong>    : devuelve precedencia de un operador</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Tarea extra</p>
+<p>Implemente el algoritmo Shunting Yard para que su RDP ahora sea capaz de realizar las operaciones matemáticas ingresadas, escriba el código necesario en <strong>Parser.java</strong></p>
+</div>
 <h3 id="43-precedencia">4.3 Precedencia<a class="headerlink" href="#43-precedencia" title="Permanent link">&para;</a></h3>
 <p>Para nuestra gramática la precedencia es la siguiente de mayor a menor:</p>
 <ol>
@@ -827,7 +845,6 @@ NUMBER : <span class="m">2</span>
 <li><strong>* / %</strong></li>
 <li><strong>+ -</strong></li>
 </ol>
-<p>Dentro del archivo que tienen que modificar, ustedes tienen que llenar con código donde hay comentarios que dicen <code>/*TODO CODIGO AQUI*/</code>.</p>
 <p>Para probar su RDP tienen que hacer lo siguiente:</p>
 <div class="codehilite"><pre><span></span>make parser
 ./parser
@@ -837,7 +854,7 @@ NUMBER : <span class="m">2</span>
 </pre></div>
 
 <h2 id="entrega">Entrega<a class="headerlink" href="#entrega" title="Permanent link">&para;</a></h2>
-<p>Recuerde hacer add + commit + push y subir el link de su repositorio al GES.</p>
+<p>Al finalizar el periodo de clase haga commit y push de sus avances y suba el link de su repositorio al GES, tendrá cero si no entrega avances. Cada vez que complete una sección, así como al terminar su laboratorio, haga commit y push nuevamente. </p>
                 
                   
                 
