@@ -622,8 +622,8 @@
 <h2 id="1-introduccion">1. Introducción<a class="headerlink" href="#1-introduccion" title="Permanent link">&para;</a></h2>
 <p>En la fase 3 se encargarán de hacer el análisis semántico del compilador, es decir, deberán asignar un tipo a cada nodo del árbol generado en la fase 2 y así terminar de capturar cualquier error o inconsistencia en el código o programa a compilar. </p>
 <p>Para realizar esta fase, ustedes deben implementar una tabla de símbolos en donde guardarán todas las variables declaradas para validar su existencia en base a su scope, y poder asignar un tipo a cada una.</p>
-<p>La estructura de este laboratorio será similar a la que utilizarán en fase 3. Obtenga sus archivos base aquí:</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/JMRPKgYs
+<p>Los repositorios ya fueron creados, obtenga sus archivos con:</p>
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc-4/lab05-2026-mi-usuario
 </pre></div>
 
 <h2 id="2-tabla-de-simbolos">2. Tabla de Símbolos<a class="headerlink" href="#2-tabla-de-simbolos" title="Permanent link">&para;</a></h2>
@@ -662,6 +662,17 @@
 </pre></div>
 
 <p>Vean que las entradas de la tabla de símbolos son pares (Key,Value), donde la llave es de tipo <strong>AbstractSymbol</strong> y el valor es de tipo <strong>Object</strong>. En este laboratorio, para simplificar la calificación, ingresaremos únicamente valores de tipo <strong>String</strong>.</p>
+<div class="admonition info">
+<p class="admonition-title">Enlances simbólicos</p>
+<p>Recuerde que hay archivos a los que no podemos acceder fácilmente, esto es intencional para no romper algún archivo importante.</p>
+<p>Si quiere consultar el contenido de <strong>SymbolTable.java</strong> puede usar:
+<div class="codehilite"><pre><span></span># para verlo en la terminal
+cat SymbolTable.java
+
+# crear su propia copia que ya podrá abrir en su IDE
+cp SymbolTable.java MySymbolTable.java
+</pre></div></p>
+</div>
 <p>Ahora que se han familiarizado un poco con la tabla de símbolos, es hora de modificar el archivo <strong>SymtabExample.java</strong>. Agreguen a este un menú en el que se puedan realizar las siguientes operaciones:</p>
 <ul>
 <li>Agregar Símbolo</li>
