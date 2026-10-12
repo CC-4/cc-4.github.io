@@ -647,10 +647,6 @@
                 <h1 id="lab-11-40optimizaciones41">Lab 11 (Optimizaciones)<a class="headerlink" href="#lab-11-40optimizaciones41" title="Permanent link">&para;</a></h1>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
 <p>El objetivo de este laboratorio es preparar el <strong>AST</strong> para la generación de código, aplicandole la optimización de <strong>Constant Folding</strong>.</p>
-<p>Antes de empezar, obtener los archivos desde Github Classroom:</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/GJXSN7iR
-</pre></div>
-
 <h2 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h2>
 <p>En lugar de generar código de forma directa, realizaremos una de las optimizaciones mas simples: aplicaremos <strong>Constant Folding</strong> a la grmática siguiente, la cual solo tiene definiciones de funciones, operaciones matemáticas y condiciones. En los archivos que descargaron, se les proporciona el codigo base del <strong>lexer</strong>, <strong>parser</strong> y <strong>AST</strong> para que ustedes puedan agregar el código necesario para implementar las optimizaciones. Esta es la gramatica:</p>
 <div class="codehilite"><pre><span></span>  P -&gt; D P | D
