@@ -71,6 +71,8 @@ nav:
     - '9: Codegen 1': labs/lab09.md
     - '10: Codegen 2': labs/lab10.md
     - '11: Optimizaciones': labs/lab11.md
+    - 'Extra: Merge conflict': labs/lab-merge.md
+    - 'Extra: Diagramas': labs/lab-diagram.md
   - Proyectos:
     - '0: Instalacion': projs/proj00.md
     - '1: Lexer': projs/proj01.md

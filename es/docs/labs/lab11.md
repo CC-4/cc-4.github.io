@@ -4,12 +4,6 @@
 
 El objetivo de este laboratorio es preparar el **AST** para la generación de código, aplicandole la optimización de **Constant Folding**.
 
-Antes de empezar, obtener los archivos desde Github Classroom:
-
-```text
-https://classroom.github.com/a/GJXSN7iR
-```
-
 ## Descripción
 
 En lugar de generar código de forma directa, realizaremos una de las optimizaciones mas simples: aplicaremos **Constant Folding** a la grmática siguiente, la cual solo tiene definiciones de funciones, operaciones matemáticas y condiciones. En los archivos que descargaron, se les proporciona el codigo base del **lexer**, **parser** y **AST** para que ustedes puedan agregar el código necesario para implementar las optimizaciones. Esta es la gramatica:

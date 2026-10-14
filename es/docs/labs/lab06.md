@@ -2,12 +2,6 @@
 
 Es hora de empezar a poner en práctica el análisis semántico. El motivo de este laboratorio es que puedan ganar experiencia en como se hace el análisis semántico de un lenguaje simple y que posteriormente en su proyecto plasmen estas ideas. En el laboratorio anterior se enteraron de como funcionaba la tabla de símbolos, en este la vamos a utilizar juntamente con otras herramientas para anotar el árbol \(_AST_\) de un lenguaje llamado **Viper** con los tipos correspondientes.
 
-Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:
-
-```bash
-https://classroom.github.com/a/TUjy3lnN
-```
-
 !!!warning "Lean bien"
 	Este lab es más complejo que los anteriores, por favor lean todas las instrucciones del lab, antes de empezar.
 

@@ -10,10 +10,10 @@ En la fase 3 se encargarán de hacer el análisis semántico del compilador, es 
 
 Para realizar esta fase, ustedes deben implementar una tabla de símbolos en donde guardarán todas las variables declaradas para validar su existencia en base a su scope, y poder asignar un tipo a cada una.
 
-La estructura de este laboratorio será similar a la que utilizarán en fase 3. Obtenga sus archivos base aquí:
+Los repositorios ya fueron creados, obtenga sus archivos con:
 
-```bash
-https://classroom.github.com/a/JMRPKgYs
+```
+git clone https://github.com/cc-4/lab05-2026-mi-usuario
 ```
 
 ## 2. Tabla de Símbolos
@@ -57,6 +57,18 @@ public String toString()
 ```
 
 Vean que las entradas de la tabla de símbolos son pares \(Key,Value\), donde la llave es de tipo **AbstractSymbol** y el valor es de tipo **Object**. En este laboratorio, para simplificar la calificación, ingresaremos únicamente valores de tipo **String**.
+
+!!!info "Enlaces simbólicos"
+	Recuerde que hay archivos a los que no podemos acceder fácilmente, esto es intencional para no romper algún archivo importante.
+
+    Si quiere consultar el contenido de **SymbolTable.java** puede usar:
+    ```
+    # para verlo en la terminal
+    cat SymbolTable.java
+
+    # crear su propia copia que ya podrá abrir en su IDE
+    cp SymbolTable.java MySymbolTable.java
+    ```
 
 Ahora que se han familiarizado un poco con la tabla de símbolos, es hora de modificar el archivo **SymtabExample.java**. Agreguen a este un menú en el que se puedan realizar las siguientes operaciones:
 

@@ -2,12 +2,6 @@
 
 En este laboratorio van a continuar con el análisis semántico del lenguaje Viper y así ganar aún más intuición en esta fase del compilador y que plasmar estas ideas en su proyecto sea bastante sencillo. 
 
-Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:
-
-```bash
-https://classroom.github.com/a/xeEvohoI
-```
-
 !!!warning "Lean bien"
 	Este lab es más complejo que los anteriores, por favor lean todas las instrucciones del lab, antes de empezar.
 

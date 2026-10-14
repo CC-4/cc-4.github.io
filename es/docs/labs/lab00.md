@@ -4,11 +4,16 @@ En este laboratorio practicaremos estructuras de datos en Java. Este laboratorio
 
 ## Archivos base
 
-Acepte el siguiente repositorio para acceder a los archivos base.
+Entre a este repositorio y siga los pasos.
 
 ```
-https://classroom.github.com/a/3ck4n3fG
+https://github.com/CC-4/lab00
 ```
+
+- Click en **Use this template** y **Create a new repository**
+- Coloque **lab00-2026** como nombre a su repo
+- Configure su repo como **Private**
+- En su repo vaya a **Settings > Collaborators** y agregue al usuario **cc4-grades**
 
 ## 1. Categories
 
@@ -33,7 +38,7 @@ Implemente en Java la clase **Categories** según la siguiente descripción.
         - 27/03/1993
         - 09-07-2024
 
-    Considere únicamente los formatos mostrados en los ejemplos anteriores, no se complique con formatos adicionales. Tras identificar a qué categoría perteneces la cadena, debe guardarla en el lugar correspondiente de la tabla **three** y actualizar el contador.
+    Considere únicamente los formatos mostrados en los ejemplos anteriores, no se complique con formatos adicionales. Tras identificar a qué categoría pertenece la cadena, debe guardarla en el lugar correspondiente de la tabla **three** y actualizar el contador.
 
     La tabla **three** tendrá únicamente tres posibles llaves: **mail**, **phone** y **date**. Cada una de estas llaves nos servirá para identificar una lista encadenada donde guardaremos las cadenas. Si es la primera vez que se está ingresando un dato de cierto tipo, en ese momento se debe crear la lista e ingresar el dato. Si la lista ya existe, el nuevo dato se agrega al final de esta.
 
@@ -70,3 +75,5 @@ Agregue un método para que su árbol se pueda desplegar de forma de recursiva, 
 ## Entrega
 
 Haga add + commit + push de sus archivos. Envíe en el GES el link de su repositorio.
+
+Asegúrese de haber agregado a **cc4-grades** como colaborador para que su laboratorio pueda ser calificado.

@@ -3,12 +3,6 @@
 
 En este laboratorio van a programar en lenguaje ensamblador para practicar y reforzar los conocimientos que adquirieron durante CC3.
 
-Antes de empezar, vamos a obtener los archivos necesarios desde Github Classroom:
-
-```bash
-https://classroom.github.com/a/Ye5uh7oc
-```
-
 ## Jupiter
 
 Jupiter ya viene instalado en el contenedor que estamos usando. Para ejecutar un archivo utilice:

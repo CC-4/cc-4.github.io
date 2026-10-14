@@ -2,12 +2,6 @@
 
 Para este laboratorio van a completar la generación de código para el lenguaje Viper
 
-Los archivos necesarios para este laboratorio los pueden encontrar en el siguiente enlace:
-
-```bash
-https://classroom.github.com/a/TYQvGTZA
-```
-
 !!!warning "Lean bien"
 	Este lab es más complejo que los anteriores, por favor lean todas las instrucciones del lab, antes de empezar.
 

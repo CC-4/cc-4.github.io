@@ -6,10 +6,10 @@ En este laboratorio aprenderán a utilizar **cup**, el analizador sintáctico pa
 
 ## 1. Introducción
 
-Descarguen todos los archivos del siguiente repositorio:
+Los repositorios ya fueron creados, obtenga sus archivos con:
 
-```text
-https://classroom.github.com/a/uFj7_0l7
+```
+git clone https://github.com/cc-4/lab03-2026-mi-usuario
 ```
 
 Ahora que han terminado la fase 1 de su proyecto, saben utilizar JLex para el análisis léxico de una cadena de caracteres. Como han visto en clase, el análisis sintáctico se basa en gramáticas, y tiene algoritmos muy bien definidos para poder ser implementado. Para prepararlos para la fase 2, utilizaremos una herramienta llamada **cup** que funciona para analizar la sintáxis de un texto dado.
@@ -29,12 +29,12 @@ precedence left PLUS, MINUS;
 precedence left TIMES;
 ```
 
-Es importante recordar que a cup no le importa la aritmética, le importan los árboles. Esto quiere decir que un operador con una mayor precedencia quedará más cerca de la raíz de su árbol.
+Es importante recordar que a cup no le importa la aritmética, le importan los árboles. Esto quiere decir que un operador con una mayor precedencia quedará más cerca de la raíz de su árbol (es decir, más arriba).
 
 Seguido de eso, van todas las reglas de producción. Usamos la siguiente sintáxis, en donde `RESULT` es un dato que estaremos haciendo disponible para que nuestro nodo padre pueda utilizar.
 
 ```java
-parent_expr ::= LPAREN expr:e RPAREN {: RESULT = e; :};
+parent_node ::= LPAREN expr:e RPAREN {: RESULT = e; :};
 ```
 
 ## 2. Lexer
@@ -44,8 +44,11 @@ La gramática con la que trabajaremos es la siguiente:
 ```bash
 S         ::= S expr_part
           |   expr_part
+
 expr_part ::= expr ;
+
 expr      ::= exprI | exprF
+
 exprI     ::= exprI + exprI
           |   exprI - exprI
           |   exprI * exprI
@@ -53,6 +56,7 @@ exprI     ::= exprI + exprI
           |   exprI % exprI
           |   (exprI)
           |   I
+
 exprF     ::= exprI + exprF
           |   exprF + exprI
           |   exprF + exprF
@@ -121,9 +125,10 @@ Así se deberá de ver al probarlo:
 
 ```bash
 2 + 2;
-= 4;
+= 4
+
 10 * sin(90) - 1;
-= 9;
+= 9
 ```
 
 Puede trabajar las trigonométricas en grados o radianes, solo deje indicado en un comentario cuál utilizó.

@@ -2,12 +2,6 @@
 
 En este laboratorio van a generar código en lenguaje ensamblador RISC-V para algunos nodos del lenguaje **Viper** que utilizarón en el laboratorio 6 y 7. Debido a que este lenguaje no es orientado a objetos es más fácil generar código. 
 
-Los archivos necesarios para este laboratorio los pueden encontrar en el siguiente enlace:
-
-```bash
-https://classroom.github.com/a/KQ2w0Tqx
-```
-
 Los archivos base tienen la misma estructura que vieron anteriormente en los laboratorios 6 y 7. Para este laboratorio el análisis semántico ya está hecho, así que no se tienen que preocupar de esta tarea, solamente se tienen que enfocar en generar código implementando un **Accumulator Machine**.
 
 !!!warning "Lean bien"
@@ -118,7 +112,7 @@ Esto imprimirá en el archivo donde estará el código generado lo siguiente:
 def_foo:
 ```
 
-Luego tenemos que saber cuanto espacio necesitamos reservar para las variables locales y los dos registros `fp` y `ra`. El método `locals()` que está implementado en el nodo **Statements** nos ayuda a determinar la cantidad de espacio que se necesita reservar para las variables locales que van a aparecer dentro del cuerpo de la función y además sabemos que necesitamos 2 palabras adicionales para los registros `fp` y `ra`. Sabiendo eso podemos reservar espacio y crear el prólogo de la función utilizando lo siguiente:
+Luego tenemos que saber cuanto espacio necesitamos reservar para las variables locales y los dos registros `fp` y `ra`. El método `locals()` que está implementado en el nodo **Statements** nos ayuda a determinar la cantidad de espacio que se necesita reservar para las variables locales que van a aparecer dentro del cuerpo de la función y además sabemos que necesitamos 2 words adicionales para los registros `fp` y `ra`. Sabiendo eso podemos reservar espacio y crear el prólogo de la función utilizando lo siguiente:
 
 ```java
 int size = statements.locals() + 2;
@@ -134,7 +128,7 @@ sw    ra 4(sp)
 addi  fp sp 4
 ```
 
-Noten que necesitamos 1 palabra para la variable local que aparece dentro del cuerpo de la función y además, 2 palabras adicionales para los registros `fp` y `ra` para un total de 3 palabras de 32 bits, es por eso que aparece el **-12** \(3 \* 4 = 12\). También noten como se guardan los registros y como se establece el frame pointer para que apunte hacia `ra`.
+Noten que necesitamos 1 word para la variable local que aparece dentro del cuerpo de la función y además, 2 words adicionales para los registros `fp` y `ra` para un total de 3 words de 32 bits, es por eso que aparece el **-12** \(3 \* 4 = 12\). También noten como se guardan los registros y como se establece el frame pointer para que apunte hacia `ra`.
 
 La función `locals()` ya está hecha en el laboratorio, pero para el proyecto ustedes la deben implementar. Esta función no es tan trivial como parece, recuerden que en un determinado tiempo hay variables vivas y variables muertas, por ejemplo:
 
@@ -150,7 +144,7 @@ def foo(): void {
 }
 ```
 
-Cuando llegamos a la declaración `int z = 30`, la variable `y` estará muerta y el espacio que utilizó se puede reciclar. Para este caso la función `locals()` tiene que devolver como resultado que se necesitan 2 palabras de 32 bits para las variables locales de la función, sabiendo que el espacio que utilizó `y` se puede reutilizar para `z`. Esto es lo que el compilador de referencia de cool **coolc** y **coolc-rv** hacen.
+Cuando llegamos a la declaración `int z = 30`, la variable `y` estará muerta y el espacio que utilizó se puede reciclar. Para este caso la función `locals()` tiene que devolver como resultado que se necesitan 2 words de 32 bits para las variables locales de la función, sabiendo que el espacio que utilizó `y` se puede reutilizar para `z`. Esto es lo que el compilador de referencia de cool **coolc** y **coolc-rv** hacen.
 
 Ya habiendo impreso el prólogo podemos seguir con el paso 3 y 4, podemos hacer lo siguiente:
 
@@ -194,7 +188,7 @@ addi  sp sp 20
 ret
 ```
 
-Noten que estamos mandando `size + formals.size()`, ya que necesitamos restaurar también el espacio reservado por el caller que utilizó para meter los parámetros de la función. Por eso el **20**, porque se reservaron 3 palabras en el prólogo del callee y 2 parámetros tiene la función para un total de 5 palabras de 32 bits \(5 \* 4 = 20\). 
+Noten que estamos mandando `size + formals.size()`, ya que necesitamos restaurar también el espacio reservado por el caller que utilizó para meter los parámetros de la función. Por eso el **20**, porque se reservaron 3 words en el prólogo del callee y 2 parámetros tiene la función para un total de 5 words de 32 bits \(5 \* 4 = 20\). 
 
 ### Call
 

@@ -2,12 +2,19 @@
 
 Para este lab, deben hacer los ejercicios que se les pide a continuación, estos ejercicios son bastante básicos y están con el único propósito de que ustedes sepan qué se puede hacer en el lenguaje COOL. Este lab será la única vez en que sea necesario programar en COOL, pero no significa que luego pueda olvidar el lenguaje, ya que para los proyectos es necesario que ustedes sean capaces de crear sus propios archivos de pruebas para probar sus implementaciones.
 
-## Archivos base
+## Flujo de trabajo de los laboratorios
 
-Acepte el siguiente repositorio para acceder a los archivos base.
+Github Classroom ya no está disponible, entonces el flujo de trabajo para nuestros laboratorios será el siguiente:
+
+* Llene el form que se le compartió por correo o por Slack, coloque su usuario de Github que usará durante el semestre
+* Antes de cada laboratorio, el staff del curso creará los repos con el código base
+* Si va a la sección de colaboradores encontará que en este repo se encuentra su usuario y **CC4 Grading**
+* **CC4 Grading** le perteneces al staff y nos servirá para poder revisar su código y calificarlo.
+
+Para su lab 1, encontrará su repo ya creado en esta dirección:
 
 ```
-https://classroom.github.com/a/RoJ_bFrb
+https://github.com/cc-4/lab01-2026-USUARIO
 ```
 
 ## 1. Hola Mundo
@@ -24,7 +31,7 @@ Su programa debe de funcionar de la siguiente manera:
 Ingrese su nombre: Timmy
 Ingrese su edad: 19
 
-Timmy tendrá 22 años al graduarse :)
+Timmy tendrá 22 anios al graduarse :)
 ```
 
 ## 3. Métodos
