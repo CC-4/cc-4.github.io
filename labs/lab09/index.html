@@ -529,6 +529,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab-diagram/" title="Extra: Diagramas" class="md-nav__link">
+      Extra: Diagramas
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -812,7 +824,7 @@
 <div class="codehilite"><pre><span></span>def_foo:
 </pre></div>
 
-<p>Luego tenemos que saber cuanto espacio necesitamos reservar para las variables locales y los dos registros <code>fp</code> y <code>ra</code>. El método <code>locals()</code> que está implementado en el nodo <strong>Statements</strong> nos ayuda a determinar la cantidad de espacio que se necesita reservar para las variables locales que van a aparecer dentro del cuerpo de la función y además sabemos que necesitamos 2 palabras adicionales para los registros <code>fp</code> y <code>ra</code>. Sabiendo eso podemos reservar espacio y crear el prólogo de la función utilizando lo siguiente:</p>
+<p>Luego tenemos que saber cuanto espacio necesitamos reservar para las variables locales y los dos registros <code>fp</code> y <code>ra</code>. El método <code>locals()</code> que está implementado en el nodo <strong>Statements</strong> nos ayuda a determinar la cantidad de espacio que se necesita reservar para las variables locales que van a aparecer dentro del cuerpo de la función y además sabemos que necesitamos 2 words adicionales para los registros <code>fp</code> y <code>ra</code>. Sabiendo eso podemos reservar espacio y crear el prólogo de la función utilizando lo siguiente:</p>
 <div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">statements</span><span class="o">.</span><span class="na">locals</span><span class="o">()</span> <span class="o">+</span> <span class="mi">2</span><span class="o">;</span>
 <span class="n">CgenSupport</span><span class="o">.</span><span class="na">emitPrologue</span><span class="o">(</span><span class="n">size</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
 </pre></div>
@@ -824,7 +836,7 @@ sw    ra 4(sp)
 addi  fp sp 4
 </pre></div>
 
-<p>Noten que necesitamos 1 palabra para la variable local que aparece dentro del cuerpo de la función y además, 2 palabras adicionales para los registros <code>fp</code> y <code>ra</code> para un total de 3 palabras de 32 bits, es por eso que aparece el <strong>-12</strong> (3 * 4 = 12). También noten como se guardan los registros y como se establece el frame pointer para que apunte hacia <code>ra</code>.</p>
+<p>Noten que necesitamos 1 word para la variable local que aparece dentro del cuerpo de la función y además, 2 words adicionales para los registros <code>fp</code> y <code>ra</code> para un total de 3 words de 32 bits, es por eso que aparece el <strong>-12</strong> (3 * 4 = 12). También noten como se guardan los registros y como se establece el frame pointer para que apunte hacia <code>ra</code>.</p>
 <p>La función <code>locals()</code> ya está hecha en el laboratorio, pero para el proyecto ustedes la deben implementar. Esta función no es tan trivial como parece, recuerden que en un determinado tiempo hay variables vivas y variables muertas, por ejemplo:</p>
 <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span> <span class="n">void</span> <span class="p">{</span>
     <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
@@ -837,7 +849,7 @@ addi  fp sp 4
 <span class="p">}</span>
 </pre></div>
 
-<p>Cuando llegamos a la declaración <code>int z = 30</code>, la variable <code>y</code> estará muerta y el espacio que utilizó se puede reciclar. Para este caso la función <code>locals()</code> tiene que devolver como resultado que se necesitan 2 palabras de 32 bits para las variables locales de la función, sabiendo que el espacio que utilizó <code>y</code> se puede reutilizar para <code>z</code>. Esto es lo que el compilador de referencia de cool <strong>coolc</strong> y <strong>coolc-rv</strong> hacen.</p>
+<p>Cuando llegamos a la declaración <code>int z = 30</code>, la variable <code>y</code> estará muerta y el espacio que utilizó se puede reciclar. Para este caso la función <code>locals()</code> tiene que devolver como resultado que se necesitan 2 words de 32 bits para las variables locales de la función, sabiendo que el espacio que utilizó <code>y</code> se puede reutilizar para <code>z</code>. Esto es lo que el compilador de referencia de cool <strong>coolc</strong> y <strong>coolc-rv</strong> hacen.</p>
 <p>Ya habiendo impreso el prólogo podemos seguir con el paso 3 y 4, podemos hacer lo siguiente:</p>
 <div class="codehilite"><pre><span></span><span class="n">O</span><span class="o">.</span><span class="na">enterScope</span><span class="o">();</span>
 <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">formals</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
@@ -868,7 +880,7 @@ addi  sp sp 20
 ret
 </pre></div>
 
-<p>Noten que estamos mandando <code>size + formals.size()</code>, ya que necesitamos restaurar también el espacio reservado por el caller que utilizó para meter los parámetros de la función. Por eso el <strong>20</strong>, porque se reservaron 3 palabras en el prólogo del callee y 2 parámetros tiene la función para un total de 5 palabras de 32 bits (5 * 4 = 20). </p>
+<p>Noten que estamos mandando <code>size + formals.size()</code>, ya que necesitamos restaurar también el espacio reservado por el caller que utilizó para meter los parámetros de la función. Por eso el <strong>20</strong>, porque se reservaron 3 words en el prólogo del callee y 2 parámetros tiene la función para un total de 5 words de 32 bits (5 * 4 = 20). </p>
 <h3 id="call">Call<a class="headerlink" href="#call" title="Permanent link">&para;</a></h3>
 <p>Para call ustedes tendrían que recorrer los actuals en el orden inverso, mandar a llamar a <code>code</code> y hacer push del resultado (que está en <code>a0</code>) en el stack. Luego hacer un <code>jal</code> hacia la función que se está mandando a llamar utilizando:</p>
 <div class="codehilite"><pre><span></span><span class="n">CgenSupport</span><span class="o">.</span><span class="na">emitJal</span><span class="o">(</span><span class="n">CgenSupport</span><span class="o">.</span><span class="na">DEF</span> <span class="o">+</span> <span class="n">name</span><span class="o">,</span> <span class="n">p</span><span class="o">);</span>
